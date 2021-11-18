@@ -132,7 +132,7 @@
 								<p>Data Siswa</p>
 							</a>
 						</li>
-						<li class="nav-item {{ (request()->is('nilaipilihan')) ? 'active' : '' }}">
+						<li class="nav-item {{ (request()->is('/nilaipilihan')) ? 'active' : '' }}">
 							<a data-toggle="collapse" href="#admin" href="/nilaipilihan" >
 								<i class="fas fa-table"></i>
 								<p>nilaipilihan</p>
@@ -142,12 +142,12 @@
 								<ul class="nav nav-collapse">
 									<li>
 										<a href="/admin/nilai">
-											<span class="sub-item">Nilai Tari</span>
+											<span class="sub-item {{ (request()->is('admin/nilai')) ? 'active' : '' }}">Nilai Tari</span>
 										</a>
 									</li>
 									<li>
 										<a href="/admin/nilaivokal">
-											<span class="sub-item">Nilai Vokal</span>
+											<span class="sub-item  {{ (request()->is('admin/nilaivokal')) ? 'active' : '' }}" >Nilai Vokal</span>
 										</a>
 									</li>
 								</ul>
