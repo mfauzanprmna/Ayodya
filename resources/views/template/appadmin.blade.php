@@ -29,6 +29,10 @@
 		<div class="main-header">
 			<!-- Logo Header -->
 			<div class="logo-header" data-background-color="blue">
+				<a href="/dashboard" class="logo">
+					<h1 style="color: white" class="navbar-brand">Ayodya</h1>
+				</a>
+
 				
 
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +59,7 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
-									<img src="{{ asset('Atlantis-Lite/assets/img/profile.jpg')}}" alt="..." class="avatar-img rounded-circle">
+									<img src="{{ asset('Atlantis-Lite/assets/img/noavatar-480x400.png')}}" alt="..." class="avatar-img rounded-circle">
 								</div>
 							</a>
 							<ul class="dropdown-menu dropdown-user animated fadeIn">
@@ -89,7 +93,7 @@
 				<div class="sidebar-content">
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
-							<img src="{{ asset('Atlantis-Lite/assets/img/profile.jpg')}}" alt="..." class="avatar-img rounded-circle">
+							<img src="{{ asset('Atlantis-Lite/assets/img/noavatar-480x400.png')}}" alt="..." class="avatar-img rounded-circle">
 						</div>
 						<div class="info">
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -128,12 +132,28 @@
 								<p>Data Siswa</p>
 							</a>
 						</li>
-						<li class="nav-item {{ (request()->is('admin/nilai')) ? 'active' : '' }}">
-							<a href="/admin/nilai">
-								<i class="fas fa-user-cog"></i>
-								<p>Data nilai</p>
+						<li class="nav-item {{ (request()->is('nilaipilihan')) ? 'active' : '' }}">
+							<a data-toggle="collapse" href="#admin" href="/nilaipilihan" >
+								<i class="fas fa-table"></i>
+								<p>nilaipilihan</p>
+								<span class="caret"></span>
 							</a>
+							<div class="collapse" id="admin">
+								<ul class="nav nav-collapse">
+									<li>
+										<a href="/admin/nilai">
+											<span class="sub-item">Nilai Tari</span>
+										</a>
+									</li>
+									<li>
+										<a href="/admin/nilaivokal">
+											<span class="sub-item">Nilai Vokal</span>
+										</a>
+									</li>
+								</ul>
+							</div>
 						</li>
+
 						
 					</ul>
 				</div>

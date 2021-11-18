@@ -16,10 +16,10 @@
     <div class="col-sm-6">
         <center>
             <div class="card ">
-                <a href="/admin/siswa" style="text-decorations:none; color:inherit;">
+                <a href="/admin/nilai" style="text-decorations:none; color:inherit;">
                 <div class="card-body ">
-                    <img src="{{ asset('Atlantis-Lite/assets/img/Teamsuccess _Outline.svg')}}" class="card-img-top" alt="..." style="width: 500px ">
-                  <h5 class="card-title " >Data Siswa</h5>
+                    {{-- <img src="{{ asset('Atlantis-Lite/assets/img/Teamsuccess _Outline.svg')}}" class="card-img-top" alt="..." style="width: 500px "> --}}
+                  <h5 class="card-title " >Nilai Tari</h5>
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                 </a>
                 </div>
@@ -30,10 +30,10 @@
     <div class="col-sm-6">
         <center>
             <div class="card ">
-                <a href="/nilaipilihan" style="text-decorations:none; color:inherit;">
+                <a href="/admin/nilaivokal" style="text-decorations:none; color:inherit;">
                 <div class="card-body">
-                    <img src="{{ asset('Atlantis-Lite/assets/img/DataArranging_Outline.svg')}}" class="card-img-top" alt="..." style="width: 500px; ;">
-                  <h5 class="card-title">Data Nilai</h5>
+                    {{-- <img src="{{ asset('Atlantis-Lite/assets/img/DataArranging_Outline.svg')}}" class="card-img-top" alt="..." style="width: 500px; ;"> --}}
+                  <h5 class="card-title">Nilai Vokal</h5>
                  
                   <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                 </a>
