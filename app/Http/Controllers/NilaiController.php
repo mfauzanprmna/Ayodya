@@ -38,6 +38,9 @@ class NilaiController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'no_induk'     => 'required',
+        'nama_siswa'     => 'required',
+        'jenis_tari'     => 'required',
             'wirama'     => 'required',
             'wiraga'     => 'required',
             'wirasa'     => 'required',
@@ -46,6 +49,9 @@ class NilaiController extends Controller
     
     
         $nilai = Nilai::create([
+            'no_induk'                  => $request->no_induk,
+        'nama_siswa'                => $request->nama_siswa,
+        'jenis_tari'     => $request->jenis_tari,
             'wirama'                => $request->wirama,
             'wiraga'                => $request->wiraga,
             'wirasa'                => $request->wirasa,
@@ -94,9 +100,12 @@ class NilaiController extends Controller
     public function update(Request $request, Nilai $nilai)
     {
         $this->validate($request, [
-            'wirama'     => 'required',
-            'wiraga'     => 'required',
-            'wirasa'     => 'required',
+            'no_induk'     => 'required',
+            'nama_siswa'     => 'required',
+            'jenis_tari'     => 'required',
+                'wirama'     => 'required',
+                'wiraga'     => 'required',
+                'wirasa'     => 'required',
         ]);
     
         //get data nilai by ID
@@ -104,9 +113,12 @@ class NilaiController extends Controller
     
     
             $nilai->update([
-                'wirama'                => $request->wirama,
-                'wiraga'                => $request->wiraga,
-                'wirasa'                => $request->wirasa,
+                'no_induk'                  => $request->no_induk,
+        'nama_siswa'                => $request->nama_siswa,
+        'jenis_tari'     => $request->jenis_tari,
+            'wirama'                => $request->wirama,
+            'wiraga'                => $request->wiraga,
+            'wirasa'                => $request->wirasa,
             ]);
     
         

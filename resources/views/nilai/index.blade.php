@@ -10,6 +10,9 @@
                         <table class="table table-bordered">
                             <thead>
                               <tr>
+                                <th scope="col">no induk</th>
+                                <th scope="col">nama siswa</th>
+                                <th scope="col">jenis tari</th>
                                 <th scope="col">wirama</th>
                                 <th scope="col">wiraga</th>
                                 <th scope="col">wirasa</th>
@@ -20,6 +23,9 @@
                             <tbody>
                               @forelse ($nilais as $nilai)
                                 <tr>
+                                    <td>{{ $nilai->no_induk }}</td>
+                                    <td>{{ $nilai->nama_siswa }}</td>
+                                    <td>{{ $nilai->jenis_tari }}</td>
                                         <td>{{ $nilai->wirama }}</td>
                                         <td>{{ $nilai->wiraga }}</td>
                                         <td>{{ $nilai->wirasa }}</td>

@@ -38,6 +38,8 @@ class NilaivokalController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'no_induk'     => 'required',
+        'nama_siswa'     => 'required',
             'penampilan'     => 'required',
             'teknik'     => 'required',
             
@@ -46,6 +48,8 @@ class NilaivokalController extends Controller
     
     
         $nilaivokal = Nilaivokal::create([
+            'no_induk'                  => $request->no_induk,
+        'nama_siswa'                => $request->nama_siswa,
             'penampilan'                => $request->penampilan,
             'teknik'                => $request->teknik,
             
@@ -94,6 +98,8 @@ class NilaivokalController extends Controller
     public function update(Request $request, Nilaivokal $nilaivokal)
     {
         $this->validate($request, [
+            'no_induk'     => 'required',
+        'nama_siswa'     => 'required',
             'penampilan'     => 'required',
             'teknik'     => 'required',
         ]);
@@ -103,8 +109,10 @@ class NilaivokalController extends Controller
     
     
             $nilaivokal->update([
-                'penampilan'                => $request->penampilan,
-            'teknik'                => $request->teknik,
+                'no_induk'                  => $request->no_induk,
+                'nama_siswa'                => $request->nama_siswa,
+                    'penampilan'                => $request->penampilan,
+                    'teknik'                => $request->teknik,
             ]);
     
         

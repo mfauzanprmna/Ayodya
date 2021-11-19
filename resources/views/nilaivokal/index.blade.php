@@ -10,8 +10,10 @@
                         <table class="table table-bordered">
                             <thead>
                               <tr>
-                                <th scope="col">penampilan</th>
-                                <th scope="col">teknik</th>
+                                <th scope="col">no induk</th>
+                                <th scope="col">nama siswa</th>
+                                <th scope="col">nilai penampilan</th>
+                                <th scope="col">nilai teknik</th>
                                 <th scope="col">AKSI</th>
                              
                               </tr>
@@ -19,6 +21,8 @@
                             <tbody>
                               @forelse ($nilaivokals as $nilaivokal)
                                 <tr>
+                                    <td>{{ $nilaivokal->no_induk }}</td>
+                                    <td>{{ $nilaivokal->nama_siswa }}</td>
                                         <td>{{ $nilaivokal->penampilan }}</td>
                                         <td>{{ $nilaivokal->teknik }}</td>
                                     <td class="text-center">

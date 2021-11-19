@@ -10,6 +10,43 @@
                             @csrf
                             @method('PUT')
 
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">No Induk</label>
+                                <input type="text" class="form-control @error('no_induk') is-invalid @enderror" name="no_induk" value="{{ old('no_induk', $nilai->no_induk) }}" placeholder="Masukkan Judul no induk">
+                            
+                                <!-- error message untuk no_induk -->
+                                @error('no_induk')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Nama Siswa</label>
+                                <input type="text" class="form-control @error('nama_siswa') is-invalid @enderror" name="nama_siswa" value="{{ old('nama_siswa', $nilai->nama_siswa) }}" placeholder="Masukkan Judul nama siswa">
+                            
+                                <!-- error message untuk nama_siswa -->
+                                @error('nama_siswa')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">jenis tari</label>
+                                <input type="text" class="form-control @error('jenis_tari') is-invalid @enderror" name="jenis_tari" value="{{ old('jenis_tari', $nilai->jenis_tari) }}" placeholder="Masukkan jenis tari">
+                            
+                                <!-- error message untuk jenis_tari -->
+                                @error('jenis_tari')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
                             <div class="form-group">
                                 <label class="font-weight-bold">wirama </label>
                                 <input type="text" class="form-control @error('wirama') is-invalid @enderror" name="wirama" value="{{ old('wirama', $nilai->wirama) }}" placeholder="Masukkan wirama">

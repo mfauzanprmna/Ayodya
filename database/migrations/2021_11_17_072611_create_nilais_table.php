@@ -15,6 +15,9 @@ class CreateNilaisTable extends Migration
     {
         Schema::create('nilais', function (Blueprint $table) {
             $table->id();
+            $table->string('no_induk');
+            $table->string('nama_siswa');
+            $table->string('jenis_tari');
             $table->string('wirama');
             $table->string('wiraga');
             $table->string('wirasa');

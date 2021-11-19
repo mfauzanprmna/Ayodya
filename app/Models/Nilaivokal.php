@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Nilaivokal extends Model
 {
     protected $fillable = [
-        'penampilan','teknik'
+        'no_induk','nama_siswa','penampilan','teknik'
     ];
 }

@@ -15,6 +15,8 @@ class CreateNilaivokalsTable extends Migration
     {
         Schema::create('nilaivokals', function (Blueprint $table) {
             $table->id();
+            $table->string('no_induk');
+            $table->string('nama_siswa');
             $table->string('penampilan');
             $table->string('teknik');
             $table->timestamps();
