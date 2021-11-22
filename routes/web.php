@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\NilaivokalController;
+use App\Http\Controllers\SiswaController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,18 +14,23 @@ use App\Http\Controllers\NilaivokalController;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
-Route::resource('admin/siswa', SiswaController::class);
-Route::resource('admin/nilai', NilaiController::class);
-Route::resource('admin/nilaivokal', NilaivokalController::class);
+Route::middleware(['auth:user'])->group(function () {
+    Route::resource('admin/siswa', SiswaController::class);
+    Route::resource('admin/nilai', NilaiController::class);
+    Route::resource('admin/nilaivokal', NilaivokalController::class);
+    Route::get('/nilaipilihan', function () {
+        return view('nilaipilihan');
+    });
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
-});
-Route::get('/nilaipilihan', function () {
-    return view('nilaipilihan');
-});
+})->name('dashboard');
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+require __DIR__ . '/auth.php';
