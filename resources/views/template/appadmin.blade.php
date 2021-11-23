@@ -65,18 +65,17 @@
 							<ul class="dropdown-menu dropdown-user animated fadeIn">
 								<div class="dropdown-user-scroll scrollbar-outer">
 									<li>
-										{{-- <form method="POST" action="{{ route('logout') }}"> --}}
-											{{-- @csrf --}}
+										<form method="POST" action="{{ route('logout') }}">
+											@csrf
 
-											{{-- <a class="dropdown-item" href="route('logout')" onclick="event.preventDefault();
-											this.closest('form').submit();">{{ __('Log Out') }}</a> --}}
-											
-											{{-- <x-dropdown-link :href="route('logout')"
+											<x-dropdown-link :href="route('logout')"
 													onclick="event.preventDefault();
 																this.closest('form').submit();">
-												{{ __('Log Out') }}
-											</x-dropdown-link> --}}
-										{{-- </form> --}}
+											<div class="btn">
+												Logout
+											</div>
+											</x-dropdown-link>
+										</form>
 									</li>
 								</div>
 							</ul>
@@ -135,7 +134,7 @@
 						<li class="nav-item {{ (request()->is('/nilaipilihan')) ? 'active' : '' }}">
 							<a data-toggle="collapse" href="#admin" href="/nilaipilihan" >
 								<i class="fas fa-table"></i>
-								<p>nilaipilihan</p>
+								<p>Data Nilai</p>
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="admin">
@@ -161,16 +160,7 @@
 		</div>
 		<div class="main-panel">
 			<div class="content">
-				<div class="page-inner">
-					<div class="page-header">
-						{{-- <h4 class="page-title">Pembayaran SPP</h4> --}}
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							@yield('main')
-						</div>
-					</div>
-				</div>
+					@yield('main')
 			</div>
 		</div>
 	</div>

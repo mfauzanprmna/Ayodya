@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class SiswaController extends Controller
 {
@@ -34,24 +35,26 @@ public function create()
 public function store(Request $request)
 {
     $this->validate($request, [
-        'no'     => 'required',
-        'no_induk'     => 'required',
-        'nama_siswa'     => 'required',
-        'tempat_tgl_lahir'     => 'required',
-        'nama_orangtua_siswa'     => 'required',
-        'alamat'     => 'required',
-        'cabang'   => 'required'
+        'no_induk'      => 'required',
+        'nama_siswa'    => 'required',
+        'tempat'        => 'required',
+        'tanggal_lahir' => 'required',
+        'orang_tua'     => 'required',
+        'alamat'        => 'required',
+        'cabang'        => 'required'
     ]);
 
 
     $siswa = Siswa::create([
-        'no'                        => $request->no,
-        'no_induk'                  => $request->no_induk,
-        'nama_siswa'                => $request->nama_siswa,
-        'tempat_tgl_lahir'          => $request->tempat_tgl_lahir,
-        'nama_orangtua_siswa'       => $request->nama_orangtua_siswa,
-        'alamat'                    => $request->alamat,
-        'cabang'                    => $request->cabang,
+        'foto'               => 'default.png',
+        'no_induk'           => $request->no_induk,
+        'nama_siswa'         => $request->nama_siswa,
+        'tempat'             => $request->tempat,
+        'tanggal_lahir'      => $request->tanggal_lahir,
+        'orang_tua'          => $request->orang_tua,
+        'alamat'             => $request->alamat,
+        'cabang'             => $request->cabang,
+        'password'           => Hash::make('password'),
     ]);
 
     if($siswa){
@@ -85,13 +88,13 @@ public function edit(siswa $siswa)
 public function update(Request $request, siswa $siswa)
 {
     $this->validate($request, [
-        'no'     => 'required',
-        'no_induk'     => 'required',
-        'nama_siswa'     => 'required',
-        'tempat_tgl_lahir'     => 'required',
-        'nama_orangtua_siswa'     => 'required',
-        'alamat'     => 'required',
-        'cabang'   => 'required'
+        'no_induk'      => 'required',
+        'nama_siswa'    => 'required',
+        'tempat'        => 'required',
+        'tanggal_lahir' => 'required',
+        'orang_tua'     => 'required',
+        'alamat'        => 'required',
+        'cabang'        => 'required'
     ]);
 
     //get data siswa by ID
@@ -99,13 +102,14 @@ public function update(Request $request, siswa $siswa)
 
 
         $siswa->update([
-            'no'                        => $request->no,
-        'no_induk'                  => $request->no_induk,
-        'nama_siswa'                => $request->nama_siswa,
-        'tempat_tgl_lahir'          => $request->tempat_tgl_lahir,
-        'nama_orangtua_siswa'       => $request->nama_orangtua_siswa,
-        'alamat'                    => $request->alamat,
-        'cabang'                    => $request->cabang,
+        'no_induk'          => $request->no_induk,
+        'nama_siswa'        => $request->nama_siswa,
+        'tempat'            => $request->tempat,
+        'tanggal_lahir'     => $request->tanggal_lahir,
+        'orang_tua'         => $request->orang_tua,
+        'alamat'            => $request->alamat,
+        'cabang'            => $request->cabang,
+        'password'          => $request->password,
         ]);
 
     

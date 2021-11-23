@@ -23,11 +23,11 @@ Route::middleware(['auth:user'])->group(function () {
     Route::get('/nilaipilihan', function () {
         return view('nilaipilihan');
     });
+    Route::get('/dashboard', function () {
+        return view('nilaipilihan');
+    })->name('dashboard');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
 
 Route::get('/', function () {
     return view('welcome');

@@ -2,32 +2,34 @@
 @section('main')
 
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
                         <a href="{{ route('siswa.create') }}" class="btn btn-md btn-success mb-3">TAMBAH siswa</a>
                         <table class="table table-bordered">
                             <thead>
                               <tr>
-                                <th scope="col">no</th>
-                                <th scope="col">no induk</th>
-                                <th scope="col">nama siswa</th>
-                                <th scope="col">tempat_tgl_lahir</th>
-                                <th scope="col">nama_orangtua_siswa</th>
-                                <th scope="col">alamat</th>
-                                <th scope="col">cabang</th>
-                                <th scope="col">AKSI</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Foto</th>
+                                <th scope="col">No Induk</th>
+                                <th scope="col">Nama Siswa</th>
+                                <th scope="col">Tempat Tanggal Lahir</th>
+                                <th scope="col">Orang Tua Siswa</th>
+                                <th scope="col">Alamat</th>
+                                <th scope="col">Cabang</th>
+                                <th scope="col">Aksi</th>
                               </tr>
                             </thead>
                             <tbody>
                               @forelse ($siswas as $siswa)
                                 <tr>
-                                        <td>{{ $siswa->no }}</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td class="text-center">
+                                            <img  src="{{ asset('image/' . $siswa->foto) }}" alt="" width="40%">
+                                        </td>
                                         <td>{{ $siswa->no_induk }}</td>
                                         <td>{{ $siswa->nama_siswa }}</td>
-                                        <td>{{ $siswa->tempat_tgl_lahir }}</td>
-                                        <td>{{ $siswa->nama_orangtua_siswa }}</td>
+                                        <td>{{ $siswa->tempat }}, {{ $siswa->tanggal_lahir }}</td>
+                                        <td>{{ $siswa->orang_tua }}</td>
                                         <td>{{ $siswa->alamat }}</td>
                                         <td>{{ $siswa->cabang }}</td>
                                     <td class="text-center">
@@ -49,8 +51,6 @@
                           {{ $siswas->links() }}
                     </div>
                 </div>
-            </div>
-        </div>
     </div>
     
     @endsection
