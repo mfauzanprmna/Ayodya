@@ -3,6 +3,7 @@
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\NilaivokalController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\AbsenController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,16 +19,23 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:user'])->group(function () {
     Route::resource('admin/siswa', SiswaController::class);
+    Route::resource('admin/absen', AbsenController::class);
     Route::resource('admin/nilai', NilaiController::class);
     Route::resource('admin/nilaivokal', NilaivokalController::class);
     Route::get('/nilaipilihan', function () {
         return view('nilaipilihan');
     });
+
+    
+
     Route::get('/dashboard', function () {
         return view('nilaipilihan');
     })->name('dashboard');
 });
 
+Route::get('/siswadashboard', function () {
+    return view('siswadashboard');
+});
 
 Route::get('/', function () {
     return view('welcome');
