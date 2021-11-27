@@ -20,72 +20,6 @@
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="../bower_components/bootstrap-social/bootstrap-social.css">
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css"> --}}
-
-    <style>
-
-        .login{
-            margin-top: 30% !important;
-        }
-
-        form .text-box{
-            position: relative;
-            border-bottom: 2px solid #adadad;
-            margin: 30px 0;
-        }
-
-        .text-box input{
-            width: 100%;
-            padding: 0 5px;
-            height: 40px;
-            font-size: 18px;
-            border: none;
-            background: none;
-            outline: none;
-            color: white;
-        }
-
-        .text-box label{
-            position: absolute;
-            top: 50%;
-            left: 5px;
-            color: #adadad;
-            transform: translateY(-50%);
-            font-size: 20px;
-            pointer-events: none;
-            transition: .5s;
-        }
-
-        .text-box span::before{
-            content: '';
-            position: absolute;
-            top: 40px;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: yellow;
-            transition: .5s;
-        }
-
-        .text-box input:focus ~ label,
-        .text-box input:valid ~ label
-        {
-            top: -5px;
-            color: yellow;
-        }
-
-        .text-box input:focus ~ span::before,
-        .text-box input:valid ~ span::before
-        {
-            width: 100%;
-        }
-
-        @media (max-width: 575px){
-            .vh-100{
-                background-color: black;
-            }
-        }
-    </style>
 
     <!-- Template CSS -->
     <!-- <link rel="stylesheet" href="../assets/css/style.css">
@@ -96,36 +30,39 @@
     <section class="vh-100">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-7 px-0 d-none d-sm-block">
-                    <img src="https://thumbs.dreamstime.com/b/lake-matheson-south-island-new-zealand-mirror-80239509.jpg" alt="Login image" class="w-100 h-100 min-vh-100"
+                <div class="col-sm-6 px-0 d-none d-sm-block">
+                    <img src="{{ asset('img/bg-tb.jpg') }}" alt="Login image" class="w-100 h-100 min-vh-100"
                         style="object-fit: cover;" id="banner-tb">
                     {{-- <img src="{{ asset('img/bg-tb1.jpg') }}" alt="Login image" class="w-100 vh-100 d-none"
                         style="object-fit: cover; object-position: left;" id="banner-tb1"> --}}
                 </div>
-                <div class="halaman col-sm-5" style="background-color: black;">
-                    <div class="login d-flex h-custom-2 px-5">
+                <div class="col-sm-6 text-black">
+                    <div class="px-5 ms-xl-4 me-3 pt-5 mt-xl-4">
+                        <img src="{{ asset('img/logo-starbhak.png') }}" alt="logo" style="width: 100px" id="log-tb">
+                    </div>
+                    <div class="d-grid align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
                         <span id="info"></span>
-                        <form id="frmlogin" style="width: 23rem;" method="POST">
+                        <form id="frmlogin" style="width: 23rem;" method="POST" onsubmit="event.preventDefault();">
                             @csrf
-                            <h3 class="fw-bold mb-3 pb-3" style="letter-spacing: 1px; color: yellow">Login</h3>
-                            <div class="mb-5 text-box">
-                                <input type="text" name="username" required/>
-                                <span></span>
-                                <label for="">Username</label>
+                            <h3 class="fw-bold mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
+                            <div class="form-outline mb-4">
+                                <input type="text" id="username" name="username" class="form-control form-control-lg" />
+                                <label class="form-label">Username</label>
                             </div>
-                            <div class="mb-4 text-box">
-                                <input type="password" name="password" required/>
-                                <span></span>
-                                <label for="">Password</label>
+                            <div class="form-outline mb-4">
+                                <input type="password" id="password" name="password"
+                                    class="form-control form-control-lg" />
+                                <label class="form-label">Password</label>
                             </div>
                             <div class="pt-1 mb-4">
-                                <button class="btn btn-warning btn-lg btn-block" type="submit">Login</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
                             </div>
                             {{-- <p class="small mb-5 pb-lg-2" id="fp"><a class="text-muted" href="">Forgot password?</a> --}}
                             </p>
                         </form>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
