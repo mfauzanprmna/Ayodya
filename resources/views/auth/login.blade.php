@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    {{-- <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="../bower_components/bootstrap-social/bootstrap-social.css">
@@ -109,17 +109,17 @@
                             @csrf
                             <h3 class="fw-bold mb-3 pb-3" style="letter-spacing: 1px; color: yellow">Login</h3>
                             <div class="mb-5 text-box">
-                                <input type="text" name="username" required/>
+                                <input type="text" id="username" name="username" required/>
                                 <span></span>
                                 <label for="">Username</label>
                             </div>
                             <div class="mb-4 text-box">
-                                <input type="password" name="password" required/>
+                                <input type="password" id="password" name="password" required/>
                                 <span></span>
                                 <label for="">Password</label>
                             </div>
                             <div class="pt-1 mb-4">
-                                <button class="btn btn-warning btn-lg btn-block" type="submit">Login</button>
+                                <button class="btn btn-warning btn-lg" type="submit">Login</button>
                             </div>
                             {{-- <p class="small mb-5 pb-lg-2" id="fp"><a class="text-muted" href="">Forgot password?</a> --}}
                             </p>

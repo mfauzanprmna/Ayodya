@@ -4,6 +4,7 @@ use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\NilaivokalController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AbsenController;
+use App\Http\Controllers\SertifikatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,8 +38,13 @@ Route::get('/siswadashboard', function () {
     return view('siswadashboard');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+Route::get('/sertifikat', [SertifikatController::class, 'index']);
+Route::post('/sertifikat/getSertifikat', [SertifikatController::class, 'getSertifikat'])->name('sertifikat.getSertifikat');
+Route::get('/', function(){
+    return view('template.app');
+});
 require __DIR__ . '/auth.php';
