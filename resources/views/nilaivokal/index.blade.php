@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
-                        <a href="{{ route('nilaivokal.create') }}" class="btn btn-md btn-success mb-3">TAMBAH nilaivokal</a>
+                        <a href="{{ route('nilaivokal.create') }}" class="btn btn-md btn-success mb-3">TAMBAH NILAI VOKAl</a>
                         <table class="table table-bordered">
                             <thead>
                               <tr>
