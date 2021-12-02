@@ -9,18 +9,26 @@
                     // Fetch data
                     $.ajax({
                         url: "{{ route('sertifikat.getSertifikat') }}",
-                        type: 'GET',
+                        type: 'post',
                         dataType: "json",
+                        data: {
+                            _token: CSRF_TOKEN,
+                            search: request.term
+                        },
                         success: function(data) {
-                            $.each(data, function(key, values) {
-                                nomor_induk = data[key].nomor_induk;
-                                nama_siswa = data[key].nama_siswa;
-                                $('#depan').append('<h1>' + cabang + '</h1>')
-                            })
+                            response(data);
                         }
                     });
+                },
+                select: function(event, ui) {
+                    // Set selection
+                    $('#tags').val(ui.item.label); // display the selected text
+                    $('#depan').html(ui.item.value); // save selected id to input
+                    $('#belakang').html(ui.item.tes); // save selected id to input
+                    return false;
                 }
             });
+
         });
     </script>
 @endsection
@@ -49,7 +57,7 @@
         <div class="row mt-4">
             <div class="col-sm-10">
                 <div class="container A3" style="background: white;">
-                    <p><input type="text" name="" id="depan"></p>
+                    <p id="depan"></p>
                 </div>
             </div>
             <div class="col-sm-2">
