@@ -43,7 +43,9 @@
             <!-- Logo Header -->
             <div class="logo-header" data-background-color="blue">
                 <a href="/dashboard" class="logo">
-                    <h1 style="color: white" class="navbar-brand">Ayodya</h1>
+                    <img src="{{ asset('Atlantis-Lite/assets/img/Layer1001.svg')}}" alt="navbar brand" class="navbar-brand " style="height:50px; width:50px ;">
+                    <h1 style="color: #ffd32a; height:50px" class="navbar-brand">Ayodya</h1>
+
                 </a>
 
 

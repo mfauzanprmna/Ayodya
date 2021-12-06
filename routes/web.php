@@ -30,12 +30,17 @@ Route::middleware(['auth:user'])->group(function () {
     
 
     Route::get('/dashboard', function () {
-        return view('nilaipilihan');
+        return view('dashboardtampilan');
     })->name('dashboard');
 });
 
+
 Route::get('/siswadashboard', function () {
     return view('siswadashboard');
+});
+
+Route::get('/nilaipilihan', function () {
+    return view('nilaipilihan');
 });
 
 // Route::get('/', function () {
