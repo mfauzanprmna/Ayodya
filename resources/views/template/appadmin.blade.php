@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <style>
+        .sub-item.active{background-color: #6C63FF !important}
+        
+    </style>
 
     <!-- Fonts and icons -->
     <script src="{{ asset('Atlantis-Lite/assets/js/plugin/webfont/webfont.min.js') }}"></script>
@@ -41,10 +45,10 @@
     <div class="wrapper">
         <div class="main-header">
             <!-- Logo Header -->
-            <div class="logo-header" data-background-color="blue">
+            <div class="logo-header" style="background: #7a74fc">
                 <a href="/dashboard" class="logo">
                     <img src="{{ asset('Atlantis-Lite/assets/img/Layer1001.svg')}}" alt="navbar brand" class="navbar-brand " style="height:50px; width:50px ;">
-                    <h1 style="color: #ffd32a; height:50px" class="navbar-brand">Ayodya</h1>
+                    <h1 style="color: white; height:50px" class="navbar-brand">Ayodya</h1>
 
                 </a>
 
@@ -66,9 +70,9 @@
             <!-- End Logo Header -->
 
             <!-- Navbar Header -->
-            <nav class="navbar navbar-header navbar-expand-lg" data-background-color="blue2">
+            <nav class="navbar navbar-header navbar-expand-lg" style="background: #6C63FF">
 
-                <div class="container-fluid">
+                <div class="container-fluid" >
 
                     <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 
@@ -76,7 +80,7 @@
                             <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
                                 aria-expanded="false">
                                 <div class="avatar-sm">
-                                    <img src="{{ asset('Atlantis-Lite/assets/img/noavatar-480x400.png') }}" alt="..."
+                                    <img src="{{ asset('Atlantis-Lite/assets/img/undraw_profile_pic_ic-5-t.svg') }}" alt="..."
                                         class="avatar-img rounded-circle">
                                 </div>
                             </a>
@@ -109,7 +113,7 @@
                 <div class="sidebar-content">
                     <div class="user">
                         <div class="avatar-sm float-left mr-2">
-                            <img src="{{ asset('Atlantis-Lite/assets/img/noavatar-480x400.png') }}" alt="..."
+                            <img src="{{ asset('Atlantis-Lite/assets/img/undraw_profile_pic_ic-5-t.svg') }}" alt="..."
                                 class="avatar-img rounded-circle">
                         </div>
                         <div class="info">
@@ -142,7 +146,7 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="nav nav-primary">
+                    <ul class="nav " >
                         <li class="nav-item {{ request()->is('admin/siswa') ? 'active' : '' }}">
                             <a href="/admin/siswa">
                                 <i class="fas fa-user"></i>
