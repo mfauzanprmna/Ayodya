@@ -102,12 +102,12 @@
                     {{-- <img src="{{ asset('img/bg-tb1.jpg') }}" alt="Login image" class="w-100 vh-100 d-none"
                         style="object-fit: cover; object-position: left;" id="banner-tb1"> --}}
                 </div>
-                <div class="halaman col-sm-5" style="background-color: black;">
+                <div class="halaman col-sm-5" style="background-color: white;">
                     <div class="login d-flex h-custom-2 px-5">
                         <span id="info"></span>
                         <form id="frmlogin" style="width: 23rem;" method="POST">
                             @csrf
-                            <h3 class="fw-bold mb-3 pb-3" style="letter-spacing: 1px; color: yellow">Login</h3>
+                            <h3 class="fw-bold mb-3 pb-3" style="letter-spacing: 1px; color: black">Login</h3>
                             <div class="mb-5 text-box">
                                 <input type="text" id="username" name="username" required/>
                                 <span></span>
@@ -119,7 +119,7 @@
                                 <label for="">Password</label>
                             </div>
                             <div class="pt-1 mb-4">
-                                <button class="btn btn-warning btn-lg" type="submit">Login</button>
+                                <button class="btn  btn-lg" type="submit" style="background: #6C63FF">Login</button>
                             </div>
                             {{-- <p class="small mb-5 pb-lg-2" id="fp"><a class="text-muted" href="">Forgot password?</a> --}}
                             </p>
