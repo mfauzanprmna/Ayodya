@@ -10,18 +10,17 @@
                         <table class="table table-bordered">
                             <thead>
                               <tr>
-                                <th scope="col">no induk</th>
-                                <th scope="col">nama siswa</th>
-                                <th scope="col">jenis tari</th>
-                                <th scope="col">wirama</th>
-                                <th scope="col">wiraga</th>
-                                <th scope="col">wirasa</th>
-                                <th scope="col">AKSI</th>
-                             
-                              </tr>
+                                <th scope="col">Nama Siswa</th>
+                                <th scope="col">Jenis Tari</th>
+                                <th scope="col">Wirama</th>
+                                <th scope="col">Wiraga</th>
+                                <th scope="col">Wirasa</th>
+                                <th scope="col">Aksi</th>
+                            
+                            </tr>
                             </thead>
                             <tbody>
-                              @forelse ($nilais as $nilai)
+                            @forelse ($nilais as $nilai)
                                 <tr>
                                     <td>{{ $nilai->no_induk }}</td>
                                     <td>{{ $nilai->nama_siswa }}</td>

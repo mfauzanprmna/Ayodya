@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNilaisTable extends Migration
+class CreateUndiansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateNilaisTable extends Migration
      */
     public function up()
     {
-        Schema::create('nilais', function (Blueprint $table) {
+        Schema::create('undians', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('no_induk');
+            $table->string('nomor');
+            $table->foreignId('siswa_id');
             $table->foreignId('tari_id');
-            $table->string('wirama');
-            $table->string('wiraga');
-            $table->string('wirasa');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ class CreateNilaisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('nilais');
+        Schema::dropIfExists('undians');
     }
 }
