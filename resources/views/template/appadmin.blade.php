@@ -12,8 +12,25 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <style>
-        .sub-item.active{background-color: #6C63FF !important}
-        
+        .sidebar.sidebar-style-2 .nav.nav-primary>.nav-item.active>a {
+            background: #1572e8 !important;
+            /* box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, .1), 4px 4px 15px -5px rgba(21, 114, 232, .4) !important; */
+        }
+
+        .sidebar.sidebar-style-2 .nav.nav-purple>.nav-item.active>a .caret,
+        .sidebar.sidebar-style-2 .nav.nav-purple>.nav-item.active>a i,
+        .sidebar.sidebar-style-2 .nav.nav-purple>.nav-item.active>a p,
+        .sidebar.sidebar-style-2 .nav.nav-purple>.nav-item.active>a span {
+            color: #fff !important;
+        }
+
+        @media (max-width: 768px){
+            .kekanan {
+                width: 100%;
+                overflow-x: scroll;
+            }
+        }
+
     </style>
 
     <!-- Fonts and icons -->
@@ -47,7 +64,8 @@
             <!-- Logo Header -->
             <div class="logo-header" style="background: #7a74fc">
                 <a href="/dashboard" class="logo">
-                    <img src="{{ asset('Atlantis-Lite/assets/img/Layer1001.svg')}}" alt="navbar brand" class="navbar-brand " style="height:50px; width:50px ;">
+                    <img src="{{ asset('Atlantis-Lite/assets/img/Layer1001.svg') }}" alt="navbar brand"
+                        class="navbar-brand " style="height:50px; width:50px ;">
                     <h1 style="color: white; height:50px" class="navbar-brand">Ayodya</h1>
 
                 </a>
@@ -72,7 +90,7 @@
             <!-- Navbar Header -->
             <nav class="navbar navbar-header navbar-expand-lg" style="background: #6C63FF">
 
-                <div class="container-fluid" >
+                <div class="container-fluid">
 
                     <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 
@@ -80,7 +98,7 @@
                             <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
                                 aria-expanded="false">
                                 <div class="avatar-sm">
-                                    <img src="{{ asset('Atlantis-Lite/assets/img/undraw_profile_pic_ic-5-t.svg') }}" alt="..."
+                                    <img src="{{ asset('/' . Auth::guard('user')->user()->foto) }}" alt="..."
                                         class="avatar-img rounded-circle">
                                 </div>
                             </a>
@@ -111,50 +129,28 @@
 
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
-                    <div class="user">
-                        <div class="avatar-sm float-left mr-2">
-                            <img src="{{ asset('Atlantis-Lite/assets/img/undraw_profile_pic_ic-5-t.svg') }}" alt="..."
-                                class="avatar-img rounded-circle">
-                        </div>
-                        <div class="info">
-                            <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-                                <span>
-                                    Administrator
-                                    <span class="caret"></span>
-                                </span>
+                    <ul class="nav nav-primary">
+                        <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
+                            <a href="/dashboard">
+                                <i class="fas fa-home"></i>
+                                <p>Dashboard</p>
                             </a>
-                            <div class="clearfix"></div>
-
-                            <div class="collapse in" id="collapseExample">
-                                <ul class="nav">
-                                    <li>
-                                        <a href="#profile">
-                                            <span class="link-collapse">My Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#edit">
-                                            <span class="link-collapse">Edit Profile</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#settings">
-                                            <span class="link-collapse">Settings</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <ul class="nav " >
+                        </li>
+                        <li class="nav-section">
+                            <span class="sidebar-mini-icon">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </span>
+                            <h4 class="text-section">Components</h4>
+                        </li>
                         <li class="nav-item {{ request()->is('admin/siswa') ? 'active' : '' }}">
                             <a href="/admin/siswa">
                                 <i class="fas fa-user"></i>
                                 <p>Data Siswa</p>
                             </a>
                         </li>
-                        <li class="nav-item {{ request()->is('/nilaipilihan') ? 'active' : '' }}">
-                            <a data-toggle="collapse" href="#admin" href="/nilaipilihan">
+                        <li
+                            class="nav-item {{ request()->is('nilaipilihan') || request()->is('admin/nilai') || request()->is('admin/nivokal') ? 'active' : '' }}">
+                            <a data-toggle="collapse" href="#admin" class="collapsed" aria-expanded="false">
                                 <i class="fas fa-table"></i>
                                 <p>Data Nilai</p>
                                 <span class="caret"></span>
@@ -218,7 +214,7 @@
                         var column = this;
                         var select = $(
                                 '<select class="form-control"><option value=""></option></select>'
-                                )
+                            )
                             .appendTo($(column.footer()).empty())
                             .on('change', function() {
                                 var val = $.fn.dataTable.util.escapeRegex(

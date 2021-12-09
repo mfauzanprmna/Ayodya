@@ -6,12 +6,12 @@
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
-                        <form action="{{ route('nilai.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('nilai.store') }}" method="POST" enctype="multipart/form-data" style="font-size: 17px">
 
                             @csrf
 
                             <div class="form-group">
-                                <label class="font-weight-bold">No Induk</label>
+                                <label class="font-weight-bold">Undian</label>
                                 <input type="text" class="form-control @error('no_induk') is-invalid @enderror"
                                     name="no_induk" value="{{ old('no_induk') }}" placeholder="Masukkan Judul no induk">
 
@@ -22,39 +22,36 @@
                                     </div>
                                 @enderror
                             </div>
-
+                            
                             <div class="form-group">
-                                <label class="font-weight-bold">Nama Siswa</label>
-                                <input type="text" class="form-control @error('nama_siswa') is-invalid @enderror"
-                                    name="nama_siswa" value="{{ old('nama_siswa') }}"
-                                    placeholder="Masukkan Judul nama siswa">
-
-                                <!-- error message untuk nama_siswa -->
-                                @error('nama_siswa')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <table>
+                                    <tr>
+                                        <th>Nomor Induk</th>
+                                        <td>:</td>
+                                        <td><span id="induk"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <td>:</td>
+                                        <td><span id="nama"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Jenis Tari</th>
+                                        <td>:</td>
+                                        <td><span id="tari"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Semester</th>
+                                        <td>:</td>
+                                        <td><span id="semester"></span></td>
+                                    </tr>
+                                </table>
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">jenis tari</label>
-                                <input type="text" class="form-control @error('jenis_tari') is-invalid @enderror"
-                                    name="jenis_tari" value="{{ old('jenis_tari') }}"
-                                    placeholder="Masukkan Judul nama siswa">
-
-                                <!-- error message untuk jenis_tari -->
-                                @error('jenis_tari')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label class="font-weight-bold">wirama </label>
+                                <label class="font-weight-bold">Wirama </label>
                                 <input type="text" class="form-control @error('wirama') is-invalid @enderror" name="wirama"
-                                    value="{{ old('wirama') }}" placeholder="Masukkan wirama">
+                                    value="{{ old('wirama') }}" placeholder="Masukkan Nilai WIrama">
 
                                 <!-- error message untuk wirama -->
                                 @error('wirama')
@@ -65,9 +62,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">wiraga</label>
+                                <label class="font-weight-bold">Wiraga</label>
                                 <input type="text" class="form-control @error('wiraga') is-invalid @enderror" name="wiraga"
-                                    value="{{ old('wiraga') }}" placeholder="Masukkan Judul no induk">
+                                    value="{{ old('wiraga') }}" placeholder="Masukkan Nilai Wiraga">
 
                                 <!-- error message untuk wiraga -->
                                 @error('wiraga')
@@ -78,9 +75,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">wirasa</label>
+                                <label class="font-weight-bold">Wirasa</label>
                                 <input type="text" class="form-control @error('wirasa') is-invalid @enderror" name="wirasa"
-                                    value="{{ old('wirasa') }}" placeholder="Masukkan Judul nama nilai">
+                                    value="{{ old('wirasa') }}" placeholder="Masukkan Nilai Wirasa">
 
                                 <!-- error message untuk wirasa -->
                                 @error('wirasa')
@@ -93,8 +90,8 @@
 
 
 
-                            <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
-                            <button type="reset" class="btn btn-md btn-warning">RESET</button>
+                            <button type="submit" class="btn btn-md btn-primary">Simpan</button>
+                            <button type="reset" class="btn btn-md btn-warning">Reset</button>
 
                         </form>
                     </div>

@@ -1,11 +1,11 @@
 @extends('template.appadmin')
 @section('main')
 
-    <div class="container mt-5">
+    <div class="container-fluid mt-5">
         <div class="card border-0 shadow rounded">
-            <div class="card-body">
+            <div class="card-body kekanan">
                 <a href="{{ route('siswa.create') }}" class="btn btn-md btn-success mb-3">Tambah Siswa</a>
-                <table class="table table-bordered">
+                <table class="table table-head-bg-primary">
                     <thead>
                         <tr>
                             <th scope="col">No</th>
