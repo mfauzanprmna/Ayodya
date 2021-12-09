@@ -50,6 +50,6 @@ Route::get('/nilaipilihan', function () {
 Route::get('/sertifikat', [SertifikatController::class, 'index']);
 Route::post('/sertifikat/getSertifikat', [SertifikatController::class, 'getSertifikat'])->name('sertifikat.getSertifikat');
 Route::get('/', function(){
-    return view('template.app');
+    return view('welcome');
 });
 require __DIR__ . '/auth.php';

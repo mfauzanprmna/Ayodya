@@ -42,7 +42,7 @@
             border: none;
             background: none;
             outline: none;
-            color: white;
+            color: black;
         }
 
         .text-box label{
@@ -63,7 +63,7 @@
             left: 0;
             width: 0%;
             height: 2px;
-            background: yellow;
+            background: #6C63FF;
             transition: .5s;
         }
 
@@ -71,7 +71,7 @@
         .text-box input:valid ~ label
         {
             top: -5px;
-            color: yellow;
+            color: #6C63FF;
         }
 
         .text-box input:focus ~ span::before,
