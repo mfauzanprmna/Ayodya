@@ -46,9 +46,10 @@ public function store(Request $request)
 
 
     $siswa = Siswa::create([
-        'foto'               => 'default.png',
+        'foto'               => 'image/default.png',
         'no_induk'           => $request->no_induk,
         'nama_siswa'         => $request->nama_siswa,
+        'semester'           => 'SMT 1',
         'tempat'             => $request->tempat,
         'tanggal_lahir'      => $request->tanggal_lahir,
         'orang_tua'          => $request->orang_tua,

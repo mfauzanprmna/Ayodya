@@ -9,18 +9,26 @@
                     // Fetch data
                     $.ajax({
                         url: "{{ route('sertifikat.getSertifikat') }}",
-                        type: 'GET',
+                        type: 'post',
                         dataType: "json",
+                        data: {
+                            _token: CSRF_TOKEN,
+                            search: request.term
+                        },
                         success: function(data) {
-                            $.each(data, function(key, values) {
-                                nomor_induk = data[key].nomor_induk;
-                                nama_siswa = data[key].nama_siswa;
-                                $('#depan').append('<h1>' + cabang + '</h1>')
-                            })
+                            response(data);
                         }
                     });
+                },
+                select: function(event, ui) {
+                    // Set selection
+                    $('#tags').val(ui.item.label); // display the selected text
+                    $('#depan').html(ui.item.value); // save selected id to input
+                    $('#belakang').html(ui.item.tes); // save selected id to input
+                    return false;
                 }
             });
+
         });
     </script>
 @endsection
@@ -28,8 +36,19 @@
     <style>
         .A3 {
             width: 100%;
-            height: 450px;
+            height: 500px;
             box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.10)
+        }
+
+        .bulet{
+            margin-left: -75%;
+            margin-top: -4%;
+        }
+
+        .desc{
+            position: absolute;
+            z-index: 100;
+            bottom: 25%;
         }
 
     </style>
@@ -49,8 +68,28 @@
         <div class="row mt-4">
             <div class="col-sm-10">
                 <div class="container A3" style="background: white;">
-                    <p><input type="text" name="" id="depan"></p>
+                    <img src="{{ asset('Atlantis-Lite/assets/img/ayodya_logo_sertifikat.png') }}" width="20%">
+                    <center>
+                        <h3 style="font-family: Eras Demi ITC"> No: __ / YAP / X / 2020 </h3>
+                        <p style="font-family: Eras Demi ITC">Diberikan Kepada:</p>
+                        <h1 style="font-family: Edwardian Script ITC">Duma Kalila</h1>
+                        
+                        <p style="font-family: Eras Demi ITC"> Dilahirkan di __, pada tanggal __, bulan __, tahun __Anak dari __</p>
+                        <h1 style="font-family: Pristina">Lulus</h1>
+                        
+                        <img src="{{ asset('Atlantis-Lite/assets/img/path118.png') }}" width="10%" class="bulet">
+                        <p style="font-family: Eras Demi ITC" class="desc">Pada ujian tari daerah, modelling & vokal di semester terpadu ke - ___ (___)yang diselenggarakan pada tanggal __, __, __, __ Oktober 2020di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depokdan tercatat sebagai siswa Ayodya Pala - __dengan nomor induk : __</p>
+                        
+                        
+                    </center>
+                    <div class="ttd" style="margin-left: 0; text-align: center;">
+                        <p>Depok, __ 2020 </p>
+                        <p style="margin-right: 3%; margin-top: -2%">Pimpinan </p>
+                        <p>Dra. Budi Agustinah</p>
+                    </div>
+
                 </div>
+                
             </div>
             <div class="col-sm-2">
                 <button type="submit" class="btn btn-warning">PDF</button>

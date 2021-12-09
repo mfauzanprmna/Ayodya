@@ -23,18 +23,19 @@
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css"> --}}
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
 
-        .login{
+        .login {
             margin-top: 30% !important;
         }
 
-        form .text-box{
+        form .text-box {
             position: relative;
             border-bottom: 2px solid #adadad;
             margin: 30px 0;
         }
 
-        .text-box input{
+        .text-box input {
             width: 100%;
             padding: 0 5px;
             height: 40px;
@@ -45,7 +46,7 @@
             color: black;
         }
 
-        .text-box label{
+        .text-box label {
             position: absolute;
             top: 50%;
             left: 5px;
@@ -56,7 +57,7 @@
             transition: .5s;
         }
 
-        .text-box span::before{
+        .text-box span::before {
             content: '';
             position: absolute;
             top: 40px;
@@ -70,21 +71,31 @@
         .text-box input:focus ~ label,
         .text-box input:valid ~ label
         {
-            top: -5px;
+            top: -10px;
             color: #6C63FF;
         }
 
-        .text-box input:focus ~ span::before,
-        .text-box input:valid ~ span::before
-        {
+        .text-box input:focus~span::before,
+        .text-box input:valid~span::before {
             width: 100%;
         }
 
-        @media (max-width: 575px){
-            .vh-100{
+        .btn {
+            font-family: 'PT Sans Narrow', sans-serif;
+            color: white;
+            letter-spacing: 1.25px;
+        }
+
+        .btn-purple{
+            background: #7a74fc;
+        }
+
+        @media (max-width: 575px) {
+            .vh-100 {
                 background-color: black;
             }
         }
+
     </style>
 
     <!-- Template CSS -->
@@ -97,29 +108,29 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-7 px-0 d-none d-sm-block">
-                    <img src="https://thumbs.dreamstime.com/b/lake-matheson-south-island-new-zealand-mirror-80239509.jpg" alt="Login image" class="w-100 h-100 min-vh-100"
-                        style="object-fit: cover;" id="banner-tb">
+                    <img src="https://thumbs.dreamstime.com/b/lake-matheson-south-island-new-zealand-mirror-80239509.jpg"
+                        alt="Login image" class="w-100 h-100 min-vh-100" style="object-fit: cover;" id="banner-tb">
                     {{-- <img src="{{ asset('img/bg-tb1.jpg') }}" alt="Login image" class="w-100 vh-100 d-none"
                         style="object-fit: cover; object-position: left;" id="banner-tb1"> --}}
                 </div>
-                <div class="halaman col-sm-5" style="background-color: white;">
+                <div class="halaman col-sm-5" style="background-color: #fafafa;">
                     <div class="login d-flex h-custom-2 px-5">
                         <span id="info"></span>
                         <form id="frmlogin" style="width: 23rem;" method="POST">
                             @csrf
-                            <h3 class="fw-bold mb-3 pb-3" style="letter-spacing: 1px; color: black">Login</h3>
+                            <h3 class="fw-bold mb-3 pb-3" style="letter-spacing: 1px; color: #111">Login</h3>
                             <div class="mb-5 text-box">
-                                <input type="text" id="username" name="username" required/>
+                                <input type="text" id="username" name="username" required />
                                 <span></span>
                                 <label for="">Username</label>
                             </div>
                             <div class="mb-4 text-box">
-                                <input type="password" id="password" name="password" required/>
+                                <input type="password" id="password" name="password" required />
                                 <span></span>
                                 <label for="">Password</label>
                             </div>
                             <div class="pt-1 mb-4">
-                                <button class="btn  btn-lg" type="submit" style="background: #6C63FF">Login</button>
+                                <button class="btn btn-purple btn-lg" type="submit">Login</button>
                             </div>
                             {{-- <p class="small mb-5 pb-lg-2" id="fp"><a class="text-muted" href="">Forgot password?</a> --}}
                             </p>

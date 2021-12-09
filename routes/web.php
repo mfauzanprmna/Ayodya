@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\UndianController;
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\NilaivokalController;
 use App\Http\Controllers\SiswaController;
@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:user'])->group(function () {
     Route::resource('admin/siswa', SiswaController::class);
+    Route::resource('admin/undian', UndianController::class);
     Route::resource('admin/absen', AbsenController::class);
     Route::resource('admin/nilai', NilaiController::class);
     Route::resource('admin/nilaivokal', NilaivokalController::class);
@@ -35,7 +36,7 @@ Route::middleware(['auth:user'])->group(function () {
 });
 
 
-Route::get('/siswadashboard', function () {
+Route::get('/dashboard/siswa', function () {
     return view('siswadashboard');
 });
 

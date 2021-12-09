@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nilai;
+use App\Models\Undian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,6 +30,24 @@ class NilaiController extends Controller
         return view('nilai.create');
     }
 
+    public function getSertifikat(Request $request)
+    {
+        $search = $request->nomor;
+        $induk = Undian::where('nomor', $request->nomor);
+        if ($search == '') {
+            $employees = Undian::orderby('nomor', 'asc')->select('id', 'nama_siswa', 'cabang')->limit(5)->get();
+        } else {
+            $employees = Undian::orderby('nomor', 'asc')->join('')->select('id', 'nama_siswa', 'cabang')->where('nomor_induk', 'like', '%' . $induk->nomor_induk . '%')->limit(5)->get();
+        }
+
+        $response = array();
+        foreach ($employees as $employee) {
+            $response[] = array("value" => $employee->id, "label" => $employee->nama_siswa, "tes" => $employee->cabang);
+        }
+
+        return response()->json($response);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -37,31 +56,31 @@ class NilaiController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
-            'no_induk'     => 'required',
-        'nama_siswa'     => 'required',
-        'jenis_tari'     => 'required',
-            'wirama'     => 'required',
-            'wiraga'     => 'required',
-            'wirasa'     => 'required',
-         
+            'no_induk' => 'required',
+            'nama_siswa' => 'required',
+            'jenis_tari' => 'required',
+            'wirama' => 'required',
+            'wiraga' => 'required',
+            'wirasa' => 'required',
+
         ]);
-    
-    
+
         $nilai = Nilai::create([
-            'no_induk'                  => $request->no_induk,
-        'nama_siswa'                => $request->nama_siswa,
-        'jenis_tari'     => $request->jenis_tari,
-            'wirama'                => $request->wirama,
-            'wiraga'                => $request->wiraga,
-            'wirasa'                => $request->wirasa,
-          
+            'no_induk' => $request->no_induk,
+            'nama_siswa' => $request->nama_siswa,
+            'jenis_tari' => $request->jenis_tari,
+            'wirama' => $request->wirama,
+            'wiraga' => $request->wiraga,
+            'wirasa' => $request->wirasa,
+
         ]);
-    
-        if($nilai){
+
+        if ($nilai) {
             //redirect dengan pesan sukses
             return redirect()->route('nilai.index')->with(['success' => 'Data Berhasil Disimpan!']);
-        }else{
+        } else {
             //redirect dengan pesan error
             return redirect()->route('nilai.index')->with(['error' => 'Data Gagal Disimpan!']);
         }
@@ -88,7 +107,6 @@ class NilaiController extends Controller
     {
         return view('nilai.edit', compact('nilai'));
     }
-    
 
     /**
      * Update the specified resource in storage.
@@ -100,33 +118,30 @@ class NilaiController extends Controller
     public function update(Request $request, Nilai $nilai)
     {
         $this->validate($request, [
-            'no_induk'     => 'required',
-            'nama_siswa'     => 'required',
-            'jenis_tari'     => 'required',
-                'wirama'     => 'required',
-                'wiraga'     => 'required',
-                'wirasa'     => 'required',
+            'no_induk' => 'required',
+            'nama_siswa' => 'required',
+            'jenis_tari' => 'required',
+            'wirama' => 'required',
+            'wiraga' => 'required',
+            'wirasa' => 'required',
         ]);
-    
+
         //get data nilai by ID
         $nilai = Nilai::findOrFail($nilai->id);
-    
-    
-            $nilai->update([
-                'no_induk'                  => $request->no_induk,
-        'nama_siswa'                => $request->nama_siswa,
-        'jenis_tari'     => $request->jenis_tari,
-            'wirama'                => $request->wirama,
-            'wiraga'                => $request->wiraga,
-            'wirasa'                => $request->wirasa,
-            ]);
-    
-        
-    
-        if($nilai){
+
+        $nilai->update([
+            'no_induk' => $request->no_induk,
+            'nama_siswa' => $request->nama_siswa,
+            'jenis_tari' => $request->jenis_tari,
+            'wirama' => $request->wirama,
+            'wiraga' => $request->wiraga,
+            'wirasa' => $request->wirasa,
+        ]);
+
+        if ($nilai) {
             //redirect dengan pesan sukses
             return redirect()->route('nilai.index')->with(['success' => 'Data Berhasil Diupdate!']);
-        }else{
+        } else {
             //redirect dengan pesan error
             return redirect()->route('nilai.index')->with(['error' => 'Data Gagal Diupdate!']);
         }
@@ -142,16 +157,16 @@ class NilaiController extends Controller
     {
         {
             $nilai = Nilai::findOrFail($id);
-            Storage::disk('local')->delete('public/nilais/'.$nilai->image);
+            Storage::disk('local')->delete('public/nilais/' . $nilai->image);
             $nilai->delete();
-          
-            if($nilai){
-               //redirect dengan pesan sukses
-               return redirect()->route('nilai.index')->with(['success' => 'Data Berhasil Dihapus!']);
-            }else{
-              //redirect dengan pesan error
-              return redirect()->route('nilai.index')->with(['error' => 'Data Gagal Dihapus!']);
+
+            if ($nilai) {
+                //redirect dengan pesan sukses
+                return redirect()->route('nilai.index')->with(['success' => 'Data Berhasil Dihapus!']);
+            } else {
+                //redirect dengan pesan error
+                return redirect()->route('nilai.index')->with(['error' => 'Data Gagal Dihapus!']);
             }
+        }
     }
-}
 }
