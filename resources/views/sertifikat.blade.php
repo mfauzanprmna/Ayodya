@@ -36,20 +36,14 @@
     <style>
         .A3 {
             width: 100%;
-            height: 500px;
+            height: 650px;
             box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.10)
         }
 
-        .bulet{
-            margin-left: -75%;
-            margin-top: -4%;
+        p.ttd{
+            line-height: 1;
         }
-
-        .desc{
-            position: absolute;
-            z-index: 100;
-            bottom: 25%;
-        }
+        
 
     </style>
     <div class="container mt-4 mb-5">
@@ -67,25 +61,36 @@
         </div> --}}
         <div class="row mt-4">
             <div class="col-sm-10">
-                <div class="container A3" style="background: white;">
+                <div class="container A3 fw-bold" style="background: white;">
                     <img src="{{ asset('Atlantis-Lite/assets/img/ayodya_logo_sertifikat.png') }}" width="20%">
                     <center>
                         <h3 style="font-family: Eras Demi ITC"> No: __ / YAP / X / 2020 </h3>
                         <p style="font-family: Eras Demi ITC">Diberikan Kepada:</p>
-                        <h1 style="font-family: Edwardian Script ITC">Duma Kalila</h1>
+                        <h1 style="font-family: Edwardian Script ITC; font-size: 50px; margin: -10px 0">Duma Kalila</h1>
                         
-                        <p style="font-family: Eras Demi ITC"> Dilahirkan di __, pada tanggal __, bulan __, tahun __Anak dari __</p>
-                        <h1 style="font-family: Pristina">Lulus</h1>
+                        <p style="font-family: Eras Demi ITC"> Dilahirkan di __, pada tanggal __, bulan __, tahun __
+                        <br> Anak dari __</p>
+                        <h1 style="font-family: Pristina; font-size: 50px; margin: -10px 0">Lulus</h1>
                         
-                        <img src="{{ asset('Atlantis-Lite/assets/img/path118.png') }}" width="10%" class="bulet">
-                        <p style="font-family: Eras Demi ITC" class="desc">Pada ujian tari daerah, modelling & vokal di semester terpadu ke - ___ (___)yang diselenggarakan pada tanggal __, __, __, __ Oktober 2020di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depokdan tercatat sebagai siswa Ayodya Pala - __dengan nomor induk : __</p>
+                        <p style="font-family: Eras Demi ITC" class="desc">Pada ujian tari daerah, modelling & vokal di semester terpadu ke - ___ (___)
+                            <br>yang diselenggarakan pada tanggal __, __, __, __ Oktober 2020
+                            <br>di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depok
+                            <br>dan tercatat sebagai siswa Ayodya Pala - __
+                            <br>dengan nomor induk : __</p>
                         
                         
                     </center>
-                    <div class="ttd" style="margin-left: 0; text-align: center;">
-                        <p>Depok, __ 2020 </p>
-                        <p style="margin-right: 3%; margin-top: -2%">Pimpinan </p>
-                        <p>Dra. Budi Agustinah</p>
+                    <div class="container d-flex justify-content-between">
+                        <div class="foto">
+                            <img src="{{ asset('image/default.png') }}" alt="" width="110px" height="150px" style="border-radius: 100%">
+                        </div>
+                        <div style="margin-left: 0; text-align: center;">
+                            <p class="ttd">Depok, __ 2020
+                            <br>Pimpinan</p>
+                            <br>
+                            <br>
+                            <p>Dra. Budi Agustinah</p>
+                        </div>
                     </div>
 
                 </div>

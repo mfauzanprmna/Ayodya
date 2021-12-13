@@ -4,9 +4,19 @@
     <div class="container-fluid mt-5">
         <div class="card border-0 shadow rounded">
             <div class="card-body kekanan">
+                <form action="{{ route('file-import') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group mb-4" style="max-width: 500px; margin: 0 auto;">
+                        <div class="custom-file text-left">
+                            <input type="file" name="file" class="custom-file-input" id="customFile">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Import data</button>
+                </form>
                 <a href="{{ route('siswa.create') }}" class="btn btn-md btn-success mb-3">Tambah Siswa</a>
-                <table class="table table-head-bg-primary">
-                    <thead>
+                <table class="table  ">
+                    <thead style="background: #7a74fc" class="text-white text-center">
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Foto</th>
@@ -25,7 +35,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="text-center">
-                                    <img src="{{ asset('/' . $siswa->foto) }}" alt="" width="100%">
+                                    <img src="{{ asset('/' . $siswa->foto) }}" alt="" width="80px">
                                 </td>
                                 <td>{{ $siswa->no_induk }}</td>
                                 <td>{{ $siswa->nama_siswa }}</td>
@@ -37,11 +47,14 @@
                                 <td class="text-center">
                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                         action="{{ route('siswa.destroy', $siswa->id) }}" method="POST">
+                                        <a href="{{ route('siswa.show', $siswa->id) }}"
+                                            class="btn btn-sm btn-primary">Detail</a>
                                         <a href="{{ route('siswa.edit', $siswa->id) }}"
-                                            class="btn btn-sm btn-primary">EDIT</a>
+                                            class="btn btn-sm btn-primary">Edit</a>
+
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                        <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                     </form>
                                 </td>
                             </tr>

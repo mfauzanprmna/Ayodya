@@ -6,6 +6,8 @@ use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\SiswaImport;
 
 class SiswaController extends Controller
 {
@@ -50,8 +52,7 @@ public function store(Request $request)
         'no_induk'           => $request->no_induk,
         'nama_siswa'         => $request->nama_siswa,
         'semester'           => 'SMT 1',
-        'tempat'             => $request->tempat,
-        'tanggal_lahir'      => $request->tanggal_lahir,
+        'tanggal_lahir'      => $request->tempat + ', ' + $request->tanggal_lahir,
         'orang_tua'          => $request->orang_tua,
         'alamat'             => $request->alamat,
         'cabang'             => $request->cabang,
@@ -76,6 +77,11 @@ public function store(Request $request)
 public function edit(siswa $siswa)
 {
     return view('siswa.edit', compact('siswa'));
+}
+
+public function show(siswa $siswa)
+{
+    return view('siswa.show', compact('siswa'));
 }
 
 
@@ -105,8 +111,7 @@ public function update(Request $request, siswa $siswa)
         $siswa->update([
         'no_induk'          => $request->no_induk,
         'nama_siswa'        => $request->nama_siswa,
-        'tempat'            => $request->tempat,
-        'tanggal_lahir'     => $request->tanggal_lahir,
+        'tanggal_lahir'     => $request->tempat . ', ' .$request->tanggal_lahir,
         'orang_tua'         => $request->orang_tua,
         'alamat'            => $request->alamat,
         'cabang'            => $request->cabang,
@@ -144,5 +149,10 @@ public function destroy($id)
     return redirect()->route('siswa.index')->with(['error' => 'Data Gagal Dihapus!']);
   }
 }
+public function fileImport(Request $request) 
+    {
+        Excel::import(new SiswaImport, $request->file('file')->store('temp'));
+        return back();
+    }
 
 }

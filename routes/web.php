@@ -6,6 +6,8 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\SertifikatController;
 use Illuminate\Support\Facades\Route;
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,4 +55,5 @@ Route::post('/sertifikat/getSertifikat', [SertifikatController::class, 'getSerti
 Route::get('/', function(){
     return view('welcome');
 });
+Route::post('file-import', [SiswaController::class, 'fileImport'])->name('file-import');
 require __DIR__ . '/auth.php';
