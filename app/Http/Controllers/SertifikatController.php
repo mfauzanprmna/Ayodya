@@ -18,14 +18,18 @@ class SertifikatController extends Controller
       $search = $request->tags;
 
       if($search == ''){
-         $employees = Siswa::orderby('nama_siswa','asc')->select('id','nama_siswa', 'cabang')->limit(5)->get();
+         $employees = Siswa::orderby('nama_siswa','asc')->all()->limit(5)->get();
       }else{
-         $employees = Siswa::orderby('nama_siswa','asc')->select('id','nama_siswa', 'cabang')->where('name', 'like', '%' .$search . '%')->limit(5)->get();
+         $employees = Siswa::orderby('nama_siswa','asc')->all()->where('name', 'like', '%' .$search . '%')->limit(5)->get();
       }
 
       $response = array();
       foreach($employees as $employee){
-         $response[] = array("value"=>$employee->id,"label"=>$employee->nama_siswa,"tes"=>$employee->cabang);
+         $response[] = array("id"        =>   $employee->id,
+                              "nama"     =>   $employee->nama_siswa,
+                              "cabang"   =>   $employee->cabang,
+                              "ortu"     =>   $employee->orang_tua,
+                              "ttl"      =>   $employee->tanggal_lahir);
       }
 
       return response()->json($response);

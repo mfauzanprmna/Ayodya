@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
     <style>
         .sidebar.sidebar-style-2 .nav.nav-primary>.nav-item.active>a {
             background: #1572e8 !important;
@@ -24,7 +27,7 @@
             color: #fff !important;
         }
 
-        @media (max-width: 1300px){
+        @media (max-width: 1300px) {
             .kekanan {
                 width: 100%;
                 overflow-x: scroll;
@@ -54,6 +57,9 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('Atlantis-Lite/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('Atlantis-Lite/assets/css/atlantis.min.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{ asset('Atlantis-Lite/assets/css/demo.css') }}">
 </head>
@@ -99,11 +105,11 @@
                                 aria-expanded="false">
                                 <div class="avatar-sm">
                                     @if (Str::length(Auth::guard('siswa')->user()) > 0)
-                                    <img src="{{ asset('/' . Auth::guard('siswa')->user()->foto) }}" alt="..."
-                                    class="avatar-img rounded-circle">
+                                        <img src="{{ asset('/' . Auth::guard('siswa')->user()->foto) }}" alt="..."
+                                            class="avatar-img rounded-circle">
                                     @elseif (Str::length(Auth::guard('user')->user()) > 0)
-                                    <img src="{{ asset('/' . Auth::guard('user')->user()->foto) }}" alt="..."
-                                    class="avatar-img rounded-circle">
+                                        <img src="{{ asset('/' . Auth::guard('user')->user()->foto) }}" alt="..."
+                                            class="avatar-img rounded-circle">
                                     @endif
                                 </div>
                             </a>
@@ -135,7 +141,8 @@
             <div class="sidebar-wrapper scrollbar scrollbar-inner">
                 <div class="sidebar-content">
                     <ul class="nav nav-primary">
-                        <li class="nav-item {{ request()->is('dashboard') || request()->is('dashboard/siswa') ? 'active' : '' }}">
+                        <li
+                            class="nav-item {{ request()->is('dashboard') || request()->is('dashboard/siswa*') ? 'active' : '' }}">
                             <a href="/dashboard">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
@@ -147,36 +154,35 @@
                             </span>
                             <h4 class="text-section">Components</h4>
                         </li>
-                        <li class="nav-item {{ request()->is('admin/siswa') ? 'active' : '' }}">
+                        <li class="nav-item {{ request()->is('admin/siswa*') ? 'active' : '' }}">
                             <a href="/admin/siswa">
                                 <i class="fas fa-user"></i>
                                 <p>Data Siswa</p>
                             </a>
                         </li>
                         <li
-                            class="nav-item {{ request()->is('nilaipilihan') || request()->is('admin/nilai') || request()->is('admin/nivokal') ? 'active' : '' }}">
+                            class="nav-item {{ request()->is('nilaipilihan') || request()->is('admin/nilai*') || request()->is('admin/nilaivokal*') ? 'active submenu' : '' }}">
                             <a data-toggle="collapse" href="#admin" class="collapsed" aria-expanded="false">
                                 <i class="fas fa-table"></i>
                                 <p>Data Nilai</p>
                                 <span class="caret"></span>
                             </a>
-                            <div class="collapse" id="admin">
+                            <div class="collapse {{ request()->is('nilaipilihan') || request()->is('admin/nilai*') || request()->is('admin/nilaivokal*') ? 'show' : '' }}"
+                                id="admin">
                                 <ul class="nav nav-collapse">
-                                    <li>
+                                    <li class="{{ request()->is('admin/nilai*') ? 'active' : '' }}">
                                         <a href="/admin/nilai">
-                                            <span
-                                                class="sub-item {{ request()->is('admin/nilai') ? 'active' : '' }}">Nilai
+                                            <span class="sub-item">Nilai
                                                 Tari</span>
                                         </a>
                                     </li>
-                                    <li>
+                                    <li class="{{ request()->is('admin/nilaivokal*') ? 'active' : '' }}">
                                         <a href="/admin/nilaivokal">
-                                            <span
-                                                class="sub-item  {{ request()->is('admin/nilaivokal') ? 'active' : '' }}">Nilai
+                                            <span class="sub-item">Nilai
                                                 Vokal</span>
                                         </a>
                                     </li>
-                                   
+
                                 </ul>
                             </div>
                         </li>

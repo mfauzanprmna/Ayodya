@@ -4,10 +4,11 @@
     <div class="container-fluid mt-5">
         <div class="card border-0 shadow rounded">
             <div class="card-body kekanan">
-                <a href="{{ route('nilaivokal.create') }}" class="btn btn-md btn-success mb-3">TAMBAH NILAI
-                    VOKAl</a>
-                <table class="table table-head-bg-primary">
-                    <thead>
+                <a href="{{ route('nilaivokal.create') }}" class="btn btn-md btn-success mb-3">Tambah Nilai
+                    Musik</a>
+                <div class="table-responsive">
+                    <table class="display table table-striped table-hover">
+                        <thead style="background: #7a74fc" class="text-white text-center">
                         <tr>
                             <th scope="col">no induk</th>
                             <th scope="col">nama siswa</th>
@@ -28,10 +29,12 @@
                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                         action="{{ route('nilaivokal.destroy', $nilaivokal->id) }}" method="POST">
                                         <a href="{{ route('nilaivokal.edit', $nilaivokal->id) }}"
-                                            class="btn btn-sm btn-primary">EDIT</a>
+                                            class="btn btn-primary"><i
+                                                    class="fas fa-edit"></i></a>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                        <button type="submit" class="btn btn-danger"><i
+                                                    class="fas fa-trash"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -42,7 +45,10 @@
                         @endforelse
                     </tbody>
                 </table>
-                {{ $nilaivokals->links() }}
+                </div>
+                <div class="d-flex justify-content-center">
+                    {{ $nilaivokals->links() }}
+                </div>
             </div>
         </div>
     </div>

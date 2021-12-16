@@ -53,9 +53,8 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Tanggal Lahir</label>
-                                <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror"
-                                    name="tanggal_lahir" value="{{ old('tanggal_lahir') }}"
-                                    placeholder="Masukkan tanggal_lahir Tanggal lahir">
+                                <input type="text" class="form-control @error('tanggal_lahir') is-invalid @enderror" id="datepicker" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}"
+                                    placeholder="Masukkan Tanggal lahir">
 
                                 <!-- error message untuk tanggal_lahir -->
                                 @error('tanggal_lahir')
