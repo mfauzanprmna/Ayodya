@@ -8,28 +8,31 @@ use App\Models\Siswa;
 class SertifikatController extends Controller
 {
     public function index(){
-      return view('sertifikat');
+      $siswas = Siswa::orderby('nama_siswa', 'asc')->get();
+      return view('sertifikat', compact('siswas'));
    }
 
    /*
    AJAX request
    */
    public function getSertifikat(Request $request){
-      $search = $request->tags;
+      $search = $request->search;
 
       if($search == ''){
-         $employees = Siswa::orderby('nama_siswa','asc')->all()->limit(5)->get();
+         $employees = Siswa::orderby('nama_siswa','asc')->select('no_induk', 'nama_siswa', 'cabang', 'orang_tua', 'tanggal_lahir', 'foto', 'semester')->get();
       }else{
-         $employees = Siswa::orderby('nama_siswa','asc')->all()->where('name', 'like', '%' .$search . '%')->limit(5)->get();
+         $employees = Siswa::orderby('nama_siswa','asc')->select('no_induk', 'nama_siswa', 'cabang', 'orang_tua', 'tanggal_lahir', 'foto', 'semester')->where('nama_siswa', 'like', '%' .$search . '%')->get();
       }
 
-      $response = array();
+      $response = array(); 
       foreach($employees as $employee){
-         $response[] = array("id"        =>   $employee->id,
-                              "nama"     =>   $employee->nama_siswa,
-                              "cabang"   =>   $employee->cabang,
-                              "ortu"     =>   $employee->orang_tua,
-                              "ttl"      =>   $employee->tanggal_lahir);
+         $response[] = array( "id"        => $employee->no_induk,
+                              "label"     => $employee->nama_siswa,
+                              "cabang"    => $employee->cabang,
+                              "ortu"      => $employee->orang_tua,
+                              "ttl"       => $employee->tanggal_lahir, 
+                              "foto"      => $employee->foto,
+                              "semester"  => $employee->semester);
       }
 
       return response()->json($response);

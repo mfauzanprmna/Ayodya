@@ -21,15 +21,60 @@
                     });
                 },
                 select: function(event, ui) {
-                    // Set selection
-                    $('#tags').val(ui.item.label); // display the selected text
-                    $('#depan').html(ui.item.value); // save selected id to input
-                    $('#belakang').html(ui.item.tes); // save selected id to input
+                    var tempat = ui.item.ttl;
+                    var convert = tempat.split(",");
+
+                    var ttl = convert[1];
+                    var bulan = ttl.split(" ")[2];
+                    var date = new Date(ttl);
+                    var tanggal = date.getDate();
+                    var tahun = date.getFullYear();
+                    
+                    var semester = ui.item.semester;
+                    var ang = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas'];
+                    var tbr;
+
+                    if (semester<12){
+                        tbr=ang[semester];
+                    }else if (semester<20){
+                        tbr=ang[semester-10]+" belas";
+                    }else if (semester<100){
+                        tbr=ang[Math.floor(semester/10)]+" puluh "+ang[semester%10];
+                    }
+
+                    $('#tags').val(ui.item.label);
+                    $('.nama').html(ui.item.label);
+                    $('#induk').html(ui.item.id);
+                    $('#tempat').html(convert[0]);
+                    $('#cabang').html(ui.item.cabang);
+                    $('#ortu').html(ui.item.ortu);
+                    $('#tanggal').html(tanggal);
+                    $('#bulan').html(bulan);
+                    $('#tahun').html(tahun);
+                    $('.semester').html(semester);
+                    $('#huruf').html(tbr);
+                    $('#foto').attr("src", '{{ asset('/') }}' + ui.item.foto);
                     return false;
                 }
             });
 
         });
+        
+                    var date2 = new Date();
+                    var tgl = date2.getDate();
+                    var romawi = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+                    var tr;
+
+                    if (tgl<11){
+                        tr=romawi[tgl];
+                    } else if (tgl<20){
+                        tr='X'+romawi[tgl-10];
+                    } else if (tgl<30){
+                        tr='XX'+romawi[tgl%10];
+                    } else if (tgl<40){
+                        tr='XXX'+romawi[tgl%10];
+                    }
+                    $('#ini').html(tr);
     </script>
 @endsection
 @section('main')
@@ -40,15 +85,14 @@
             box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.10)
         }
 
-        p.ttd{
+        p.ttd {
             line-height: 1;
         }
-        
 
     </style>
     <div class="container mt-4 mb-5">
         <div class="ui-widget">
-            <label for="tags">Siswa: </label>
+            <label for="tags">Siswa</label>
             <input id="tags" class="form-control" name="tags">
         </div>
         {{-- <div class="form-group">
@@ -64,29 +108,37 @@
                 <div class="container A3 fw-bold" style="background: white;">
                     <img src="{{ asset('Atlantis-Lite/assets/img/ayodya_logo_sertifikat.png') }}" width="20%">
                     <center>
-                        <h3 style="font-family: Eras Demi ITC"> No: __ / YAP / X / 2020 </h3>
+                        <h3 style="font-family: Eras Demi ITC"> No: __ / YAP / <span id="ini"></span> /
+                            {{ Carbon\Carbon::now()->isoFormat('YYYY') }} </h3>
                         <p style="font-family: Eras Demi ITC">Diberikan Kepada:</p>
-                        <h1 style="font-family: Edwardian Script ITC; font-size: 50px; margin: -10px 0">Duma Kalila</h1>
-                        
-                        <p style="font-family: Eras Demi ITC"> Dilahirkan di __, pada tanggal __, bulan __, tahun __
-                        <br> Anak dari __</p>
+                        <h1 style="font-family: Edwardian Script ITC; font-size: 50px; margin: -10px 0" class="nama">Nama Siswa
+                        </h1>
+
+                        <p style="font-family: Eras Demi ITC"> Dilahirkan di <span id="tempat">__</span>, pada tanggal <span
+                                id="tanggal">__</span>,
+                            bulan <span id="bulan">__</span>, tahun <span id="tahun">__</span>
+                            <br> Anak dari <span id="ortu">__</span>
+                        </p>
                         <h1 style="font-family: Pristina; font-size: 50px; margin: -10px 0">Lulus</h1>
-                        
-                        <p style="font-family: Eras Demi ITC" class="desc">Pada ujian tari daerah, modelling & vokal di semester terpadu ke - ___ (___)
+
+                        <p style="font-family: Eras Demi ITC" class="desc">Pada ujian tari daerah, modelling &
+                            vokal di semester terpadu ke - <span class="semester">__</span> ( <span id="huruf">___</span> )
                             <br>yang diselenggarakan pada tanggal __, __, __, __ Oktober 2020
                             <br>di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depok
                             <br>dan tercatat sebagai siswa Ayodya Pala - __
-                            <br>dengan nomor induk : __</p>
-                        
-                        
+                            <br>dengan nomor induk : <span id="induk">__</span>
+                        </p>
+
+
                     </center>
                     <div class="container d-flex justify-content-between">
                         <div class="foto">
-                            <img src="{{ asset('image/default.png') }}" alt="" width="110px" height="150px" style="border-radius: 100%">
+                            <img src="" alt="" id="foto" width="110px" height="150px" style="border-radius: 100%">
                         </div>
                         <div style="margin-left: 0; text-align: center;">
-                            <p class="ttd">Depok, __ 2020
-                            <br>Pimpinan</p>
+                            <p class="ttd">Depok, {{ Carbon\Carbon::now()->isoFormat('D MMMM YYYY') }}
+                                <br>Pimpinan
+                            </p>
                             <br>
                             <br>
                             <p>Dra. Budi Agustinah</p>
@@ -94,7 +146,7 @@
                     </div>
 
                 </div>
-                
+
             </div>
             <div class="col-sm-2">
                 <button type="submit" class="btn btn-warning">PDF</button>
@@ -106,23 +158,23 @@
                 <div class="container A3" style="background: white;">
                     <br>
                     <div>
-                    <h2 class="text-center ">DAFTAR NILAI UJIAN</h2>
+                        <h2 class="text-center ">DAFTAR NILAI UJIAN</h2>
                     </div>
                     <table style="margin-left: 100px">
                         <tr>
                             <th>Nama</th>
                             <td>:</td>
-                            <td>Ghinati Humaira Sholeh</td>
+                            <td class="nama"></td>
                         </tr>
                         <tr>
                             <th>No.Ujian</th>
                             <td>:</td>
-                            <td>36</td>
+                            <td id="ujian">36</td>
                         </tr>
                         <tr>
                             <th>Semester</th>
                             <td>:</td>
-                            <td>8</td>
+                            <td class="semester"></td>
                         </tr>
                     </table>
 
@@ -143,13 +195,13 @@
                                 <th>TOTAL</th>
                             </tr>
                             <tr>
-                                <td>jawatengah</td>
-                                <td>gambiranom</td>
-                                <td>78.50</td>
-                                <td>78.50</td>
-                                <td>78.50</td>
-                                <td>78.50</td>
-                                <th rowspan="2">78.50</th>
+                                <td id="daerah">jawatengah</td>
+                                <td id="tari">gambiranom</td>
+                                <td id="wirawa">78.50</td>
+                                <td id="wiraga">78.50</td>
+                                <td id="wirasa">78.50</td>
+                                <td id="subtotal">78.50</td>
+                                <th id="total" rowspan="2">78.50</th>
                             </tr>
                             <tr>
                                 <td>sumatra</td>
@@ -160,7 +212,7 @@
                                 <td>78.50</td>
                             </tr>
                             <tr>
-                                <th colspan="2">undian</th>
+                                <th colspan="2">Undian</th>
                                 <td>233</td>
                                 <td>23</td>
                                 <td>232</td>
@@ -217,11 +269,11 @@
                         <center>
                             <div class="col">
                                 <tr>
-                                    <td>Depok, 9 Agustis 2021</td>
+                                    <td>Depok, {{ Carbon\Carbon::now()->isoFormat('D MMMM YYYY') }}</td>
                                 </tr>
                                 <br>
                                 <tr>
-                                    <td>ketua litbang</td>
+                                    <td>Ketua Litbang</td>
                                 </tr>
                                 <br>
                                 <br>
@@ -230,7 +282,7 @@
                                 </tr>
                                 <br>
                                 <tr>
-                                    <td>wulandari,S.sn</td>
+                                    <td>Wulandari,S.sn</td>
                                 </tr>
                             </div>
                         </center>
