@@ -29,17 +29,19 @@
                     var date = new Date(ttl);
                     var tanggal = date.getDate();
                     var tahun = date.getFullYear();
-                    
+
                     var semester = ui.item.semester;
-                    var ang = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan', 'sepuluh', 'sebelas'];
+                    var ang = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan',
+                        'sembilan', 'sepuluh', 'sebelas'
+                    ];
                     var tbr;
 
-                    if (semester<12){
-                        tbr=ang[semester];
-                    }else if (semester<20){
-                        tbr=ang[semester-10]+" belas";
-                    }else if (semester<100){
-                        tbr=ang[Math.floor(semester/10)]+" puluh "+ang[semester%10];
+                    if (semester < 12) {
+                        tbr = ang[semester];
+                    } else if (semester < 20) {
+                        tbr = ang[semester - 10] + " belas";
+                    } else if (semester < 100) {
+                        tbr = ang[Math.floor(semester / 10)] + " puluh " + ang[semester % 10];
                     }
 
                     $('#tags').val(ui.item.label);
@@ -59,30 +61,33 @@
             });
 
         });
-        
-                    var date2 = new Date();
-                    var tgl = date2.getDate();
-                    var romawi = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
-                    var tr;
 
-                    if (tgl<11){
-                        tr=romawi[tgl];
-                    } else if (tgl<20){
-                        tr='X'+romawi[tgl-10];
-                    } else if (tgl<30){
-                        tr='XX'+romawi[tgl%10];
-                    } else if (tgl<40){
-                        tr='XXX'+romawi[tgl%10];
-                    }
-                    $('#ini').html(tr);
+        var date2 = new Date();
+        var tgl = date2.getDate();
+        var romawi = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
+        var tr;
+
+        if (tgl < 11) {
+            tr = romawi[tgl];
+        } else if (tgl < 20) {
+            tr = 'X' + romawi[tgl - 10];
+        } else if (tgl < 30) {
+            tr = 'XX' + romawi[tgl % 10];
+        } else if (tgl < 40) {
+            tr = 'XXX' + romawi[tgl % 10];
+        }
+        $('#ini').html(tr);
     </script>
 @endsection
 @section('main')
+    <link href="https://www.dafontfree.net/embed/ZXJhcy1kZW1pLWl0Yy1yZWd1bGFyJmRhdGEvMTMvZS82NDc3MS9FUkFTREVNSS5UVEY"
+        rel="stylesheet" type="text/css" />
     <style>
         .A3 {
             width: 100%;
             height: 650px;
-            box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.10)
+            box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.10);
+            margin-top:
         }
 
         p.ttd {
@@ -103,196 +108,203 @@
                 <option>tes</option>
             </select>
         </div> --}}
-        <div class="row mt-4">
-            <div class="col-sm-10">
-                <div class="container A3 fw-bold" style="background: white;">
-                    <img src="{{ asset('Atlantis-Lite/assets/img/ayodya_logo_sertifikat.png') }}" width="20%">
-                    <center>
-                        <h3 style="font-family: Eras Demi ITC"> No: __ / YAP / <span id="ini"></span> /
-                            {{ Carbon\Carbon::now()->isoFormat('YYYY') }} </h3>
-                        <p style="font-family: Eras Demi ITC">Diberikan Kepada:</p>
-                        <h1 style="font-family: Edwardian Script ITC; font-size: 50px; margin: -10px 0" class="nama">Nama Siswa
-                        </h1>
-
-                        <p style="font-family: Eras Demi ITC"> Dilahirkan di <span id="tempat">__</span>, pada tanggal <span
-                                id="tanggal">__</span>,
-                            bulan <span id="bulan">__</span>, tahun <span id="tahun">__</span>
-                            <br> Anak dari <span id="ortu">__</span>
-                        </p>
-                        <h1 style="font-family: Pristina; font-size: 50px; margin: -10px 0">Lulus</h1>
-
-                        <p style="font-family: Eras Demi ITC" class="desc">Pada ujian tari daerah, modelling &
-                            vokal di semester terpadu ke - <span class="semester">__</span> ( <span id="huruf">___</span> )
-                            <br>yang diselenggarakan pada tanggal __, __, __, __ Oktober 2020
-                            <br>di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depok
-                            <br>dan tercatat sebagai siswa Ayodya Pala - __
-                            <br>dengan nomor induk : <span id="induk">__</span>
-                        </p>
-
-
-                    </center>
-                    <div class="container d-flex justify-content-between">
-                        <div class="foto">
-                            <img src="" alt="" id="foto" width="110px" height="150px" style="border-radius: 100%">
-                        </div>
-                        <div style="margin-left: 0; text-align: center;">
-                            <p class="ttd">Depok, {{ Carbon\Carbon::now()->isoFormat('D MMMM YYYY') }}
-                                <br>Pimpinan
-                            </p>
-                            <br>
-                            <br>
-                            <p>Dra. Budi Agustinah</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="col-sm-2">
+        <div class="mt-4">
+            <div>
                 <button type="submit" class="btn btn-warning">PDF</button>
                 <button type="submit" class="btn btn-info">Print</button>
+            </div>
+            <div class="A3 fw-bold mt-3" style="background-image: url('Atlantis-Lite/assets/img/LAYOUT BACKGROUND SERTIFIKAT 2022 1.png') ; background-size: 500px 250px;   background-position: left;
+                            background-repeat: no-repeat;
+                            position: relative;">
+                <div class="row">
+                    <div class="col-md-4" style="float: left">
+                        <img src="{{ asset('Atlantis-Lite/assets/img/LAYOUT BACKGROUND SERTIFIKAT 2022 3.png') }} "
+                            width="800px" height="650px">
+                    </div>
+                    <div class="col-md-8 mt-5">
+                        <center>
+                            <h3 style="font-family: 'eras-demi-itc-bold', sans-serif"> No: __ / YAP / <span id="ini"></span>
+                                /
+                                {{ Carbon\Carbon::now()->isoFormat('YYYY') }} </h3>
+                            <p style="font-family: 'eras-demi-itc-bold', sans-serif">Diberikan Kepada:</p>
+                            <h1 style="font-family: Edwardian Script ITC; font-size: 50px; margin: -10px 0"
+                                class="nama">Nama Siswa
+                            </h1>
+
+                            <p style="font-family: 'eras-demi-itc-bold', sans-serif"> Dilahirkan di <span
+                                    id="tempat">__</span>, pada tanggal <span id="tanggal">__</span>,
+                                bulan <span id="bulan">__</span>, tahun <span id="tahun">__</span>
+                                <br> Anak dari <span id="ortu">__</span>
+                            </p>
+                            <h1 style="font-family: Pristina; font-size: 50px; margin: -10px 0">Lulus</h1>
+
+                            <p style="font-family: 'eras-demi-itc-bold', sans-serif" class="desc">Pada ujian
+                                tari daerah, modelling &
+                                vokal di semester terpadu ke - <span class="semester">__</span> ( <span
+                                    id="huruf">___</span> )
+                                <br>yang diselenggarakan pada tanggal __, __, __, __ Oktober 2020
+                                <br>di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depok
+                                <br>dan tercatat sebagai siswa Ayodya Pala - __
+                                <br>dengan nomor induk : <span id="induk">__</span>
+                            </p>
+
+
+                        </center>
+                        <div class="container d-flex justify-content-between">
+                            <div class="foto">
+                                <img src="{{ asset('/image/default.png') }}" alt="" id="foto" width="110px" height="150px" style="border-radius: 100%">
+                            </div>
+                            <div style="margin-left: 0; text-align: center;">
+                                <p class="ttd">Depok, {{ Carbon\Carbon::now()->isoFormat('D MMMM YYYY') }}
+                                    <br>Pimpinan
+                                </p>
+                                <br>
+                                <br>
+                                <p>Dra. Budi Agustinah</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row mt-4">
-            <div class="col-sm-10">
-                <div class="container A3" style="background: white;">
-                    <br>
-                    <div>
-                        <h2 class="text-center ">DAFTAR NILAI UJIAN</h2>
-                    </div>
-                    <table style="margin-left: 100px">
-                        <tr>
-                            <th>Nama</th>
-                            <td>:</td>
-                            <td class="nama"></td>
-                        </tr>
-                        <tr>
-                            <th>No.Ujian</th>
-                            <td>:</td>
-                            <td id="ujian">36</td>
-                        </tr>
-                        <tr>
-                            <th>Semester</th>
-                            <td>:</td>
-                            <td class="semester"></td>
-                        </tr>
-                    </table>
-
-                    <center>
-                        <table border='1' style="text-align: center; width: 100%; height:100px" class="mt-3 mb-3">
-                            <tr>
-                                <th colspan="2">MATERI UJIAN</th>
-                                <th colspan="5">NILAI</th>
-                            </tr>
-
-                            <tr>
-                                <th>DARI DAERAH</th>
-                                <th>NAMA TARIAN </th>
-                                <th>Wirawa</th>
-                                <th>Wiraga</th>
-                                <th>Wirasa</th>
-                                <th>Subtotal</th>
-                                <th>TOTAL</th>
-                            </tr>
-                            <tr>
-                                <td id="daerah">jawatengah</td>
-                                <td id="tari">gambiranom</td>
-                                <td id="wirawa">78.50</td>
-                                <td id="wiraga">78.50</td>
-                                <td id="wirasa">78.50</td>
-                                <td id="subtotal">78.50</td>
-                                <th id="total" rowspan="2">78.50</th>
-                            </tr>
-                            <tr>
-                                <td>sumatra</td>
-                                <td>panen</td>
-                                <td>78.50</td>
-                                <td>78.50</td>
-                                <td>78.50</td>
-                                <td>78.50</td>
-                            </tr>
-                            <tr>
-                                <th colspan="2">Undian</th>
-                                <td>233</td>
-                                <td>23</td>
-                                <td>232</td>
-                                <th colspan="2">232</th>
-                            </tr>
-                            <tr>
-                                <th colspan="2">Sinopsi</th>
-                                <th colspan="5">79.00</th>
-                            </tr>
-
-                        </table>
-
-                    </center>
-                    <div class="row">
-                        <div class="col">
-                            <h5 class="fw-bold">KETERANGAN</h5>
-                            <tr>
-                                <td>A</td>
-                                <td>(Amanat Baik)</td>
-                                <td>=</td>
-                                <td>80</td>
-                                <td>-</td>
-                                <td>90</td>
-                            </tr>
-                            <br>
-                            <tr>
-                                <td>B</td>
-                                <td>(Baik)</td>
-                                <td>=</td>
-                                <td>80</td>
-                                <td>-</td>
-                                <td>90</td>
-                            </tr>
-                            <br>
-                            <tr>
-                                <td>C</td>
-                                <td>(Cukup)</td>
-                                <td>=</td>
-                                <td>80</td>
-                                <td>-</td>
-                                <td>90</td>
-                            </tr>
-                            <br>
-                            <tr>
-                                <td>D</td>
-                                <td>(Kurang)</td>
-                                <td>=</td>
-                                <td>80</td>
-                                <td>-</td>
-                                <td>90</td>
-                            </tr>
-
-                        </div>
-                        <center>
-                            <div class="col">
-                                <tr>
-                                    <td>Depok, {{ Carbon\Carbon::now()->isoFormat('D MMMM YYYY') }}</td>
-                                </tr>
-                                <br>
-                                <tr>
-                                    <td>Ketua Litbang</td>
-                                </tr>
-                                <br>
-                                <br>
-                                <tr>
-                                    <td></td>
-                                </tr>
-                                <br>
-                                <tr>
-                                    <td>Wulandari,S.sn</td>
-                                </tr>
-                            </div>
-                        </center>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-2">
+        <div class="mt-5">
+            <div>
                 <button type="submit" class="btn btn-warning">PDF</button>
                 <button type="submit" class="btn btn-info">Print</button>
+            </div>
+            <div class="container A3 mt-3" style="background: white;">
+                <br>
+                <div>
+                    <h2 class="text-center ">DAFTAR NILAI UJIAN</h2>
+                </div>
+                <table style="margin-left: 100px">
+                    <tr>
+                        <th>Nama</th>
+                        <td>:</td>
+                        <td class="nama"></td>
+                    </tr>
+                    <tr>
+                        <th>No.Ujian</th>
+                        <td>:</td>
+                        <td id="ujian">36</td>
+                    </tr>
+                    <tr>
+                        <th>Semester</th>
+                        <td>:</td>
+                        <td class="semester"></td>
+                    </tr>
+                </table>
+
+                <center>
+                    <table border='1' style="text-align: center; width: 100%; height:100px" class="mt-3 mb-3">
+                        <tr>
+                            <th colspan="2">MATERI UJIAN</th>
+                            <th colspan="5">NILAI</th>
+                        </tr>
+
+                        <tr>
+                            <th>DARI DAERAH</th>
+                            <th>NAMA TARIAN </th>
+                            <th>Wirawa</th>
+                            <th>Wiraga</th>
+                            <th>Wirasa</th>
+                            <th>Subtotal</th>
+                            <th>TOTAL</th>
+                        </tr>
+                        <tr>
+                            <td id="daerah">jawatengah</td>
+                            <td id="tari">gambiranom</td>
+                            <td id="wirawa">78.50</td>
+                            <td id="wiraga">78.50</td>
+                            <td id="wirasa">78.50</td>
+                            <td id="subtotal">78.50</td>
+                            <th id="total" rowspan="2">78.50</th>
+                        </tr>
+                        <tr>
+                            <td>sumatra</td>
+                            <td>panen</td>
+                            <td>78.50</td>
+                            <td>78.50</td>
+                            <td>78.50</td>
+                            <td>78.50</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Undian</th>
+                            <td>233</td>
+                            <td>23</td>
+                            <td>232</td>
+                            <th colspan="2">232</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Sinopsi</th>
+                            <th colspan="5">79.00</th>
+                        </tr>
+
+                    </table>
+
+                </center>
+                <div class="row">
+                    <div class="col">
+                        <h5 class="fw-bold">KETERANGAN</h5>
+                        <tr>
+                            <td>A</td>
+                            <td>(Amanat Baik)</td>
+                            <td>=</td>
+                            <td>80</td>
+                            <td>-</td>
+                            <td>90</td>
+                        </tr>
+                        <br>
+                        <tr>
+                            <td>B</td>
+                            <td>(Baik)</td>
+                            <td>=</td>
+                            <td>80</td>
+                            <td>-</td>
+                            <td>90</td>
+                        </tr>
+                        <br>
+                        <tr>
+                            <td>C</td>
+                            <td>(Cukup)</td>
+                            <td>=</td>
+                            <td>80</td>
+                            <td>-</td>
+                            <td>90</td>
+                        </tr>
+                        <br>
+                        <tr>
+                            <td>D</td>
+                            <td>(Kurang)</td>
+                            <td>=</td>
+                            <td>80</td>
+                            <td>-</td>
+                            <td>90</td>
+                        </tr>
+
+                    </div>
+                    <center>
+                        <div class="col">
+                            <tr>
+                                <td>Depok, {{ Carbon\Carbon::now()->isoFormat('D MMMM YYYY') }}</td>
+                            </tr>
+                            <br>
+                            <tr>
+                                <td>Ketua Litbang</td>
+                            </tr>
+                            <br>
+                            <br>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <br>
+                            <tr>
+                                <td>Wulandari,S.sn</td>
+                            </tr>
+                        </div>
+                    </center>
+
+                </div>
             </div>
         </div>
     </div>
