@@ -117,10 +117,14 @@
         </div>
         <div class="row mt-4">
             <div class="col-sm-10">
-                <div class="container A3" style="background: white;">
+                <div class="container A3"  style="background-image: url('Atlantis-Lite/assets/img/LAYOUT SISI BELAKANG SERTIFIKAT-1.png') ; background-size: cover;
+                background-repeat: no-repeat;
+                position: relative;">
+                    <br>
                     <br>
                     <div>
                     <h2 class="text-center ">DAFTAR NILAI UJIAN</h2>
+                    <br>
                     </div>
                     <table style="margin-left: 100px">
                         <tr>
@@ -139,9 +143,9 @@
                             <td>8</td>
                         </tr>
                     </table>
-
+                    <br>
                     <center>
-                        <table border='1' style="text-align: center; width: 100%; height:100px" class="mt-3 mb-3">
+                        <table border='1' style="text-align: center; width: 100%; height:200px" class="mt-3 mb-3">
                             <tr>
                                 <th colspan="2">MATERI UJIAN</th>
                                 <th colspan="5">NILAI</th>
@@ -186,9 +190,10 @@
                             </tr>
 
                         </table>
+                        <br><br>
 
                     </center>
-                    <div class="row">
+                    <div class="row ">
                         <div class="col">
                             <h5 class="fw-bold">KETERANGAN</h5>
                             <tr>
