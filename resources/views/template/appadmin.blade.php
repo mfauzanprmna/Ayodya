@@ -4,9 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Dashboard Admin</title>
+    <title> Ayodya Pala Dashboard Admin</title>
     <meta content='width=device-width, initial-scale=1.0' name='viewport' />
-    <link rel="icon" href="{{ asset('Atlantis-Lite/assets/img/icon.ico') }}" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('Atlantis-Lite/assets/img/Layer1001.svg') }}" type="image/x-icon" />
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
