@@ -33,6 +33,7 @@
     </script>
 @endsection
 @section('main')
+<link href="https://www.dafontfree.net/embed/ZXJhcy1kZW1pLWl0Yy1yZWd1bGFyJmRhdGEvMTMvZS82NDc3MS9FUkFTREVNSS5UVEY" rel="stylesheet" type="text/css"/>
     <style>
         .A3 {
             width: 100%;
@@ -61,22 +62,32 @@
         </div> --}}
         <div class="row mt-4">
             <div class="col-sm-10">
-                <div class="container A3 fw-bold" style="background: white;">
-                    <img src="{{ asset('Atlantis-Lite/assets/img/ayodya_logo_sertifikat.png') }}" width="20%">
-                    <center>
-                        <h3 style="font-family: Eras Demi ITC"> No: __ / YAP / X / 2020 </h3>
-                        <p style="font-family: Eras Demi ITC">Diberikan Kepada:</p>
-                        <h1 style="font-family: Edwardian Script ITC; font-size: 50px; margin: -10px 0">Duma Kalila</h1>
-                        
-                        <p style="font-family: Eras Demi ITC"> Dilahirkan di __, pada tanggal __, bulan __, tahun __
-                        <br> Anak dari __</p>
-                        <h1 style="font-family: Pristina; font-size: 50px; margin: -10px 0">Lulus</h1>
-                        
-                        <p style="font-family: Eras Demi ITC" class="desc">Pada ujian tari daerah, modelling & vokal di semester terpadu ke - ___ (___)
-                            <br>yang diselenggarakan pada tanggal __, __, __, __ Oktober 2020
-                            <br>di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depok
-                            <br>dan tercatat sebagai siswa Ayodya Pala - __
-                            <br>dengan nomor induk : __</p>
+                <div class=" A3 fw-bold" style="background-image: url('Atlantis-Lite/assets/img/LAYOUT BACKGROUND SERTIFIKAT 2022 1.png') ; background-size: 400px 200px;   background-position: left;
+                background-repeat: no-repeat;
+                position: relative;">
+                    {{-- <img src="{{ asset('Atlantis-Lite/assets/img/LAYOUT BACKGROUND SERTIFIKAT 2022 1.png') }}"  > --}}
+                    <div class="row">
+                        <div class="col-md-4" style="float: left">
+                            <img src="{{ asset('Atlantis-Lite/assets/img/LAYOUT BACKGROUND SERTIFIKAT 2022 3.png') }} " width="700px" height="650px">
+                        </div>
+                        <div class="col-md-8">
+                            <center>
+                                <br><br><br><br><br>
+                                <h3 style="font-family: 'eras-demi-itc-bold', sans-serif;"> No: __ / YAP / X / 2020 </h3>
+                                <p style="font-family:  'eras-demi-itc-bold', sans-serif;">Diberikan Kepada:</p>
+                                <h1 style="font-family: Edwardian Script ITC; font-size: 50px; margin: -10px 0">Duma Kalila</h1>
+                                
+                                <p style="font-family: 'eras-demi-itc-bold', sans-serif;"> Dilahirkan di __, pada tanggal __, bulan __, tahun __
+                                <br> Anak dari __</p>
+                                <h1 style="font-family: Pristina; font-size: 50px; margin: -10px 0">Lulus</h1>
+                                
+                                <p style="font-family: 'eras-demi-itc-bold', sans-serif;" class="desc">Pada ujian tari daerah, modelling & vokal di semester terpadu ke - ___ (___)
+                                    <br>yang diselenggarakan pada tanggal __, __, __, __ Oktober 2020
+                                    <br>di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depok
+                                    <br>dan tercatat sebagai siswa Ayodya Pala - __
+                                    <br>dengan nomor induk : __</p>
+
+                       
                         
                         
                     </center>
@@ -94,6 +105,9 @@
                     </div>
 
                 </div>
+                        </div>
+                    </div>
+                   
                 
             </div>
             <div class="col-sm-2">

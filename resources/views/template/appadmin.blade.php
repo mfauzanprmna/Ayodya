@@ -72,7 +72,7 @@
                 <a href="/dashboard" class="logo">
                     <img src="{{ asset('Atlantis-Lite/assets/img/Layer1001.svg') }}" alt="navbar brand"
                         class="navbar-brand " style="height:50px; width:50px ;">
-                    <h1 style="color: white; height:50px" class="navbar-brand">Ayodya</h1>
+                    <h1 style="color: white; height:50px;" class="navbar-brand ">Ayodya Pala</h1>
 
                 </a>
 
@@ -187,7 +187,7 @@
                             </div>
                         </li>
 
-                        <li class="nav-item {{ request()->is('/sertifikat') ? 'active' : '' }}">
+                        <li class="nav-item {{ request()->is('sertifikat*') ? 'active' : '' }}">
                             <a href="/sertifikat">
                                 <i class="fas fa-certificate"></i>
                                 <p>Sertifikat</p>
