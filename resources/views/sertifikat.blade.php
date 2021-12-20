@@ -85,10 +85,7 @@
         rel="stylesheet" type="text/css" />
     <style>
         .A3 {
-            width: 100%;
-            height: 650px;
-            box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.10);
-            margin-top:
+            box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.10);   
         }
 
         p.ttd {
@@ -128,9 +125,9 @@
                 <div class="row">
                     <div class="col-md-4" style="float: left">
                         <img src="{{ asset('image/layout2.png') }} "
-                            width="800px" height="650px">
+                            width="800px" height="100%">
                     </div>
-                    <div class="col-md-8 mt-5" style="text-align: ">
+                    <div class="col-8 mt-5" style="text-align: ">
                         <center>
                             <h3 style="font-family: 'eras-demi-itc-bold', sans-serif"> No: __ / YAP / <span id="ini"></span>
                                 /
