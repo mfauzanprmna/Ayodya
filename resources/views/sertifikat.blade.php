@@ -114,9 +114,17 @@
                 <a href="/sertifikat/pdf" id="sertipdf" target="_blank"><button type="submit" class="btn btn-warning">PDF</button></a>
                 <button type="submit" class="btn btn-info">Print</button>
             </div>
-            <div class="A3 fw-bold mt-3" style="background-image: url('{{ asset('image/layout1.png') }}') ; background-size: 500px 250px;   background-position: left;
-                            background-repeat: no-repeat;
-                            position: relative;">
+
+            
+            <div class="A3 fw-bold mt-3">
+                {{-- <div  style="background-image: url('{{ asset('image/layout1.png') }}') ; background-size: 500px 250px;   background-position: left;
+                background-repeat: no-repeat;
+                position: relative;"></div> --}}
+                <div class="fotobaground">
+                    <img src="{{ asset('image/layout1.png') }}" alt="" style=" width: 500px ;  
+                    position: absolute; bottom: -10%" >
+                </div>
+
                 <div class="row">
                     <div class="col-md-4" style="float: left">
                         <img src="{{ asset('image/layout2.png') }} "
@@ -173,10 +181,11 @@
                 <button type="submit" class="btn btn-warning">PDF</button>
                 <button type="submit" class="btn btn-info">Print</button>
             </div>
-            <div class="container A3 mt-3"  style="background-image: url('Atlantis-Lite/assets/img/LAYOUT SISI BELAKANG SERTIFIKAT-1.png') ; background-size: cover;
+            <div class="container A3 mt-3"  style="background-image: url('Atlantis-Lite/assets/img/LAYOUT SISI BELAKANG SERTIFIKAT-1.png') ; background-size: 100% 100%;
                 background-repeat: no-repeat;
                 position: relative;">
                 <br>
+                <img src="" alt="">
                 <div>
                     <h2 class="text-center ">DAFTAR NILAI UJIAN</h2>
                 </div>
