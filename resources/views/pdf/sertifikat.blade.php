@@ -11,8 +11,10 @@
         rel="stylesheet" type="text/css" />
     <style type="text/css" media="print">
         .A3 {
-            height: 2339px;
-            width: 1654px;
+            height: 895px;
+            width: 1000px;
+           
+           
         }
 
         @page {
@@ -25,43 +27,46 @@
 </head>
 
 <body>
-    <div class="A3 fw-bold " >
+    <div class="A3 fw-bold " style="height: 942px " >
         {{-- <div  style="background-image: url('{{ asset('image/layout1.png') }}') ; background-size: 500px 250px;   background-position: left;
         background-repeat: no-repeat;
         position: relative;"></div> --}}
         <div class="fotobaground">
-            <img src="{{ asset('image/layout1.png') }}" alt="" style=" width: 500px ;  
-            position: absolute; top: 30%">
+            <img src="{{ asset('image/layout1.png') }}" alt="" style=" width: 600px ;  
+            position: absolute; top: 300px">
         </div>
         <div class="row">
             <div class="col-sm-4" style="float: left">
-                <img src="../../image/layout2.png" width="800px" height="650px">
+                <img src="../../image/layout2.png" width="1000px" height="942px">
             </div>
-            <div class="col-sm-8 mt-5">
+            <div class="col-sm-8" style="">
                 <center>
-                    <h3 style="font-family: 'eras-demi-itc-bold', sans-serif"> No: __ / YAP / <span id="ini"></span>
-                        /
-                        {{ Carbon\Carbon::now()->isoFormat('YYYY') }} </h3>
-                    <p style="font-family: 'eras-demi-itc-bold', sans-serif">Diberikan Kepada:</p>
-                    <h1 style="font-family: Edwardian Script ITC; font-size: 50px; margin: -10px 0"
-                        class="nama">{{ $siswas->nama_siswa }}
-                    </h1>
-
-                    <p style="font-family: 'eras-demi-itc-bold', sans-serif"> Dilahirkan di <span id="tempat">__</span>,
-                        pada tanggal <span id="tanggal">__</span>,
-                        bulan <span id="bulan">__</span>, tahun <span id="tahun">__</span>
-                        <br> Anak dari {{ $siswas->orang_tua }}
-                    </p>
-                    <h1 style="font-family: Pristina; font-size: 50px; margin: -10px 0">Lulus</h1>
-
-                    <p style="font-family: 'eras-demi-itc-bold', sans-serif" class="desc">Pada ujian
-                        tari daerah, modelling &
-                        vokal di semester terpadu ke - {{ $siswas->semester }} ( <span id="huruf">___</span> )
-                        <br>yang diselenggarakan pada tanggal __, __, __, __ Oktober 2020
-                        <br>di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depok
-                        <br>dan tercatat sebagai siswa Ayodya Pala - __
-                        <br>dengan nomor induk : {{ $siswas->no_induk }}
-                    </p>
+                    <div style=" margin-top:100px; margin-right: -160px; ">
+                        <h3 style="font-family: 'eras-demi-itc-bold', sans-serif; font-size: 20px"> No: __ / YAP / <span id="ini"></span>
+                            /
+                            {{ Carbon\Carbon::now()->isoFormat('YYYY') }} </h3>
+                        <p style="font-family: 'eras-demi-itc-bold', sans-serif ; font-size: 20px">Diberikan Kepada:</p>
+                        <h1 style="font-family: Edwardian Script ITC; font-size: 80px; "
+                            class="nama">{{ $siswas->nama_siswa }}
+                        </h1>
+    
+                        <p style="font-family: 'eras-demi-itc-bold', sans-serif ; font-size: 20px"> Dilahirkan di <span id="tempat">__</span>,
+                            pada tanggal <span id="tanggal">__</span>,
+                            bulan <span id="bulan">__</span>, tahun <span id="tahun">__</span>
+                            <br> Anak dari {{ $siswas->orang_tua }}
+                        </p>
+                        <h1 style="font-family: Pristina; font-size: 80px;  ">Lulus</h1>
+    
+                        <p style="font-family: 'eras-demi-itc-bold', sans-serif ; font-size: 20px" class="desc">Pada ujian
+                            tari daerah, modelling &
+                            vokal di semester terpadu ke - {{ $siswas->semester }} ( <span id="huruf">___</span> )
+                            <br>yang diselenggarakan pada tanggal __, __, __, __ Oktober 2020
+                            <br>di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depok
+                            <br>dan tercatat sebagai siswa Ayodya Pala - __
+                            <br>dengan nomor induk : {{ $siswas->no_induk }}
+                        </p>
+                    </div>
+                   
 
 
                 </center>
@@ -70,13 +75,13 @@
                         <img src="../../image/default.png" alt="" id="foto" width="110px" height="150px"
                             style="border-radius: 100%">
                     </div>
-                    <div style="text-align: center;">
-                        <p class="ttd">Depok, {{ Carbon\Carbon::now()->isoFormat('D MMMM YYYY') }}
+                    <div style="text-align: center; ">
+                        <p class="ttd" style="font-size: 20px;">Depok, {{ Carbon\Carbon::now()->isoFormat('D MMMM YYYY') }}
                             <br>Pimpinan
                         </p>
                         <br>
                         <br>
-                        <p>Dra. Budi Agustinah</p>
+                        <p tyle="font-size: 20px;">Dra. Budi Agustinah</p>
                     </div>
                 </div>
             </div>
