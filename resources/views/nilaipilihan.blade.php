@@ -41,7 +41,7 @@
                 <div class="card mt-3">
                     <div class="row m-3">
                         <div class="col-lg-3">
-                            <img src="{{ asset('Atlantis-Lite/assets/img/undraw_stand_out_-1-oag.svg') }}"
+                            <img src="{{ asset('Atlantis-Lite/assets/img/undraw_workout_gcgu.svg') }}"
                                 class="card-img-top" alt="..." style="width: 130px; height: 170px;">
                         </div>
                         <div class="col-lg-9">

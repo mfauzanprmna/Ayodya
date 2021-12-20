@@ -46,7 +46,7 @@
 
                     $('#tags').val(ui.item.label);
                     $('.nama').html(ui.item.label);
-                    $('#induk').html(ui.item.id);
+                    $('#induk').html(ui.item.no_induk);
                     $('#tempat').html(convert[0]);
                     $('#cabang').html(ui.item.cabang);
                     $('#ortu').html(ui.item.ortu);
@@ -56,6 +56,7 @@
                     $('.semester').html(semester);
                     $('#huruf').html(tbr);
                     $('#foto').attr("src", '{{ asset('/') }}' + ui.item.foto);
+                    $('#sertipdf').attr("href", '/sertifikat/' + ui.item.id);
                     return false;
                 }
             });
@@ -110,18 +111,18 @@
         </div> --}}
         <div class="mt-4">
             <div>
-                <button type="submit" class="btn btn-warning">PDF</button>
+                <a href="/sertifikat/pdf" id="sertipdf" target="_blank"><button type="submit" class="btn btn-warning">PDF</button></a>
                 <button type="submit" class="btn btn-info">Print</button>
             </div>
-            <div class="A3 fw-bold mt-3" style="background-image: url('Atlantis-Lite/assets/img/LAYOUT BACKGROUND SERTIFIKAT 2022 1.png') ; background-size: 500px 250px;   background-position: left;
+            <div class="A3 fw-bold mt-3" style="background-image: url('{{ asset('image/layout1.png') }}') ; background-size: 500px 250px;   background-position: left;
                             background-repeat: no-repeat;
                             position: relative;">
                 <div class="row">
                     <div class="col-md-4" style="float: left">
-                        <img src="{{ asset('Atlantis-Lite/assets/img/LAYOUT BACKGROUND SERTIFIKAT 2022 3.png') }} "
+                        <img src="{{ asset('image/layout2.png') }} "
                             width="800px" height="650px">
                     </div>
-                    <div class="col-md-8 mt-5">
+                    <div class="col-md-8 mt-5" style="text-align: ">
                         <center>
                             <h3 style="font-family: 'eras-demi-itc-bold', sans-serif"> No: __ / YAP / <span id="ini"></span>
                                 /
@@ -172,7 +173,9 @@
                 <button type="submit" class="btn btn-warning">PDF</button>
                 <button type="submit" class="btn btn-info">Print</button>
             </div>
-            <div class="container A3 mt-3" style="background: white;">
+            <div class="container A3 mt-3"  style="background-image: url('Atlantis-Lite/assets/img/LAYOUT SISI BELAKANG SERTIFIKAT-1.png') ; background-size: cover;
+                background-repeat: no-repeat;
+                position: relative;">
                 <br>
                 <div>
                     <h2 class="text-center ">DAFTAR NILAI UJIAN</h2>
@@ -239,9 +242,7 @@
                             <th colspan="2">Sinopsi</th>
                             <th colspan="5">79.00</th>
                         </tr>
-
                     </table>
-
                 </center>
                 <div class="row">
                     <div class="col">

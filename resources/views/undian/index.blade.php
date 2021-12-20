@@ -5,8 +5,8 @@
         <div class="card border-0 shadow rounded">
             <div class="card-body kekanan">
                 <a href="{{ route('undian.create') }}" class="btn btn-md btn-success mb-3">Tambah undian</a>
-                <table class="table table-head-bg-primary">
-                    <thead>
+                <table class="display table table-striped table-hover">
+                    <thead style="background: #7a74fc" class="text-white text-center">
                         <tr>
                             <th scope="col">Nomor</th>
                             <th scope="col">Siswa</th>
@@ -42,7 +42,7 @@
                             </div>
                         @endforelse
                     </tbody>
-                </table>
+                </thead>
                 {{ $undians->links() }}
             </div>
         </div>
