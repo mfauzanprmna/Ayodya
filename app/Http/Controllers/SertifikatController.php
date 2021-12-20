@@ -22,9 +22,9 @@ class SertifikatController extends Controller
       $search = $request->search;
 
       if ($search == '') {
-         $employees = Siswa::orderby('nama_siswa', 'asc')->select('no_induk', 'nama_siswa', 'cabang', 'orang_tua', 'tanggal_lahir', 'foto', 'semester')->get();
+         $employees = Siswa::orderby('nama_siswa', 'asc')->select('no_induk', 'nama_siswa', 'cabang', 'orang_tua', 'tanggal_lahir', 'foto', 'semester')->limit(5)->get();
       } else {
-         $employees = Siswa::orderby('nama_siswa', 'asc')->select('id', 'no_induk', 'nama_siswa', 'cabang', 'orang_tua', 'tanggal_lahir', 'foto', 'semester')->where('nama_siswa', 'like', '%' . $search . '%')->get();
+         $employees = Siswa::orderby('nama_siswa', 'asc')->select('id', 'no_induk', 'nama_siswa', 'cabang', 'orang_tua', 'tanggal_lahir', 'foto', 'semester')->where('nama_siswa', 'like', '%' . $search . '%')->limit(5)->get();
       }
 
       $response = array();
