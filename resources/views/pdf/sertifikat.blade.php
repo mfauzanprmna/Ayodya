@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="A3 fw-bold mt-3">
+    <div class="A3 fw-bold">
         {{-- <div  style="background-image: url('{{ asset('image/layout1.png') }}') ; background-size: 500px 250px;   background-position: left;
         background-repeat: no-repeat;
         position: relative;"></div> --}}
@@ -73,7 +73,22 @@
       
     </div>
     <script>
-        window.print();
+        var css = '@page { size: A4; size: landscape; }',
+    head = document.head || document.getElementsByTagName('head')[0],
+    style = document.createElement('style');
+
+style.type = 'text/css';
+style.media = 'print';
+
+if (style.styleSheet){
+  style.styleSheet.cssText = css;
+} else {
+  style.appendChild(document.createTextNode(css));
+}
+
+head.appendChild(style);
+
+window.print();
     </script>
 </body>
 

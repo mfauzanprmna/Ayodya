@@ -85,6 +85,7 @@
         rel="stylesheet" type="text/css" />
     <style>
         .A3 {
+            size: 
             box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.10);   
         }
 
