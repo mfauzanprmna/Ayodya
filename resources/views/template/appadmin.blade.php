@@ -177,8 +177,8 @@
                                                 Tari</span>
                                         </a>
                                     </li>
-                                    <li class="{{ request()->is('admin/nilaivokal*') ? 'active' : '' }}">
-                                        <a href="/admin/nilaivokal">
+                                    <li class="{{ request()->is('admin/vokal*') ? 'active' : '' }}">
+                                        <a href="/admin/vokal">
                                             <span class="sub-item">Nilai
                                                 Vokal</span>
                                         </a>
@@ -194,10 +194,22 @@
                                 <p>Sertifikat</p>
                             </a>
                         </li>
-                        <li class="nav-item {{ request()->is('admin/undian') ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ request()->is('admin/undian') ? 'active' : '' }}">
                             <a href="/admin/undian">
                                 <i class="fas fa-ticket-alt"></i>
                                 <p>Undian</p>
+                            </a>
+                        </li> --}}
+                        <li class="nav-item {{ request()->is('admin/tarian') ? 'active' : '' }}">
+                            <a href="/admin/tarian">
+                                <i class="fas fa-ticket-alt"></i>
+                                <p>Tarian</p>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ request()->is('admin/layout') ? 'active' : '' }}">
+                            <a href="/admin/layout">
+                                <i class="fas fa-ticket-alt"></i>
+                                <p>Tarian</p>
                             </a>
                         </li>
                     </ul>

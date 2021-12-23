@@ -16,7 +16,7 @@ class NilaivokalController extends Controller
     public function index()
     {
         $nilaivokals = Nilaivokal::latest()->paginate(10);
-        return view('nilaivokal.index', compact('nilaivokals'));
+        return view('vokal.index', compact('nilaivokals'));
     }
 
     /**
@@ -26,7 +26,7 @@ class NilaivokalController extends Controller
      */
     public function create()
     {
-        return view('nilaivokal.create');
+        return view('vokal.create');
     }
 
     /**
@@ -58,10 +58,10 @@ class NilaivokalController extends Controller
     
         if($nilaivokal){
             //redirect dengan pesan sukses
-            return redirect()->route('nilaivokal.index')->with(['success' => 'Data Berhasil Disimpan!']);
+            return redirect()->route('vokal.index')->with(['success' => 'Data Berhasil Disimpan!']);
         }else{
             //redirect dengan pesan error
-            return redirect()->route('nilaivokal.index')->with(['error' => 'Data Gagal Disimpan!']);
+            return redirect()->route('vokal.index')->with(['error' => 'Data Gagal Disimpan!']);
         }
     }
 
@@ -73,7 +73,7 @@ class NilaivokalController extends Controller
      */
     public function show(Nilaivokal $nilaivokal)
     {
-        return view('nilaivokal.edit', compact('nilaivokal'));
+        return view('vokal.edit', compact('nilaivokal'));
     }
 
     /**
@@ -84,7 +84,7 @@ class NilaivokalController extends Controller
      */
     public function edit(Nilaivokal $nilaivokal)
     {
-        return view('nilaivokal.edit', compact('nilaivokal'));
+        return view('vokal.edit', compact('nilaivokal'));
     }
     
 
@@ -119,10 +119,10 @@ class NilaivokalController extends Controller
     
         if($nilaivokal){
             //redirect dengan pesan sukses
-            return redirect()->route('nilaivokal.index')->with(['success' => 'Data Berhasil Diupdate!']);
+            return redirect()->route('vokal.index')->with(['success' => 'Data Berhasil Diupdate!']);
         }else{
             //redirect dengan pesan error
-            return redirect()->route('nilaivokal.index')->with(['error' => 'Data Gagal Diupdate!']);
+            return redirect()->route('vokal.index')->with(['error' => 'Data Gagal Diupdate!']);
         }
     }
 
@@ -141,10 +141,10 @@ class NilaivokalController extends Controller
           
             if($nilaivokal){
                //redirect dengan pesan sukses
-               return redirect()->route('nilaivokal.index')->with(['success' => 'Data Berhasil Dihapus!']);
+               return redirect()->route('vokal.index')->with(['success' => 'Data Berhasil Dihapus!']);
             }else{
               //redirect dengan pesan error
-              return redirect()->route('nilaivokal.index')->with(['error' => 'Data Gagal Dihapus!']);
+              return redirect()->route('vokal.index')->with(['error' => 'Data Gagal Dihapus!']);
             }
     }
 }
