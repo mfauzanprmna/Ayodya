@@ -108,17 +108,17 @@ class SiswaController extends Controller
         $file = $request->file('foto');
    
       // Mendapatkan Nama File
-      $nama_file = $file->nama($request->nama_siswa);
+      $extension = $file->getClientOriginalExtension();
+      $nama_file = $file->basename($request->nama_siswa,'.',$extension);
    
       // Mendapatkan Extension File
-      $extension = $file->getClientOriginalExtension();
   
       // Mendapatkan Ukuran File
       $ukuran_file = $file->getSize();
    
       // Proses Upload File
       $destinationPath = 'image';
-      $file->move($destinationPath,$file->name($request->nama_siswa));
+      $file->move($destinationPath,$nama_file);
       $filenameSimpan = $destinationPath . '/' . $nama_file;
 
 
