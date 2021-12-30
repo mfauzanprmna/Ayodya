@@ -17,11 +17,9 @@ class Siswa extends Authenticatable
         'no_induk',
         'nama_siswa',
         'semester',
-        'tempat',
         'tanggal_lahir',
         'orang_tua',
         'alamat',
         'cabang',
-        'password'
     ];
 }

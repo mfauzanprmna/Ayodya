@@ -208,8 +208,8 @@
                         </li>
                         <li class="nav-item {{ request()->is('admin/layout') ? 'active' : '' }}">
                             <a href="/admin/layout">
-                                <i class="fas fa-ticket-alt"></i>
-                                <p>Tarian</p>
+                                <i class="fas fa-image"></i>
+                                <p>background</p>
                             </a>
                         </li>
                     </ul>

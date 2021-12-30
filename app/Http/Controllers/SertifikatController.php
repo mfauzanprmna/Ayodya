@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Siswa;
+use Carbon\Carbon;
 use PDF;
 
 class SertifikatController extends Controller
@@ -48,6 +49,16 @@ class SertifikatController extends Controller
    {
       $siswas = Siswa::findOrFail($id);
 
-      return view('pdf.sertifikat', ['siswas' => $siswas]);
+      $romawi = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+      $rombulan = $romawi[date('n')];
+
+      $split = explode(",", $siswas->tanggal_lahir);
+      $tempat = $split[0];
+      $lahir = explode(" ", $split[1]);
+      $tanggal = $lahir[1];
+      $bulan = $lahir[2];
+      $tahun = $lahir[3];
+
+      return view('pdf.sertifikat', ['siswas' => $siswas, 'tempat' => $tempat, 'tanggal' => $tanggal, 'bulan' => $bulan, 'tahun' => $tahun, 'rombulan' => $rombulan]);
    }
 }

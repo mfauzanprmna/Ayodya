@@ -27,7 +27,7 @@
 
                             <div class="form-group">
                                 <label for="" class="font-wight-bold">Foto</label>
-                                <img src="{{ asset('image/' . $siswa->foto) }}" alt="">
+                                <img src="{{ asset('/' . $siswa->foto) }}" alt="">
                                 <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto">
                             </div>
 
