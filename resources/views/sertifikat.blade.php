@@ -56,7 +56,8 @@
                     $('.semester').html(semester);
                     $('#huruf').html(tbr);
                     $('#foto').attr("src", '{{ asset('/') }}' + ui.item.foto);
-                    $('#sertipdf').attr("href", '/sertifikat/' + ui.item.id);
+                    $('#printserti').attr("href", '/sertifikat/' + ui.item.id);
+                    $('#sertipdf').attr("href", '/sertifikat/pdf/' + ui.item.id);
                     return false;
                 }
             });
@@ -109,8 +110,8 @@
         </div> --}}
         <div class="mt-4">
             <div>
-                <a href="/sertifikat/pdf" id="sertipdf" target="_blank"><button type="submit" class="btn btn-warning">PDF</button></a>
-                <button type="submit" class="btn btn-info">Print</button>
+                <a href="" id="sertipdf" target="_blank"><button type="submit" class="btn btn-warning">PDF</button></a>
+                <a href="" id="printserti" target="_blank"><button type="submit" class="btn btn-info">Print</button></a>
             </div>
 
             
