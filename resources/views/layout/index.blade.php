@@ -3,36 +3,34 @@
 
     <div class="container-fluid mt-5">
         <div class="card border-0 shadow rounded">
-            {{ $nilais->links() }}
             <div class="card-body kekanan">
-                <a href="{{ route('nilai.create') }}" class="btn btn-md btn-success mb-3">Tambah Nilai Tari</a>
+                <a href="{{ route('layout.create') }}" class="btn btn-md btn-success mb-3">Tambah Nilai
+                    Musik</a>
                 <div class="table-responsive">
                     <table class="display table table-striped table-hover">
                         <thead style="background: #7a74fc" class="text-white text-center">
                         <tr>
-                            <th scope="col">Nama Siswa</th>
-                            <th scope="col">Jenis Tari</th>
-                            <th scope="col">Wirama</th>
-                            <th scope="col">Wiraga</th>
-                            <th scope="col">Wirasa</th>
-                            <th scope="col">Aksi</th>
+                            <th scope="col">No</th>
+                            <th scope="col">background</th>
+                            <th scope="col">kelas</th>
+        
+                            <th scope="col">AKSI</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($nilais as $nilai)
+                        @forelse ($layouts as $layout)
                             <tr>
-                                
-                                <td>{{ $nilai->no_induk }}</td>
-                                <td>{{ $nilai->Nama }}</td>
-                                <td>{{ $nilai->tari_id }}</td>
-                                <td>{{ $nilai->wirama }}</td>
-                                <td>{{ $nilai->wiraga }}</td>
-                                <td>{{ $nilai->wirasa }}</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>
+                                    <img src="{{ asset('image/') . $layout->background}}" alt="">
+                                </td>
+                                <td>{{ $layout->kelas }}</td>
+                               
                                 <td class="text-center">
                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                        action="{{ route('nilai.destroy', $nilai->id) }}" method="POST">
-                                        <a href="{{ route('nilai.edit', $nilai->id) }}"
+                                        action="{{ route('layout.destroy', $layout->id) }}" method="POST">
+                                        <a href="{{ route('layout.edit', $layout->id) }}"
                                             class="btn btn-primary"><i
                                                     class="fas fa-edit"></i></a>
                                         @csrf
@@ -44,17 +42,17 @@
                             </tr>
                         @empty
                             <div class="alert alert-danger">
-                                Data nilai belum Tersedia.
+                                Data nilaivokal belum Tersedia.
                             </div>
                         @endforelse
                     </tbody>
                 </table>
                 </div>
                 <div class="d-flex justify-content-center">
-                    {{ $nilais->links() }}
+                    {{ $layouts->links() }}
                 </div>
             </div>
-        </div>    
+        </div>
     </div>
 
 @endsection

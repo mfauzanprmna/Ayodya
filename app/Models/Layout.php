@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Nilai extends Model
+class Layout extends Model
 {
+    use HasFactory;
     protected $fillable = [
-       'no_induk','Nama','tari_id','Semester','wirama','wiraga','wirasa'
-    ];
+        'background','kelas'
+     ];
 }

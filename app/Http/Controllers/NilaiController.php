@@ -58,9 +58,10 @@ class NilaiController extends Controller
     {
 
         $this->validate($request, [
-            'no_induk' => 'required',
-            'nama_siswa' => 'required',
-            'jenis_tari' => 'required',
+            'no_induk'=> 'required',
+            'Nama'    => 'required',
+            'tari_id' => 'required',
+            'Semester'=> 'required',
             'wirama' => 'required',
             'wiraga' => 'required',
             'wirasa' => 'required',
@@ -68,9 +69,10 @@ class NilaiController extends Controller
         ]);
 
         $nilai = Nilai::create([
-            'no_induk' => $request->no_induk,
-            'nama_siswa' => $request->nama_siswa,
-            'jenis_tari' => $request->jenis_tari,
+            'no_induk'=> $request->no_induk,
+            'Nama'    => $request->Nama,
+            'tari_id' => $request->tari_id,
+            'Semester'=> $request->Semester,
             'wirama' => $request->wirama,
             'wiraga' => $request->wiraga,
             'wirasa' => $request->wirasa,
@@ -118,9 +120,10 @@ class NilaiController extends Controller
     public function update(Request $request, Nilai $nilai)
     {
         $this->validate($request, [
-            'no_induk' => 'required',
-            'nama_siswa' => 'required',
-            'jenis_tari' => 'required',
+            'no_induk'=> 'required',
+            'Nama'    => 'required',
+            'tari_id' => 'required',
+            'Semester'=> 'required',
             'wirama' => 'required',
             'wiraga' => 'required',
             'wirasa' => 'required',
@@ -130,9 +133,10 @@ class NilaiController extends Controller
         $nilai = Nilai::findOrFail($nilai->id);
 
         $nilai->update([
-            'no_induk' => $request->no_induk,
-            'nama_siswa' => $request->nama_siswa,
-            'jenis_tari' => $request->jenis_tari,
+            'no_induk'=> $request->no_induk,
+            'Nama'    => $request->Nama,
+            'tari_id' => $request->tari_id,
+            'Semester'=> $request->Semester,
             'wirama' => $request->wirama,
             'wiraga' => $request->wiraga,
             'wirasa' => $request->wirasa,

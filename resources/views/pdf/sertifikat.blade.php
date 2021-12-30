@@ -31,13 +31,11 @@
         {{-- <div  style="background-image: url('{{ asset('image/layout1.png') }}') ; background-size: 500px 250px;   background-position: left;
         background-repeat: no-repeat;
         position: relative;"></div> --}}
-        <div class="fotobaground">
-            <img src="{{ asset('image/layout1.png') }}" alt="" style=" width: 600px ;  
-            position: absolute; top: 300px">
-        </div>
         <div class="row">
             <div class="col-sm-4" style="float: left">
                 <img src="../../image/layout2.png" width="1000px" height="942px">
+                <img src="{{ asset('image/layout1.png') }}" alt="" style=" width: 600px ;  
+                position: absolute; top: 300px">
             </div>
             <div class="col-sm-8" style="">
                 <center>

@@ -119,15 +119,17 @@
                 {{-- <div  style="background-image: url('{{ asset('image/layout1.png') }}') ; background-size: 500px 250px;   background-position: left;
                 background-repeat: no-repeat;
                 position: relative;"></div> --}}
-                <div class="fotobaground">
-                    <img src="{{ asset('image/layout1.png') }}" alt="" style=" width: 500px ;  
-                    position: absolute; bottom: -10%" >
-                </div>
-
+               
                 <div class="row">
+                  
+    
                     <div class="col-md-4" style="float: left">
                         <img src="{{ asset('image/layout2.png') }} "
                             width="800px" height="100%">
+                            <div class="fotobaground">
+                                <img src="{{ asset('image/layout1.png') }}" alt="" style=" width: 500px ;  
+                                position: absolute; top: 30%" >
+                            </div>
                     </div>
                     <div class="col-8 mt-5" style="text-align: ">
                         <center>
@@ -180,7 +182,7 @@
                 <button type="submit" class="btn btn-warning">PDF</button>
                 <button type="submit" class="btn btn-info">Print</button>
             </div>
-            <div class="container A3 mt-3"  style="background-image: url('Atlantis-Lite/assets/img/LAYOUT SISI BELAKANG SERTIFIKAT-1.png') ; background-size: 100% 100%;
+            <div class="container A3 mt-3"  style="background-image: url('Atlantis-Lite/assets/img/LAYOUT SISI BELAKANG SERTIFIKAT-1.png') ; background-size: 100% 530px;
                 background-repeat: no-repeat;
                 position: relative;">
                 <br>
@@ -205,9 +207,9 @@
                         <td class="semester"></td>
                     </tr>
                 </table>
-
+                <br>
                 <center>
-                    <table border='1' style="text-align: center; width: 100%; height:100px" class="mt-3 mb-3">
+                    <table border='1' style="text-align: center; width: 100%; height:150px" class="mt-3 mb-3">
                         <tr>
                             <th colspan="2">MATERI UJIAN</th>
                             <th colspan="5">NILAI</th>
@@ -239,19 +241,20 @@
                             <td>78.50</td>
                             <td>78.50</td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <th colspan="2">Undian</th>
                             <td>233</td>
                             <td>23</td>
                             <td>232</td>
                             <th colspan="2">232</th>
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <th colspan="2">Sinopsi</th>
                             <th colspan="5">79.00</th>
                         </tr>
                     </table>
                 </center>
+                <br>
                 <div class="row">
                     <div class="col">
                         <h5 class="fw-bold">KETERANGAN</h5>
@@ -314,6 +317,8 @@
                     </center>
 
                 </div>
+                <br>
+                <br>
             </div>
         </div>
     </div>

@@ -8,6 +8,8 @@ use App\Http\Controllers\SertifikatController;
 use Illuminate\Support\Facades\Route;
 use App\Imports\UsersImport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\TarianController;
+use App\Http\Controllers\LayoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +27,9 @@ Route::middleware(['auth:user'])->group(function () {
     Route::resource('admin/undian', UndianController::class);
     Route::resource('admin/absen', AbsenController::class);
     Route::resource('admin/nilai', NilaiController::class);
-    Route::resource('admin/nilaivokal', NilaivokalController::class);
+    Route::resource('admin/vokal', NilaivokalController::class);
+    Route::resource('admin/tarian', TarianController::class);
+    Route::resource('admin/layout', LayoutController::class);
     Route::get('/nilaipilihan', function () {
         return view('nilaipilihan');
     });
