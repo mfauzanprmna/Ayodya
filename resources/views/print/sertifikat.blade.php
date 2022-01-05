@@ -40,7 +40,7 @@
             <div class="col-sm-8" style="">
                 <center>
                     <div style=" margin-top:100px; margin-right: -160px; ">
-                        <h3 style="font-family: 'eras-demi-itc-bold', sans-serif; font-size: 20px"> No: __ / YAP / <span id="ini"></span>
+                        <h3 style="font-family: 'eras-demi-itc-bold', sans-serif; font-size: 20px"> No: __ / YAP / {{ $rombulan }}
                             /
                             {{ Carbon\Carbon::now()->isoFormat('YYYY') }} </h3>
                         <p style="font-family: 'eras-demi-itc-bold', sans-serif ; font-size: 20px">Diberikan Kepada:</p>
@@ -48,9 +48,9 @@
                             class="nama">{{ $siswas->nama_siswa }}
                         </h1>
     
-                        <p style="font-family: 'eras-demi-itc-bold', sans-serif ; font-size: 20px"> Dilahirkan di <span id="tempat">__</span>,
-                            pada tanggal <span id="tanggal">__</span>,
-                            bulan <span id="bulan">__</span>, tahun <span id="tahun">__</span>
+                        <p style="font-family: 'eras-demi-itc-bold', sans-serif ; font-size: 20px"> Dilahirkan di {{ $tempat }},
+                            pada tanggal {{ $tanggal }},
+                            bulan {{ $bulan }}, tahun {{ $tahun }}
                             <br> Anak dari {{ $siswas->orang_tua }}
                         </p>
                         <h1 style="font-family: Pristina; font-size: 80px;  ">Lulus</h1>
@@ -70,7 +70,7 @@
                 </center>
                 <div class="container d-flex justify-content-between">
                     <div class="foto">
-                        <img src="../../image/default.png" alt="" id="foto" width="110px" height="150px"
+                        <img src="{{ asset('/' . $siswas->foto ) }}" alt="" id="foto" width="110px" height="150px"
                             style="border-radius: 100%">
                     </div>
                     <div style="text-align: center; ">
@@ -86,24 +86,6 @@
         </div>
 
     </div>
-    <script>
-        var css = '@page { size: A4 landscape; }',
-            head = document.head || document.getElementsByTagName('head')[0],
-            style = document.createElement('style');
-
-        style.type = 'text/css';
-        style.media = 'print';
-
-        if (style.styleSheet) {
-            style.styleSheet.cssText = css;
-        } else {
-            style.appendChild(document.createTextNode(css));
-        }
-
-        head.appendChild(style);
-
-        window.print();
-    </script>
 </body>
 
 </html>

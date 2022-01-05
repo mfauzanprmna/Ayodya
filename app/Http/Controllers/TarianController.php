@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Tarian;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\TarianImport;
 
 class TarianController extends Controller
 {
@@ -136,5 +138,10 @@ class TarianController extends Controller
             }
     }
 }
+public function fileImport(Request $request)
+    {
+        Excel::import(new TarianImport, $request->file('file')->store('temp'));
+        return back();
+    }
     }
 

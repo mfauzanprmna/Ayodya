@@ -62,4 +62,6 @@ Route::get('/', function(){
 Route::get('/sertifikat/{id}', [SertifikatController::class, 'cetak_sertifikat'])->name('sertifikat.print');
 Route::get('/sertifikat/pdf/{id}', [SertifikatController::class, 'sertipdf'])->name('sertifikat.pdf');
 Route::post('file-import', [SiswaController::class, 'fileImport'])->name('file-import');
+Route::post('tari-import', [TarianController::class, 'fileImport'])->name('tari-import');
+
 require __DIR__ . '/auth.php';

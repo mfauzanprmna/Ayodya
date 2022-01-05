@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Siswa;
+use Illuminate\Http\Request;
 use PDF;
 
 class SertifikatController extends Controller
@@ -15,8 +15,8 @@ class SertifikatController extends Controller
    }
 
    /*
-   AJAX request
-   */
+    AJAX request
+     */
    public function getSertifikat(Request $request)
    {
       $search = $request->search;
@@ -30,14 +30,14 @@ class SertifikatController extends Controller
       $response = array();
       foreach ($employees as $employee) {
          $response[] = array(
-            "id"        => $employee->id,
-            "no_induk"  => $employee->no_induk,
-            "label"     => $employee->nama_siswa,
-            "cabang"    => $employee->cabang,
-            "ortu"      => $employee->orang_tua,
-            "ttl"       => $employee->tanggal_lahir,
-            "foto"      => $employee->foto,
-            "semester"  => $employee->semester
+            "id" => $employee->id,
+            "no_induk" => $employee->no_induk,
+            "label" => $employee->nama_siswa,
+            "cabang" => $employee->cabang,
+            "ortu" => $employee->orang_tua,
+            "ttl" => $employee->tanggal_lahir,
+            "foto" => $employee->foto,
+            "semester" => $employee->semester,
          );
       }
 
@@ -47,8 +47,17 @@ class SertifikatController extends Controller
    public function cetak_sertifikat($id)
    {
       $siswas = Siswa::findOrFail($id);
+      $romawi = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+      $rombulan = $romawi[date('n')];
 
-      return view('print.sertifikat', ['siswas' => $siswas]);
+      $split = explode(",", $siswas->tanggal_lahir);
+      $tempat = $split[0];
+      $lahir = explode(" ", $split[1]);
+      $tanggal = $lahir[1];
+      $bulan = $lahir[2];
+      $tahun = $lahir[3];
+
+      return view('print.sertifikat', ['siswas' => $siswas, 'tempat' => $tempat, 'tanggal' => $tanggal, 'bulan' => $bulan, 'tahun' => $tahun, 'rombulan' => $rombulan]);
    }
 
    public function sertipdf($id)

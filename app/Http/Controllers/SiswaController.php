@@ -97,7 +97,6 @@ class SiswaController extends Controller
         $this->validate($request, [
             'no_induk'      => 'required',
             'nama_siswa'    => 'required',
-            'tempat'        => 'required',
             'tanggal_lahir' => 'required',
             'orang_tua'     => 'required',
             'alamat'        => 'required',
@@ -106,16 +105,33 @@ class SiswaController extends Controller
 
         //get data siswa by ID
         $siswa = Siswa::findOrFail($siswa->id);
+        $file = $request->file('foto');
+   
+      // Mendapatkan Nama File
+      $extension = $file->getClientOriginalExtension();
+      $nama_file = $file->basename($request->nama_siswa,'.',$extension);
+   
+      // Mendapatkan Extension File
+  
+      // Mendapatkan Ukuran File
+      $ukuran_file = $file->getSize();
+   
+      // Proses Upload File
+      $destinationPath = 'image';
+      $file->move($destinationPath,$nama_file);
+      $filenameSimpan = $destinationPath . '/' . $nama_file;
+
 
 
         $siswa->update([
             'no_induk'          => $request->no_induk,
+            'foto'              => $filenameSimpan,
             'nama_siswa'        => $request->nama_siswa,
-            'tanggal_lahir'     => $request->tempat . ', ' . $request->tanggal_lahir,
+            'tanggal_lahir'     => $request->tanggal_lahir,
             'orang_tua'         => $request->orang_tua,
             'alamat'            => $request->alamat,
             'cabang'            => $request->cabang,
-            'password'          => $request->password,
+            // 'password'          => $request->password,
         ]);
 
 
