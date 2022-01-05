@@ -55,6 +55,7 @@
                     $('#tahun').html(tahun);
                     $('.semester').html(semester);
                     $('#huruf').html(tbr);
+                    $('#tari').html(ui.item.tarian);
                     $('#foto').attr("src", '{{ asset('/') }}' + ui.item.foto);
                     $('#printserti').attr("href", '/sertifikat/' + ui.item.id);
                     $('#sertipdf').attr("href", '/sertifikat/pdf/' + ui.item.id);
@@ -63,6 +64,12 @@
             });
 
         });
+
+        var tanggal = document.querySelector('#lenggara').value;
+        var pengambilan = document.querySelector('#pengambilan');
+
+        pengambilan.innerHTML = tanggal;
+
 
         var date2 = new Date();
         var tgl = date2.getDate();
@@ -96,9 +103,18 @@
 
     </style>
     <div class="container mt-4 mb-5">
-        <div class="ui-widget">
-            <label for="tags">Siswa</label>
+        <div class="ui-widget ">
+            <div class="row">
+                <div class="col">
+                    <label for="tags">Siswa</label>
             <input id="tags" class="form-control" name="tags">
+                </div>
+                <div class="col">
+                    <label for="lenggara">Tanggal Penyelenggara</label>
+                    <input id="lenggara" class="form-control" name="lenggara">
+                </div>
+            </div>
+            
         </div>
         {{-- <div class="form-group">
             <label for="">Nama Siswa</label>
@@ -152,7 +168,7 @@
                                 tari daerah, modelling &
                                 vokal di semester terpadu ke - <span class="semester">__</span> ( <span
                                     id="huruf">___</span> )
-                                <br>yang diselenggarakan pada tanggal __, __, __, __ Oktober 2020
+                                <br>yang diselenggarakan pada tanggal <span id="pengambilan"></span>
                                 <br>di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depok
                                 <br>dan tercatat sebagai siswa Ayodya Pala - __
                                 <br>dengan nomor induk : <span id="induk">__</span>
