@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Nilai;
 use App\Models\Siswa;
-use App\Models\User;
 use App\Models\Tarian;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 
 class NilaiController extends Controller
 {
@@ -20,8 +19,13 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        $nilais = Nilai::latest()->paginate(10);
-        return view('nilai.index', compact('nilais'));
+        if (Auth::user()->role == 'admin') {
+            $nilais = Nilai::latest()->paginate(10);
+        } elseif (Auth::user()->role == 'juri') {
+            $nilais = Nilai::latest()->where('juri', Auth::user()->id)->paginate(10);
+        }
+
+        return view('nilai.tari.index', compact('nilais'));
     }
 
     /**
@@ -31,14 +35,16 @@ class NilaiController extends Controller
      */
     public function create()
     {
-        return view('nilai.create');
+        $juris = User::all()->where('role', 'juri');
+
+        return view('nilai.tari.create', compact('juris'));
     }
 
     public function browse(Request $request)
     {
-        $data = Tarian::whereRaw("(nama LIKE '%".$request->get('q')."%' OR daerah LIKE '%".$request->get('q')."%')")
-                ->limit(30)
-                ->get();
+        $data = Tarian::whereRaw("(nama LIKE '%" . $request->get('q') . "%' OR daerah LIKE '%" . $request->get('q') . "%')")
+            ->limit(30)
+            ->get();
         return response()->json($data);
     }
 
@@ -67,27 +73,36 @@ class NilaiController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request, [
-            'induk'         => 'required',
-            'tari'          => 'required',
-            'semester'      => 'required',
-            'wirama'        => 'required',
-            'wiraga'        => 'required',
-            'wirasa'        => 'required',
-
+            'induk' => 'required',
+            'tari' => 'required',
+            'semester' => 'required',
+            'wirama' => 'required',
+            'wiraga' => 'required',
+            'wirasa' => 'required',
         ]);
 
-        $nilai = Nilai::create([
-            'no_induk'      => $request->induk,
-            'id_juri'       => Auth::guard('user')->user()->id,
-            'tari_id'       => $request->tari,
-            'semester'      => $request->semester,
-            'wirama'        => $request->wirama,
-            'wiraga'        => $request->wiraga,
-            'wirasa'        => $request->wirasa,
-
-        ]);
+        if (Auth::user()->role == 'juri') {
+            $nilai = Nilai::create([
+                'no_induk' => $request->induk,
+                'id_juri' => Auth::guard('user')->user()->id,
+                'tari_id' => $request->tari,
+                'semester' => $request->semester,
+                'wirama' => $request->wirama,
+                'wiraga' => $request->wiraga,
+                'wirasa' => $request->wirasa,
+            ]);
+        } elseif (Auth::user()->role == 'admin') {
+            $nilai = Nilai::create([
+                'no_induk' => $request->induk,
+                'id_juri' => $request->juri,
+                'tari_id' => $request->tari,
+                'semester' => $request->semester,
+                'wirama' => $request->wirama,
+                'wiraga' => $request->wiraga,
+                'wirasa' => $request->wirasa,
+            ]);
+        }
 
         if ($nilai) {
             //redirect dengan pesan sukses
@@ -106,7 +121,7 @@ class NilaiController extends Controller
      */
     public function show(Nilai $nilai)
     {
-        return view('nilai.edit', compact('nilai'));
+        return view('nilai.tari.edit', compact('nilai'));
     }
 
     /**
@@ -117,9 +132,9 @@ class NilaiController extends Controller
      */
     public function edit(Nilai $nilai)
     {
-        $taris = Tarian::all();
-        
-        return view('nilai.edit', compact('nilai', 'taris'));
+        $juris = User::all()->where('role', 'juri');
+
+        return view('nilai.tari.edit', compact('juris'));
     }
 
     /**
@@ -132,27 +147,39 @@ class NilaiController extends Controller
     public function update(Request $request, Nilai $nilai)
     {
         $this->validate($request, [
-            'no_induk'      => 'required',
-            'id_juri'       => 'required',
-            'tari_id'       => 'required',
-            'semester'      => 'required',
-            'wirama'        => 'required',
-            'wiraga'        => 'required',
-            'wirasa'        => 'required',
+            'no_induk' => 'required',
+            'id_juri' => 'required',
+            'tari_id' => 'required',
+            'semester' => 'required',
+            'wirama' => 'required',
+            'wiraga' => 'required',
+            'wirasa' => 'required',
         ]);
 
         //get data nilai by ID
         $nilai = Nilai::findOrFail($nilai->id);
 
-        $nilai->update([
-            'no_induk'      => $request->no_induk,
-            'id_juri'       => $request->juri,
-            'tari_id'       => $request->tari_id,
-            'semester'      => $request->semester,
-            'wirama'        => $request->wirama,
-            'wiraga'        => $request->wiraga,
-            'wirasa'        => $request->wirasa,
-        ]);
+        if (Auth::user()->role == 'juri') {
+            $nilai = Nilai::edit([
+                'no_induk' => $request->induk,
+                'id_juri' => Auth::guard('user')->user()->id,
+                'tari_id' => $request->tari,
+                'semester' => $request->semester,
+                'wirama' => $request->wirama,
+                'wiraga' => $request->wiraga,
+                'wirasa' => $request->wirasa,
+            ]);
+        } elseif (Auth::user()->role == 'admin') {
+            $nilai = Nilai::edit([
+                'no_induk' => $request->induk,
+                'id_juri' => $request->juri,
+                'tari_id' => $request->tari,
+                'semester' => $request->semester,
+                'wirama' => $request->wirama,
+                'wiraga' => $request->wiraga,
+                'wirasa' => $request->wirasa,
+            ]);
+        }
 
         if ($nilai) {
             //redirect dengan pesan sukses
