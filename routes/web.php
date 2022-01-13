@@ -34,11 +34,9 @@ Route::middleware(['auth:user'])->group(function () {
 Route::middleware(['auth:user', 'role:admin'])->group(function () {
     Route::resource('admin/siswa', SiswaController::class);
     Route::resource('admin/juri', JuriController::class);
-    Route::resource('admin/siswa', CabangController::class);
+    Route::resource('admin/cabang', CabangController::class);
     Route::resource('admin/undian', UndianController::class);
     Route::resource('admin/absen', AbsenController::class);
-    Route::resource('admin/nilai', NilaiController::class);
-    Route::resource('admin/vokal', NilaivokalController::class);
     Route::resource('admin/tarian', TarianController::class);
     Route::resource('admin/layout', LayoutController::class);
     Route::get('/nilaipilihan', function () {
@@ -46,7 +44,7 @@ Route::middleware(['auth:user', 'role:admin'])->group(function () {
     });
 });
 
-Route::middleware(['auth:user', 'role:juri'])->group(function () {
+Route::middleware(['auth:user', 'role:juri,admin'])->group(function () {
     Route::resource('admin/nilai', NilaiController::class);
     Route::resource('admin/vokal', NilaivokalController::class);
 });
@@ -72,5 +70,7 @@ Route::get('/sertifikat/{id}', [SertifikatController::class, 'cetak_sertifikat']
 Route::get('/sertifikat/pdf/{id}', [SertifikatController::class, 'sertipdf'])->name('sertifikat.pdf');
 Route::post('file-import', [SiswaController::class, 'fileImport'])->name('file-import');
 Route::post('tari-import', [TarianController::class, 'fileImport'])->name('tari-import');
+Route::get('/browse/tari', [NilaiController::class, 'browse'])->name('browse-tari');
+Route::post('/getsiswa', [NilaiController::class, 'getSiswa'])->name('getsiswa');
 
 require __DIR__ . '/auth.php';

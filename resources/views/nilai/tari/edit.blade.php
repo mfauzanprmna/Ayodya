@@ -41,7 +41,15 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">jenis tari</label>
+                                <label class="font-weight-bold">Jenis Tari</label>
+                                <select name="tari" id="tari" style="width: 100%;"
+                                    class="js-example-basic-single form-control @error('wirama') is-invalid @enderror">
+                                    @foreach ($taris as $item)
+                                        @if (old('tari'))
+                                            
+                                        @endif
+                                    @endforeach
+                                </select>
                                 <input type="text" class="form-control @error('jenis_tari') is-invalid @enderror"
                                     name="jenis_tari" value="{{ old('jenis_tari', $nilai->jenis_tari) }}"
                                     placeholder="Masukkan Jenis Tari">

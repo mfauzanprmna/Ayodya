@@ -15,10 +15,10 @@ class CreateNilaisTable extends Migration
     {
         Schema::create('nilais', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('no_induk');
-            $table->foreignId('nama');
+            $table->string('no_induk');
+            $table->foreignId('id_juri');
             $table->foreignId('tari_id');
-            $table->foreignId('semester');
+            $table->string('semester');
             $table->string('wirama');
             $table->string('wiraga');
             $table->string('wirasa');

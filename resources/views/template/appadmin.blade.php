@@ -58,6 +58,8 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('Atlantis-Lite/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('Atlantis-Lite/assets/css/atlantis.min.css') }}">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
@@ -187,8 +189,8 @@
                                     </ul>
                                 </div>
                             </li>
-                            @endif
-                            @if (Auth::user()->role == 'admin' || 'juri')
+                        @endif
+                        @if (Auth::user()->role == 'admin' || 'juri')
                             <li
                                 class="nav-item {{ request()->is('nilaipilihan') || request()->is('admin/nilai*') || request()->is('admin/nilaivokal*') ? 'active submenu' : '' }}">
                                 <a data-toggle="collapse" href="#nilai" class="collapsed" aria-expanded="false">
@@ -215,8 +217,8 @@
                                     </ul>
                                 </div>
                             </li>
-                            @endif
-                            @if (Auth::user()->role == 'admin')
+                        @endif
+                        @if (Auth::user()->role == 'admin')
                             <li class="nav-item {{ request()->is('sertifikat*') ? 'active' : '' }}">
                                 <a href="/sertifikat">
                                     <i class="fas fa-certificate"></i>

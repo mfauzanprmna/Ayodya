@@ -14,12 +14,11 @@ class CheckRole
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, string $role)
+    public function handle(Request $request, Closure $next, ...$levels)
     {
-        if ($request->user()->role === $role) {
-            return $next($request);
-        }
-
-        abort(403);
+        if (in_array($request->user()->role,$levels)) {
+                return $next($request);
+            };
+            return redirect()->back();
     }
 }

@@ -10,6 +10,7 @@
                     <table class="display table table-striped table-hover">
                         <thead style="background: #7a74fc" class="text-white text-center">
                         <tr>
+                            <th scope="col">No</th>
                             <th scope="col">Nama Siswa</th>
                             <th scope="col">Jenis Tari</th>
                             <th scope="col">Wirama</th>
@@ -22,10 +23,9 @@
                     <tbody>
                         @forelse ($nilais as $nilai)
                             <tr>
-                                
-                                <td>{{ $nilai->no_induk }}</td>
-                                <td>{{ $nilai->Nama }}</td>
-                                <td>{{ $nilai->tari_id }}</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $nilai->siswa->nama_siswa }}</td>
+                                <td>{{ $nilai->tari->nama }}</td>
                                 <td>{{ $nilai->wirama }}</td>
                                 <td>{{ $nilai->wiraga }}</td>
                                 <td>{{ $nilai->wirasa }}</td>
