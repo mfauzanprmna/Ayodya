@@ -14,11 +14,11 @@
                             <th scope="col">Nama</th>
                             <th scope="col">Foto</th>
                             <th scope="col">Email</th>
-                            <th scope="col">AKSI</th>
+                            <th scope="col">Aksi</th>
 
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                         @forelse ($juris as $juri)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>

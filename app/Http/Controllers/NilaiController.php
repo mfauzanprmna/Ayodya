@@ -22,7 +22,7 @@ class NilaiController extends Controller
         if (Auth::user()->role == 'admin') {
             $nilais = Nilai::latest()->paginate(10);
         } elseif (Auth::user()->role == 'juri') {
-            $nilais = Nilai::latest()->where('juri', Auth::user()->id)->paginate(10);
+            $nilais = Nilai::latest()->where('id_juri', Auth::user()->id)->paginate(10);
         }
 
         return view('nilai.tari.index', compact('nilais'));

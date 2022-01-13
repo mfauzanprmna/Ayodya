@@ -53,7 +53,7 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">Tari</label>
                                 <select name="tari" id="tari" style="width: 100%;"
-                                    class="js-example-basic-single form-control @error('wirama') is-invalid @enderror"></select>
+                                    class="form-control form-control @error('wirama') is-invalid @enderror"></select>
 
                                 <!-- error message untuk wirama -->
                                 @error('wirama')
@@ -120,6 +120,7 @@
             $('#tari').select2({
                 placeholder: 'Tarian',
                 width: 'resolve',
+                allowClear: true,
                 ajax: {
                     url: "{{ route('browse-tari') }}",
                     dataType: 'json',

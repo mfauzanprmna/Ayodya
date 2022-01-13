@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('id_cabang')->nullable();
             $table->string('name');
             $table->string('foto');
-            $table->enum('role', ['admin', 'cabang', 'juri']);
+            $table->string('role');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

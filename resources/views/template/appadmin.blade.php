@@ -58,7 +58,7 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('Atlantis-Lite/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('Atlantis-Lite/assets/css/atlantis.min.css') }}">
-    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
@@ -102,32 +102,34 @@
                 <div class="container-fluid">
 
                     <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-
                         <li class="nav-item dropdown hidden-caret">
                             <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
                                 aria-expanded="false">
                                 <div class="avatar-sm">
-                                    @if (Str::length(Auth::guard('siswa')->user()) > 0)
-                                        <img src="{{ asset('/' . Auth::guard('siswa')->user()->foto) }}" alt="..."
-                                            class="avatar-img rounded-circle">
-                                    @elseif (Str::length(Auth::guard('user')->user()) > 0)
-                                        <img src="{{ asset('/' . Auth::guard('user')->user()->foto) }}" alt="..."
-                                            class="avatar-img rounded-circle">
-                                    @endif
+                                    <img src="{{ asset('/' . Auth::user()->foto) }}" alt="..."
+                                        class="avatar-img rounded-circle">
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-user animated fadeIn">
                                 <div class="dropdown-user-scroll scrollbar-outer">
                                     <li>
+                                        <div class="user-box">
+                                            <div class="avatar-lg"><img
+                                                    src="{{ asset('/' . Auth::user()->foto) }}" alt="image profile"
+                                                    class="avatar-img rounded"></div>
+                                            <div class="u-text">
+                                                <h4>{{ Auth::user()->name }}</h4>
+                                                <p class="text-muted">{{ Auth::user()->email }}</p><a href=""
+                                                    class="btn btn-xs btn-secondary btn-sm">View Profile</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
-
-                                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
-                this.closest('form').submit();">
-                                                <div class="btn">
-                                                    Logout
-                                                </div>
-                                            </x-dropdown-link>
+                                            <a class="dropdown-item" href="route('logout')"
+                                                onclick="event.preventDefault();this.closest('form').submit();">Logout</a>
                                         </form>
                                     </li>
                                 </div>
