@@ -11,4 +11,9 @@ class Tarian extends Model
     protected $fillable = [
         'nama','daerah'
      ];
+
+    public function nilai()
+    {
+        return $this->hasMany(Nilai::class, 'tari_id');
+    }
 }

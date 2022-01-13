@@ -7,11 +7,7 @@
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
                         <form action="{{ route('tarian.store') }}" method="POST" enctype="multipart/form-data">
-
                             @csrf
-
-                            
-
                             <div class="form-group">
                                 <label class="font-weight-bold">Nama</label>
                                 <input type="text" class="form-control @error('nama') is-invalid @enderror"

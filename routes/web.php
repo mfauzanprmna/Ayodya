@@ -63,5 +63,7 @@ Route::get('/sertifikat/{id}', [SertifikatController::class, 'cetak_sertifikat']
 Route::get('/sertifikat/pdf/{id}', [SertifikatController::class, 'sertipdf'])->name('sertifikat.pdf');
 Route::post('file-import', [SiswaController::class, 'fileImport'])->name('file-import');
 Route::post('tari-import', [TarianController::class, 'fileImport'])->name('tari-import');
+Route::get('/browse/tari', [NilaiController::class, 'browse'])->name('browse-tari');
+Route::post('/getsiswa', [NilaiController::class, 'getSiswa'])->name('getsiswa');
 
 require __DIR__ . '/auth.php';

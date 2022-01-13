@@ -8,6 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Nilai extends Model
 {
     protected $fillable = [
-       'no_induk','Nama','tari_id','Semester','wirama','wiraga','wirasa'
+       'no_induk','id_juri','tari_id','semester','wirama','wiraga','wirasa'
     ];
+
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'no_induk', 'no_induk');
+    }
+
+    public function tari()
+    {
+        return $this->belongsTo(Tarian::class, 'tari_id', 'id');
+    }
 }

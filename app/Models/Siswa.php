@@ -23,4 +23,9 @@ class Siswa extends Authenticatable
         'cabang',
         'password',
     ];
+
+    public function nilai()
+    {
+        return $this->hasMany(Nilai::class, 'no_induk');
+    }
 }
