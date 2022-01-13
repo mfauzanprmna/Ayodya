@@ -1,8 +1,10 @@
 <?php
+use App\Http\Controllers\User\SiswaController;
+use App\Http\Controllers\User\JuriController;
+use App\Http\Controllers\User\CabangController;
 use App\Http\Controllers\UndianController;
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\NilaivokalController;
-use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\AbsenController;
 use App\Http\Controllers\SertifikatController;
 use Illuminate\Support\Facades\Route;
@@ -23,7 +25,16 @@ use App\Http\Controllers\LayoutController;
  */
 
 Route::middleware(['auth:user'])->group(function () {
+    Route::get('/dashboard', function () {
+    return view('dashboardtampilan');
+})->name('dashboard');
+
+});
+
+Route::middleware(['auth:user', 'role:admin'])->group(function () {
     Route::resource('admin/siswa', SiswaController::class);
+    Route::resource('admin/juri', JuriController::class);
+    Route::resource('admin/siswa', CabangController::class);
     Route::resource('admin/undian', UndianController::class);
     Route::resource('admin/absen', AbsenController::class);
     Route::resource('admin/nilai', NilaiController::class);
@@ -33,14 +44,12 @@ Route::middleware(['auth:user'])->group(function () {
     Route::get('/nilaipilihan', function () {
         return view('nilaipilihan');
     });
-
-    
-
-    Route::get('/dashboard', function () {
-        return view('dashboardtampilan');
-    })->name('dashboard');
 });
 
+Route::middleware(['auth:user', 'role:juri'])->group(function () {
+    Route::resource('admin/nilai', NilaiController::class);
+    Route::resource('admin/vokal', NilaivokalController::class);
+});
 
 Route::get('/dashboard/siswa', function () {
     return view('siswadashboard');

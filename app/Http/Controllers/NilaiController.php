@@ -6,6 +6,7 @@ use App\Models\Nilai;
 use App\Models\Undian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class NilaiController extends Controller
 {
@@ -16,8 +17,13 @@ class NilaiController extends Controller
      */
     public function index()
     {
-        $nilais = Nilai::latest()->paginate(10);
-        return view('nilai.index', compact('nilais'));
+        if (Auth::user()->role == 'admin') {
+            $nilais = Nilai::latest()->paginate(10);
+        } elseif (Auth::user()->role == 'juri') {
+            $nilais = Nilai::latest()->where('juri', Auth::user()->id)->paginate(10);
+        }
+        
+        return view('nilai.tari.index', compact('nilais'));
     }
 
     /**
@@ -27,7 +33,7 @@ class NilaiController extends Controller
      */
     public function create()
     {
-        return view('nilai.create');
+        return view('nilai.tari.create');
     }
 
     public function getSertifikat(Request $request)
@@ -96,7 +102,7 @@ class NilaiController extends Controller
      */
     public function show(Nilai $nilai)
     {
-        return view('nilai.edit', compact('nilai'));
+        return view('nilai.tari.edit', compact('nilai'));
     }
 
     /**
@@ -107,7 +113,7 @@ class NilaiController extends Controller
      */
     public function edit(Nilai $nilai)
     {
-        return view('nilai.edit', compact('nilai'));
+        return view('nilai.tari.edit', compact('nilai'));
     }
 
     /**
