@@ -4,8 +4,9 @@
     <div class="container-fluid mt-5">
         <div class="card border-0 shadow rounded">
             <div class="card-body kekanan">
-                <a href="{{ route('tarian.create') }}" class="btn btn-md btn-success mb-3">Tambah Nilai
-                    Musik</a>
+
+                <div class="mb-3 d-flex justify-content-between">
+                    <a href="{{ route('tarian.create') }}" class="btn btn-md btn-success">Tambah Siswa</a>
                     <div>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Export Excel
