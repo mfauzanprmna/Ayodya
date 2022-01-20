@@ -103,7 +103,9 @@ class JuriController extends Controller
 
         // Mendapatkan Nama File
         $extension = $file->getClientOriginalExtension();
-        $nama_file = $file->basename($request->name, '.', $extension);
+        $name = $request->name;
+        $nama = explode(" ", $name);
+        $nama_file = join("-", $nama) . "." . $extension;
 
         // Mendapatkan Extension File
 
@@ -111,7 +113,7 @@ class JuriController extends Controller
         $ukuran_file = $file->getSize();
 
         // Proses Upload File
-        $destinationPath = 'image';
+        $destinationPath = 'image/juri';
         $file->move($destinationPath, $nama_file);
         $filenameSimpan = $destinationPath . '/' . $nama_file;
 

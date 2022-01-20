@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class CabangController extends Controller
 {
@@ -15,7 +16,8 @@ class CabangController extends Controller
      */
     public function index()
     {
-        //
+        $cabang = User::orderby('name', 'asc')->where('role', 'cabang')->paginate(10);
+        return view('user.cabang.index', compact('cabang'));
     }
 
     /**
@@ -25,7 +27,7 @@ class CabangController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.juri.create');
     }
 
     /**
@@ -36,7 +38,32 @@ class CabangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        $id = explode(" ", $request->name);
+        foreach ($id as $key ) {
+            $cabang = substr($key[0],0,1);
+        };
+
+        $cabang = User::create([
+            'id_cabang' => $cabang,
+            'name' => $request->name,
+            'foto' => 'image/default.png',
+            'role' => 'cabang',
+            'email' => $request->email,
+            'password' => Hash::make('password'),
+        ]);
+
+        if ($cabang) {
+            //redirect dengan pesan sukses
+            return redirect()->route('cabang.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('cabang.index')->with(['error' => 'Data Gagal Disimpan!']);
+        }
     }
 
     /**
@@ -58,7 +85,7 @@ class CabangController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('user.cabang.edit', compact('user'));
     }
 
     /**
@@ -70,7 +97,24 @@ class CabangController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+
+        if ($user) {
+            //redirect dengan pesan sukses
+            return redirect()->route('cabang.index')->with(['success' => 'Data Berhasil Diupdate!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('cabang.index')->with(['error' => 'Data Gagal Diupdate!']);
+        }
     }
 
     /**
@@ -81,6 +125,14 @@ class CabangController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $cabang = $user->delete();
+
+        if ($cabang) {
+            //redirect dengan pesan sukses
+            return redirect()->route('user.cabang.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('user.cabang.index')->with(['error' => 'Data Gagal Dihapus!']);
+        }
     }
 }

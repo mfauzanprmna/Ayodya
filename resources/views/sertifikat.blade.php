@@ -56,6 +56,7 @@
                     $('.semester').html(semester);
                     $('#huruf').html(tbr);
                     $('#tari').html(ui.item.tarian);
+                    $('.ujian').html(ui.item.index);
                     $('#foto').attr("src", '{{ asset('/') }}' + ui.item.foto);
                     $('#printserti').attr("href", '/sertifikat/' + ui.item.id);
                     $('#sertipdf').attr("href", '/sertifikat/pdf/' + ui.item.id);
@@ -86,6 +87,13 @@
             tr = 'XXX' + romawi[tgl % 10];
         }
         $('#ini').html(tr);
+
+        $(document).ready(function() {
+            $('#lenggara').keyup(function() {
+                var tanggal = $('#lenggara').val();
+                $('#pengambilan').html(tanggal);
+            });
+        });
     </script>
 @endsection
 @section('main')
@@ -93,8 +101,8 @@
         rel="stylesheet" type="text/css" />
     <style>
         .A3 {
-            size: 
-            box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.10);   
+            size:
+                box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.10);
         }
 
         p.ttd {
@@ -107,14 +115,14 @@
             <div class="row">
                 <div class="col">
                     <label for="tags">Siswa</label>
-            <input id="tags" class="form-control" name="tags">
+                    <input id="tags" class="form-control" name="tags">
                 </div>
                 <div class="col">
                     <label for="lenggara">Tanggal Penyelenggara</label>
                     <input id="lenggara" class="form-control" name="lenggara">
                 </div>
             </div>
-            
+
         </div>
         {{-- <div class="form-group">
             <label for="">Nama Siswa</label>
@@ -130,26 +138,25 @@
                 <a href="" id="printserti" target="_blank"><button type="submit" class="btn btn-info">Print</button></a>
             </div>
 
-            
+
             <div class="A3 fw-bold mt-3">
                 {{-- <div  style="background-image: url('{{ asset('image/layout1.png') }}') ; background-size: 500px 250px;   background-position: left;
                 background-repeat: no-repeat;
                 position: relative;"></div> --}}
-               
+
                 <div class="row">
-                  
-    
+
+
                     <div class="col-md-4" style="float: left">
-                        <img src="{{ asset('image/layout2.png') }} "
-                            width="800px" height="100%">
-                            <div class="fotobaground">
-                                <img src="{{ asset('image/layout1.png') }}" alt="" style=" width: 500px ;  
-                                position: absolute; top: 30%" >
-                            </div>
+                        <img src="{{ asset('image/layout2.png') }} " width="800px" height="100%">
+                        <div class="fotobaground">
+                            <img src="{{ asset('image/layout1.png') }}" alt="" style=" width: 500px ;  
+                                    position: absolute; top: 30%">
+                        </div>
                     </div>
                     <div class="col-8 mt-5" style="text-align: ">
                         <center>
-                            <h3 style="font-family: 'eras-demi-itc-bold', sans-serif"> No: __ / YAP / <span id="ini"></span>
+                            <h3 style="font-family: 'eras-demi-itc-bold', sans-serif"> No: <span class="ujian">__</span> / YAP / <span id="ini"></span>
                                 /
                                 {{ Carbon\Carbon::now()->isoFormat('YYYY') }} </h3>
                             <p style="font-family: 'eras-demi-itc-bold', sans-serif">Diberikan Kepada:</p>
@@ -168,7 +175,7 @@
                                 tari daerah, modelling &
                                 vokal di semester terpadu ke - <span class="semester">__</span> ( <span
                                     id="huruf">___</span> )
-                                <br>yang diselenggarakan pada tanggal <span id="pengambilan"></span>
+                                <br>yang diselenggarakan pada tanggal <span id="pengambilan">__</span>
                                 <br>di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depok
                                 <br>dan tercatat sebagai siswa Ayodya Pala - __
                                 <br>dengan nomor induk : <span id="induk">__</span>
@@ -178,7 +185,8 @@
                         </center>
                         <div class="container d-flex justify-content-between">
                             <div class="foto">
-                                <img src="{{ asset('/image/default.png') }}" alt="" id="foto" width="110px" height="150px" style="border-radius: 100%">
+                                <img src="{{ asset('/image/default.png') }}" alt="" id="foto" width="110px" height="150px"
+                                    style="border-radius: 100%">
                             </div>
                             <div style="margin-left: 0; text-align: center;">
                                 <p class="ttd">Depok, {{ Carbon\Carbon::now()->isoFormat('D MMMM YYYY') }}
@@ -198,9 +206,9 @@
                 <button type="submit" class="btn btn-warning">PDF</button>
                 <button type="submit" class="btn btn-info">Print</button>
             </div>
-            <div class="container A3 mt-3"  style="background-image: url('Atlantis-Lite/assets/img/LAYOUT SISI BELAKANG SERTIFIKAT-1.png') ; background-size: 100% 530px;
-                background-repeat: no-repeat;
-                position: relative;">
+            <div class="container A3 mt-3" style="background-image: url('Atlantis-Lite/assets/img/LAYOUT SISI BELAKANG SERTIFIKAT-1.png') ; background-size: 100% 530px;
+                    background-repeat: no-repeat;
+                    position: relative;">
                 <br>
                 <img src="" alt="">
                 <div>
@@ -210,17 +218,17 @@
                     <tr>
                         <th>Nama</th>
                         <td>:</td>
-                        <td class="nama"></td>
+                        <td class="nama">__</td>
                     </tr>
                     <tr>
                         <th>No.Ujian</th>
                         <td>:</td>
-                        <td id="ujian">36</td>
+                        <td class="ujian">__</td>
                     </tr>
                     <tr>
                         <th>Semester</th>
                         <td>:</td>
-                        <td class="semester"></td>
+                        <td class="semester">__</td>
                     </tr>
                 </table>
                 <br>

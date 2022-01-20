@@ -28,4 +28,9 @@ class Siswa extends Authenticatable
     {
         return $this->hasMany(Nilai::class, 'no_induk');
     }
+
+    public function cabang()
+    {
+        return $this->belongsTo(Nilai::class, 'cabang', 'id_cabang');
+    }
 }

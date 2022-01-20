@@ -7,7 +7,6 @@ use App\Imports\SiswaImport;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SiswaController extends Controller
@@ -51,7 +50,7 @@ class SiswaController extends Controller
             'no_induk' => $request->no_induk,
             'nama_siswa' => $request->nama_siswa,
             'semester' => 'SMT 1',
-            'tanggal_lahir' => $request->tempat+', '+$request->tanggal_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
             'orang_tua' => $request->orang_tua,
             'alamat' => $request->alamat,
             'cabang' => $request->cabang,
@@ -60,10 +59,10 @@ class SiswaController extends Controller
 
         if ($siswa) {
             //redirect dengan pesan sukses
-            return redirect()->route('user.siswa.index')->with(['success' => 'Data Berhasil Disimpan!']);
+            return redirect()->route('siswa.index')->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
             //redirect dengan pesan error
-            return redirect()->route('user.siswa.index')->with(['error' => 'Data Gagal Disimpan!']);
+            return redirect()->route('siswa.index')->with(['error' => 'Data Gagal Disimpan!']);
         }
     }
 
@@ -101,41 +100,67 @@ class SiswaController extends Controller
             'cabang' => 'required',
         ]);
 
-        //get data siswa by ID
-        $siswa = Siswa::findOrFail($siswa->id);
         $file = $request->file('foto');
 
-        // Mendapatkan Nama File
+// Mendapatkan Nama File
         $extension = $file->getClientOriginalExtension();
-        $nama_file = $file->basename($request->nama_siswa, '.', $extension);
+        $name = $request->nama_siswa;
+        $nama = explode(" ", $name);
+        $nama_file = join("-", $nama) . "." . $extension;
 
-        // Mendapatkan Extension File
-
-        // Mendapatkan Ukuran File
-        $ukuran_file = $file->getSize();
-
-        // Proses Upload File
-        $destinationPath = 'image';
+// Proses Upload File
+        $destinationPath = 'image/siswa';
         $file->move($destinationPath, $nama_file);
         $filenameSimpan = $destinationPath . '/' . $nama_file;
 
-        $siswa->update([
-            'no_induk' => $request->no_induk,
-            'foto' => $filenameSimpan,
-            'nama_siswa' => $request->nama_siswa,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'orang_tua' => $request->orang_tua,
-            'alamat' => $request->alamat,
-            'cabang' => $request->cabang,
-            // 'password'          => $request->password,
-        ]);
+        if ($request->foto == '' && $request->password == '') {
+            $siswa->update([
+                'no_induk' => $request->no_induk,
+                'nama_siswa' => $request->nama_siswa,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'orang_tua' => $request->orang_tua,
+                'alamat' => $request->alamat,
+                'cabang' => $request->cabang,
+            ]);
+        } elseif ($request->foto == '') {
+            $siswa->update([
+                'no_induk' => $request->no_induk,
+                'nama_siswa' => $request->nama_siswa,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'orang_tua' => $request->orang_tua,
+                'alamat' => $request->alamat,
+                'cabang' => $request->cabang,
+                'password' => Hash::make($request->password),
+            ]);
+        } elseif ($request->password == '') {
+            $siswa->update([
+                'no_induk' => $request->no_induk,
+                'foto' => $filenameSimpan,
+                'nama_siswa' => $request->nama_siswa,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'orang_tua' => $request->orang_tua,
+                'alamat' => $request->alamat,
+                'cabang' => $request->cabang,
+            ]);
+        } else {
+            $siswa->update([
+                'no_induk' => $request->no_induk,
+                'foto' => $filenameSimpan,
+                'nama_siswa' => $request->nama_siswa,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'orang_tua' => $request->orang_tua,
+                'alamat' => $request->alamat,
+                'cabang' => $request->cabang,
+                'password' => Hash::make($request->password),
+            ]);
+        }
 
         if ($siswa) {
             //redirect dengan pesan sukses
-            return redirect()->route('user.siswa.index')->with(['success' => 'Data Berhasil Diupdate!']);
+            return redirect()->route('siswa.index')->with(['success' => 'Data Berhasil Diupdate!']);
         } else {
             //redirect dengan pesan error
-            return redirect()->route('user.siswa.index')->with(['error' => 'Data Gagal Diupdate!']);
+            return redirect()->route('siswa.index')->with(['error' => 'Data Gagal Diupdate!']);
         }
     }
 
@@ -145,18 +170,24 @@ class SiswaController extends Controller
      * @param  mixed $id
      * @return void
      */
-    public function destroy($id)
+    public function destroy(Siswa $siswa)
     {
-        $siswa = Siswa::findOrFail($id);
-        Storage::disk('local')->delete('public/siswas/' . $siswa->image);
+        $file = public_path('/') . $siswa->foto;
+        $default = public_path('/image/default.png');
+
+        if (file_exists($file)) {
+            if ($file != $default) {
+                @unlink($file);
+            }
+        }
         $siswa->delete();
 
         if ($siswa) {
             //redirect dengan pesan sukses
-            return redirect()->route('user.siswa.index')->with(['success' => 'Data Berhasil Dihapus!']);
+            return redirect()->route('siswa.index')->with(['success' => 'Data Berhasil Dihapus!']);
         } else {
             //redirect dengan pesan error
-            return redirect()->route('user.siswa.index')->with(['error' => 'Data Gagal Dihapus!']);
+            return redirect()->route('siswa.index')->with(['error' => 'Data Gagal Dihapus!']);
         }
     }
     public function fileImport(Request $request)

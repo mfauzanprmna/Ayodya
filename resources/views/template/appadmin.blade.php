@@ -129,7 +129,10 @@
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
                                             <a class="dropdown-item" href="route('logout')"
-                                                onclick="event.preventDefault();this.closest('form').submit();">Logout</a>
+                                                onclick="event.preventDefault();this.closest('form').submit();">
+                                                <i class="fas fa-sign-out-alt me-2"></i>
+                                                Logout
+                                            </a>
                                         </form>
                                     </li>
                                 </div>
@@ -172,20 +175,17 @@
                                     <ul class="nav nav-collapse">
                                         <li class="nav-item {{ request()->is('admin/siswa*') ? 'active' : '' }}">
                                             <a href="/admin/siswa">
-                                                <i class="fas fa-user"></i>
-                                                <p>Data Siswa</p>
+                                                <span class="sub-item">Data Siswa</span>
                                             </a>
                                         </li>
                                         <li class="nav-item {{ request()->is('admin/juri*') ? 'active' : '' }}">
                                             <a href="/admin/juri">
-                                                <i class="fas fa-user"></i>
-                                                <p>Data Juri</p>
+                                                <span class="sub-item">Data Juri</span>
                                             </a>
                                         </li>
                                         <li class="nav-item {{ request()->is('admin/cabang*') ? 'active' : '' }}">
                                             <a href="/admin/cabang">
-                                                <i class="fas fa-user"></i>
-                                                <p>Data Cabang</p>
+                                                <span class="sub-item">Data Cabang</span>
                                             </a>
                                         </li>
                                     </ul>

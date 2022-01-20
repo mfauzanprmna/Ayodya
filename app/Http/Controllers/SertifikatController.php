@@ -15,11 +15,21 @@ class SertifikatController extends Controller
    }
 
    /*
-    AJAX request
+   AJAX request
      */
    public function getSertifikat(Request $request)
    {
       $search = $request->search;
+
+      $siswa = SIswa::select('nama_siswa')->get();
+
+      $nama = array();
+
+      foreach ($siswa as $key) {
+         $nama[] = array(
+            $key->nama_siswa,
+         );
+      }
 
       if ($search == '') {
          $employees = Siswa::orderby('nama_siswa', 'asc')->select('no_induk', 'nama_siswa', 'cabang', 'orang_tua', 'tanggal_lahir', 'foto', 'semester')->limit(5)->get();
@@ -38,6 +48,7 @@ class SertifikatController extends Controller
             "ttl" => $employee->tanggal_lahir,
             "foto" => $employee->foto,
             "semester" => $employee->semester,
+            "index" => array_search([$employee->nama_siswa], $nama),
          );
       }
 

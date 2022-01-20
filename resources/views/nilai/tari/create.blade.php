@@ -1,5 +1,14 @@
 @extends('template.appadmin')
 @section('main')
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
+    <style>
+        .form-edit {
+            font-size: 14px;
+            border-color: #ebedf2 !important;
+        }
+
+    </style>
 
     <div class="container mt-5 mb-5">
         <div class="row">
@@ -39,8 +48,8 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Semester</label>
-                                <input type="text" class="form-control @error('semester') is-invalid @enderror" name="semester"
-                                    value="{{ old('semester') }}" placeholder="Masukkan" id="semester">
+                                <input type="text" class="form-control @error('semester') is-invalid @enderror"
+                                    name="semester" value="{{ old('semester') }}" placeholder="Masukkan" id="semester">
 
                                 <!-- error message untuk semester -->
                                 @error('semester')
@@ -120,66 +129,69 @@
             $('#tari').select2({
                 placeholder: 'Tarian',
                 width: 'resolve',
-                allowClear: true,
+                theme: 'bootstrap-5',
+                selectionCssClass: 'form-edit',
                 ajax: {
                     url: "{{ route('browse-tari') }}",
                     dataType: 'json',
                     delay: 250,
                     data: function(params) {
-                        return {
-                            q: params.term
+                        var query = {
+                            q: params.term,
+                            type: 'query'
                             //tambahkan parameter lainnya di sini jika ada
                         }
+                        return query;
                     },
                     processResults: function(data) {
                         return {
                             results: $.map(data, function(item) {
                                 return {
                                     text: item.nama + ' - ' + item.daerah,
-                                    id: item.id
+                                    id: item.id,
+                                    daerah: item.daerah
                                 }
                             })
                         };
                     },
-                    cache: true
-                },
-                templateSelection: function(selection) {
-                    var result = selection.text.split('-');
-                    return result[0];
+                    cache: function(event, ui) {
+                        $('#semester').val(ui.daerah);
+                        return false;
+                    },
                 }
             });
         });
 
-        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-        $(document).ready(function() {
+        // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        // $(document).ready(function() {
 
-            $("#tags").autocomplete({
-                source: function(request, response) {
-                    // Fetch data
-                    $.ajax({
-                        url: "{{ route('getsiswa') }}",
-                        type: 'post',
-                        dataType: "json",
-                        data: {
-                            _token: CSRF_TOKEN,
-                            search: request.term
-                        },
-                        success: function(data) {
-                            response(data);
-                            console.log(data);
-                        }
-                    });
-                },
-                select: function(event, ui) {
+        //     $("#tags").autocomplete({
+        //         source: function(request, response) {
+        //             // Fetch data
+        //             $.ajax({
+        //                 url: "{{ route('getsiswa') }}",
+        //                 type: 'post',
+        //                 dataType: "json",
+        //                 data: {
+        //                     _token: CSRF_TOKEN,
+        //                     search: request.term
+        //                 },
+        //                 success: function(data) {
+        //                     response(data);
+        //                     console.log(data);
+        //                 }
+        //             });
+        //         },
+        //         select: function(event, ui) {
 
-                    $('#tags').val(ui.item.label);
-                    $('#nama').val(ui.item.label);
-                    $('#induk').val(ui.item.id);
-                    $('#semester').val(ui.item.semester);
-                    return false;
-                }
-            });
-        });
+        //             $('#tags').val(ui.item.label);
+        //             $('#nama').val(ui.item.label);
+        //             $('#induk').val(ui.item.id);
+        //             $('#semester').val(ui.item.semester);
+        //             return false;
+        //         }
+        //     });
+        // });
     </script>
 
 @endsection
