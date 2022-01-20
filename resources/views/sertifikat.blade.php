@@ -56,7 +56,7 @@
                     $('.semester').html(semester);
                     $('#huruf').html(tbr);
                     $('#tari').html(ui.item.tarian);
-                    $('.ujian').html(ui.item.index);
+                    $('.ujian').html(ui.item.index + 1);
                     $('#foto').attr("src", '{{ asset('/') }}' + ui.item.foto);
                     $('#printserti').attr("href", '/sertifikat/' + ui.item.id);
                     $('#sertipdf').attr("href", '/sertifikat/pdf/' + ui.item.id);
