@@ -56,10 +56,11 @@
                     $('.semester').html(semester);
                     $('#huruf').html(tbr);
                     $('#tari').html(ui.item.tarian);
+                    $('#cabang').html(ui.item.cabang);
                     $('.ujian').html(ui.item.index + 1);
                     $('#foto').attr("src", '{{ asset('/') }}' + ui.item.foto);
                     $('#printserti').attr("href", '/sertifikat/' + ui.item.id);
-                    $('#sertipdf').attr("href", '/sertifikat/pdf/' + ui.item.id);
+                    $('#printnilai').attr("href", '/nilai/' + ui.item.id);
                     return false;
                 }
             });
@@ -73,19 +74,10 @@
 
 
         var date2 = new Date();
-        var tgl = date2.getDate();
-        var romawi = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX'];
-        var tr;
+        var tgl = date2.getMonth();
+        var romawi = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+        var tr = romawi[tgl];
 
-        if (tgl < 11) {
-            tr = romawi[tgl];
-        } else if (tgl < 20) {
-            tr = 'X' + romawi[tgl - 10];
-        } else if (tgl < 30) {
-            tr = 'XX' + romawi[tgl % 10];
-        } else if (tgl < 40) {
-            tr = 'XXX' + romawi[tgl % 10];
-        }
         $('#ini').html(tr);
 
         $(document).ready(function() {
@@ -101,12 +93,25 @@
         rel="stylesheet" type="text/css" />
     <style>
         .A3 {
-            size:
-                box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.10);
+            box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.10);
         }
 
         p.ttd {
             line-height: 1;
+        }
+
+        .ui-autocomplete {
+            max-height: 100px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+
+        /* IE 6 doesn't support max-height
+       * we use height instead, but this forces the menu to always be this tall
+       */
+        * html .ui-autocomplete {
+            height: 100px;
         }
 
     </style>
@@ -134,7 +139,6 @@
         </div> --}}
         <div class="mt-4">
             <div>
-                <a href="" id="sertipdf" target="_blank"><button type="submit" class="btn btn-warning">PDF</button></a>
                 <a href="" id="printserti" target="_blank"><button type="submit" class="btn btn-info">Print</button></a>
             </div>
 
@@ -147,16 +151,16 @@
                 <div class="row">
 
 
-                    <div class="col-md-4" style="float: left">
-                        <img src="{{ asset('image/layout2.png') }} " width="800px" height="100%">
+                    <div class="col-md-4" style="float: left; width:800px">
                         <div class="fotobaground">
                             <img src="{{ asset('image/layout1.png') }}" alt="" style=" width: 500px ;  
-                                    position: absolute; top: 30%">
+                                            position: absolute; top: 30%">
                         </div>
                     </div>
                     <div class="col-8 mt-5" style="text-align: ">
                         <center>
-                            <h3 style="font-family: 'eras-demi-itc-bold', sans-serif"> No: <span class="ujian">__</span> / YAP / <span id="ini"></span>
+                            <h3 style="font-family: 'eras-demi-itc-bold', sans-serif"> No: <span
+                                    class="ujian">__</span> / YAP / <span id="ini"></span>
                                 /
                                 {{ Carbon\Carbon::now()->isoFormat('YYYY') }} </h3>
                             <p style="font-family: 'eras-demi-itc-bold', sans-serif">Diberikan Kepada:</p>
@@ -177,7 +181,7 @@
                                     id="huruf">___</span> )
                                 <br>yang diselenggarakan pada tanggal <span id="pengambilan">__</span>
                                 <br>di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depok
-                                <br>dan tercatat sebagai siswa Ayodya Pala - __
+                                <br>dan tercatat sebagai siswa Ayodya Pala - <span id="cabang"></span>
                                 <br>dengan nomor induk : <span id="induk">__</span>
                             </p>
 
@@ -203,12 +207,11 @@
         </div>
         <div class="mt-5">
             <div>
-                <button type="submit" class="btn btn-warning">PDF</button>
-                <button type="submit" class="btn btn-info">Print</button>
+                <a href="" id="printnilai" target="_blank"><button type="submit" class="btn btn-info">Print</button></a>
             </div>
             <div class="container A3 mt-3" style="background-image: url('Atlantis-Lite/assets/img/LAYOUT SISI BELAKANG SERTIFIKAT-1.png') ; background-size: 100% 530px;
-                    background-repeat: no-repeat;
-                    position: relative;">
+                            background-repeat: no-repeat;
+                            position: relative;">
                 <br>
                 <img src="" alt="">
                 <div>
@@ -249,21 +252,21 @@
                             <th>TOTAL</th>
                         </tr>
                         <tr>
-                            <td id="daerah">jawatengah</td>
-                            <td id="tari">gambiranom</td>
-                            <td id="wirawa">78.50</td>
-                            <td id="wiraga">78.50</td>
-                            <td id="wirasa">78.50</td>
-                            <td id="subtotal">78.50</td>
-                            <th id="total" rowspan="2">78.50</th>
+                            <td id="daerah"></td>
+                            <td id="tari"></td>
+                            <td id="wirawa">0</td>
+                            <td id="wiraga">0</td>
+                            <td id="wirasa">0</td>
+                            <td id="subtotal">0</td>
+                            <th id="total" rowspan="2">0</th>
                         </tr>
                         <tr>
-                            <td>sumatra</td>
-                            <td>panen</td>
-                            <td>78.50</td>
-                            <td>78.50</td>
-                            <td>78.50</td>
-                            <td>78.50</td>
+                            <td id="daerah1"></td>
+                            <td id="tari1"></td>
+                            <td id="wirawa1">0</td>
+                            <td id="wiraga1">0</td>
+                            <td id="wirasa1">0</td>
+                            <td id="subtotal1">0</td>
                         </tr>
                         {{-- <tr>
                             <th colspan="2">Undian</th>
@@ -273,8 +276,8 @@
                             <th colspan="2">232</th>
                         </tr> --}}
                         <tr>
-                            <th colspan="2">Sinopsi</th>
-                            <th colspan="5">79.00</th>
+                            <th colspan="2">Sinopsis</th>
+                            <th colspan="5">00</th>
                         </tr>
                     </table>
                 </center>
@@ -335,7 +338,7 @@
                             </tr>
                             <br>
                             <tr>
-                                <td>Wulandari,S.sn</td>
+                                <td>Wulandari S. Sn.</td>
                             </tr>
                         </div>
                     </center>

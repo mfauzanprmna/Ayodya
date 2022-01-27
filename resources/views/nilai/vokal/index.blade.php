@@ -10,19 +10,21 @@
                     <table class="display table table-striped table-hover">
                         <thead style="background: #7a74fc" class="text-white text-center">
                         <tr>
-                            <th scope="col">no induk</th>
-                            <th scope="col">nama siswa</th>
-                            <th scope="col">nilai penampilan</th>
-                            <th scope="col">nilai teknik</th>
-                            <th scope="col">AKSI</th>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama Siswa</th>
+                            <th scope="col">Semester</th>
+                            <th scope="col">Nilai Penampilan</th>
+                            <th scope="col">Nilai Teknik</th>
+                            <th scope="col">Aksi</th>
 
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($nilaivokals as $nilaivokal)
                             <tr>
-                                <td>{{ $nilaivokal->no_induk }}</td>
-                                <td>{{ $nilaivokal->nama_siswa }}</td>
+                                <td>{{ $loop->itertion }}</td>
+                                <td>{{ $nilaivokal->siswa->nama_siswa }}</td>
+                                <td>{{ $nilaivokal->semester }}</td>
                                 <td>{{ $nilaivokal->penampilan }}</td>
                                 <td>{{ $nilaivokal->teknik }}</td>
                                 <td class="text-center">
@@ -40,7 +42,7 @@
                             </tr>
                         @empty
                             <div class="alert alert-danger">
-                                Data nilaivokal belum Tersedia.
+                                Data Nilai Vokal Belum Tersedia.
                             </div>
                         @endforelse
                     </tbody>

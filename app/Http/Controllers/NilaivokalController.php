@@ -16,7 +16,7 @@ class NilaivokalController extends Controller
     public function index()
     {
         $nilaivokals = Nilaivokal::latest()->paginate(10);
-        return view('vokal.index', compact('nilaivokals'));
+        return view('nilai.vokal.index', compact('nilaivokals'));
     }
 
     /**
@@ -26,7 +26,7 @@ class NilaivokalController extends Controller
      */
     public function create()
     {
-        return view('vokal.create');
+        return view('nilai.vokal.create');
     }
 
     /**
@@ -73,7 +73,7 @@ class NilaivokalController extends Controller
      */
     public function show(Nilaivokal $nilaivokal)
     {
-        return view('vokal.edit', compact('nilaivokal'));
+        return view('nilai.vokal.edit', compact('nilaivokal'));
     }
 
     /**
@@ -84,7 +84,7 @@ class NilaivokalController extends Controller
      */
     public function edit(Nilaivokal $nilaivokal)
     {
-        return view('vokal.edit', compact('nilaivokal'));
+        return view('nilai.vokal.edit', compact('nilaivokal'));
     }
     
 

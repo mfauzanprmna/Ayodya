@@ -1,38 +1,32 @@
 @extends('template.appadmin')
 @section('main')
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
+    <style>
+        .form-edit {
+            font-size: 14px;
+            border-color: #ebedf2 !important;
+        }
+
+    </style>
 
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
-                        <form action="{{ route('nilaivokal.update', $nilaivokal->id) }}" method="POST"
-                            enctype="multipart/form-data">
+                        <form action="{{ route('nilai.store') }}" method="POST" enctype="multipart/form-data"
+                            style="font-size: 17px">
+
                             @csrf
-                            @method('PUT')
-
-                            <div class="form-group">
-                                <label class="font-weight-bold">No Induk</label>
-                                <input type="text" class="form-control @error('no_induk') is-invalid @enderror"
-                                    name="no_induk" value="{{ old('no_induk', $nilaivokal->no_induk) }}"
-                                    placeholder="Masukkan Judul no induk">
-
-                                <!-- error message untuk no_induk -->
-                                @error('no_induk')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Nama Siswa</label>
-                                <input type="text" class="form-control @error('nama_siswa') is-invalid @enderror"
-                                    name="nama_siswa" value="{{ old('nama_siswa', $nilaivokal->nama_siswa) }}"
-                                    placeholder="Masukkan Judul nama siswa">
+                                <input type="text" class="form-control @error('siswa') is-invalid @enderror" name="siswa"
+                                    value="{{ $nilai->no_induk }} - {{ $nilai->siswa->nama_siswa }}" placeholder="Masukkan" id="siswa">
 
-                                <!-- error message untuk nama_siswa -->
-                                @error('nama_siswa')
+                                <!-- error message untuk siswa -->
+                                @error('siswa')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -40,10 +34,22 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">penampilan </label>
-                                <input type="text" class="form-control @error('penampilan') is-invalid @enderror"
-                                    name="penampilan" value="{{ old('penampilan', $nilaivokal->penampilan) }}"
-                                    placeholder="Masukkan penampilan">
+                                <label class="font-weight-bold">Semester</label>
+                                <input type="text" class="form-control @error('semester') is-invalid @enderror"
+                                    name="semester" value="{{ old('semester', $nilai->semester) }}" placeholder="Masukkan" id="semester">
+
+                                <!-- error message untuk semester -->
+                                @error('semester')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Penampila</label>
+                                <input type="text" class="form-control @error('penampilan') is-invalid @enderror" name="penampilan"
+                                    value="{{ old('penampilan', $nilai->penampilan) }}" placeholder="Masukkan Nilai Penampilan">
 
                                 <!-- error message untuk penampilan -->
                                 @error('penampilan')
@@ -54,10 +60,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">teknik</label>
+                                <label class="font-weight-bold">Teknik</label>
                                 <input type="text" class="form-control @error('teknik') is-invalid @enderror" name="teknik"
-                                    value="{{ old('teknik', $nilaivokal->teknik) }}"
-                                    placeholder="Masukkan Judul no induk">
+                                    value="{{ old('teknik', $nilai->teknik) }}" placeholder="Masukkan Nilai Teknik">
 
                                 <!-- error message untuk teknik -->
                                 @error('teknik')
@@ -70,9 +75,8 @@
 
 
 
-
-                            <button type="submit" class="btn btn-md btn-primary">UPDATE</button>
-                            {{-- <button type="reset" class="btn btn-md btn-warning">RESET</button> --}}
+                            <button type="submit" class="btn btn-md btn-primary">Simpan</button>
+                            <button type="reset" class="btn btn-md btn-warning">Reset</button>
 
                         </form>
                     </div>

@@ -149,49 +149,44 @@
                                 return {
                                     text: item.nama + ' - ' + item.daerah,
                                     id: item.id,
-                                    daerah: item.daerah
                                 }
                             })
                         };
-                    },
-                    cache: function(event, ui) {
-                        $('#semester').val(ui.daerah);
-                        return false;
-                    },
+                    }
                 }
             });
         });
 
-        // var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-        // $(document).ready(function() {
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $(document).ready(function() {
 
-        //     $("#tags").autocomplete({
-        //         source: function(request, response) {
-        //             // Fetch data
-        //             $.ajax({
-        //                 url: "{{ route('getsiswa') }}",
-        //                 type: 'post',
-        //                 dataType: "json",
-        //                 data: {
-        //                     _token: CSRF_TOKEN,
-        //                     search: request.term
-        //                 },
-        //                 success: function(data) {
-        //                     response(data);
-        //                     console.log(data);
-        //                 }
-        //             });
-        //         },
-        //         select: function(event, ui) {
+            $("#tags").autocomplete({
+                source: function(request, response) {
+                    // Fetch data
+                    $.ajax({
+                        url: "{{ route('getsiswa') }}",
+                        type: 'post',
+                        dataType: "json",
+                        data: {
+                            _token: CSRF_TOKEN,
+                            search: request.term
+                        },
+                        success: function(data) {
+                            response(data);
+                            console.log(data);
+                        }
+                    });
+                },
+                select: function(event, ui) {
 
-        //             $('#tags').val(ui.item.label);
-        //             $('#nama').val(ui.item.label);
-        //             $('#induk').val(ui.item.id);
-        //             $('#semester').val(ui.item.semester);
-        //             return false;
-        //         }
-        //     });
-        // });
+                    $('#tags').val(ui.item.label);
+                    $('#nama').val(ui.item.label);
+                    $('#induk').val(ui.item.id);
+                    $('#semester').val(ui.item.semester);
+                    return false;
+                }
+            });
+        });
     </script>
 
 @endsection

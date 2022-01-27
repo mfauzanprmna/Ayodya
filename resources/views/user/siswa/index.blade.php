@@ -66,7 +66,7 @@
                                     <td>{{ $siswa->no_induk }}</td>
                                     <td>{{ $siswa->nama_siswa }}</td>
                                     <td>{{ $siswa->semester }}</td>
-                                    <td>{{ $siswa->cabang }}</td>
+                                    <td>{{ $siswa->tempat->name }}</td>
                                     <td class="text-center">
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                             action="{{ route('siswa.destroy', $siswa->id) }}" method="POST">

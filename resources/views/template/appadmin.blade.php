@@ -215,6 +215,12 @@
                                                     Vokal</span>
                                             </a>
                                         </li>
+                                        <li class="{{ request()->is('admin/sinopsis*') ? 'active' : '' }}">
+                                            <a href="/admin/sinopsis">
+                                                <span class="sub-item">Nilai
+                                                    Sinopsis</span>
+                                            </a>
+                                        </li>
 
                                     </ul>
                                 </div>

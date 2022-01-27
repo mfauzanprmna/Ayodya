@@ -22,7 +22,7 @@
                         @forelse ($cabang as $cab)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $cab->id_cabang }}</td>
+                                <td>{{ $cab->singkatan }}</td>
                                 <td>{{ $cab->name }}</td>
                                 <td>
                                     <img src="{{ asset('/' . $cab->foto) }}" alt="" width="80px">

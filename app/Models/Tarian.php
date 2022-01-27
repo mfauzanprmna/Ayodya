@@ -16,4 +16,5 @@ class Tarian extends Model
     {
         return $this->hasMany(Nilai::class, 'tari_id');
     }
+    
 }

@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class Siswa extends Authenticatable
+class Siswa extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
     
@@ -24,13 +25,23 @@ class Siswa extends Authenticatable
         'password',
     ];
 
-    public function nilai()
+    public function tari()
     {
         return $this->hasMany(Nilai::class, 'no_induk');
     }
 
-    public function cabang()
+    public function vokal()
     {
-        return $this->belongsTo(Nilai::class, 'cabang', 'id_cabang');
+        return $this->hasMany(Nilaivokal::class, 'no_induk');
+    }
+
+    public function sinopsis()
+    {
+        return $this->hasMany(Sinopsis::class, 'no_induk');
+    }
+
+    public function tempat()
+    {
+        return $this->belongsTo(User::class, 'cabang', 'singkatan');
     }
 }

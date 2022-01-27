@@ -20,4 +20,9 @@ class Nilai extends Model
     {
         return $this->belongsTo(Tarian::class, 'tari_id', 'id');
     }
+
+    public function juri()
+    {
+        return $this->belongsTo(User::class, 'id_juri', 'id');
+    }
 }

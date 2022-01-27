@@ -74,9 +74,7 @@ class NilaiController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'induk' => 'required',
             'tari' => 'required',
-            'semester' => 'required',
             'wirama' => 'required',
             'wiraga' => 'required',
             'wirasa' => 'required',
@@ -95,7 +93,7 @@ class NilaiController extends Controller
         } elseif (Auth::user()->role == 'admin') {
             $nilai = Nilai::create([
                 'no_induk' => $request->induk,
-                'id_juri' => $request->juri,
+                'id_juri' => '3',
                 'tari_id' => $request->tari,
                 'semester' => $request->semester,
                 'wirama' => $request->wirama,
@@ -147,10 +145,8 @@ class NilaiController extends Controller
     public function update(Request $request, Nilai $nilai)
     {
         $this->validate($request, [
-            'no_induk' => 'required',
             'id_juri' => 'required',
             'tari_id' => 'required',
-            'semester' => 'required',
             'wirama' => 'required',
             'wiraga' => 'required',
             'wirasa' => 'required',
@@ -172,7 +168,7 @@ class NilaiController extends Controller
         } elseif (Auth::user()->role == 'admin') {
             $nilai = Nilai::edit([
                 'no_induk' => $request->induk,
-                'id_juri' => $request->juri,
+                'id_juri' => '3',
                 'tari_id' => $request->tari,
                 'semester' => $request->semester,
                 'wirama' => $request->wirama,

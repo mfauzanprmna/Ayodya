@@ -1,37 +1,32 @@
 @extends('template.appadmin')
 @section('main')
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
+    <style>
+        .form-edit {
+            font-size: 14px;
+            border-color: #ebedf2 !important;
+        }
+
+    </style>
 
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
                     <div class="card-body">
-                        <h1>Tambah Data Siswa</h1>
-                        <hr>
-                        <form action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('nilai.store') }}" method="POST" enctype="multipart/form-data"
+                            style="font-size: 17px">
 
                             @csrf
 
                             <div class="form-group">
-                                <label class="font-weight-bold">No Induk</label>
-                                <input type="text" class="form-control @error('no_induk') is-invalid @enderror"
-                                    name="no_induk" value="{{ old('no_induk') }}" placeholder="Masukkan No Induk">
-
-                                <!-- error message untuk no_induk -->
-                                @error('no_induk')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
                                 <label class="font-weight-bold">Nama Siswa</label>
-                                <input type="text" class="form-control @error('nama_siswa') is-invalid @enderror"
-                                    name="nama_siswa" value="{{ old('nama_siswa') }}" placeholder="Masukkan Nama Siswa">
+                                <input type="text" class="form-control @error('tags') is-invalid @enderror" name="tags"
+                                    value="{{ old('tags') }}" placeholder="Masukkan" id="tags">
 
-                                <!-- error message untuk nama_siswa -->
-                                @error('nama_siswa')
+                                <!-- error message untuk tags -->
+                                @error('tags')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -39,12 +34,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Tempat</label>
-                                <input type="text" class="form-control @error('tempat') is-invalid @enderror" name="tempat"
-                                    value="{{ old('tempat') }}" placeholder="Masukkan Tempat Tanggal lahir">
+                                <label class="font-weight-bold">No Induk</label>
+                                <input type="text" class="form-control @error('induk') is-invalid @enderror" name="induk"
+                                    value="{{ old('induk') }}" placeholder="Masukkan" id="induk">
 
-                                <!-- error message untuk tempat -->
-                                @error('tempat')
+                                <!-- error message untuk induk -->
+                                @error('induk')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -52,12 +47,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Tanggal Lahir</label>
-                                <input type="text" class="form-control @error('tanggal_lahir') is-invalid @enderror" id="datepicker" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}"
-                                    placeholder="Masukkan Tanggal lahir">
+                                <label class="font-weight-bold">Semester</label>
+                                <input type="text" class="form-control @error('semester') is-invalid @enderror"
+                                    name="semester" value="{{ old('semester') }}" placeholder="Masukkan" id="semester">
 
-                                <!-- error message untuk tanggal_lahir -->
-                                @error('tanggal_lahir')
+                                <!-- error message untuk semester -->
+                                @error('semester')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -65,48 +60,20 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Nama Orang Tua</label>
-                                <input type="text" class="form-control @error('orang_tua') is-invalid @enderror"
-                                    name="orang_tua" value="{{ old('orang_tua') }}"
-                                    placeholder="Masukkan Nama Orang Tua Siswa">
+                                <label class="font-weight-bold">Nilai</label>
+                                <input type="text" class="form-control @error('nilai') is-invalid @enderror" name="nilai"
+                                    value="{{ old('nilai') }}" placeholder="Masukkan Nilai">
 
-                                <!-- error message untuk orang_tua -->
-                                @error('orang_tua')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="font-weight-bold">Alamat</label>
-                                <input type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat"
-                                    value="{{ old('alamat') }}" placeholder="Masukkan Alamat">
-
-                                <!-- error message untuk alamat -->
-                                @error('alamat')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label class="font-weight-bold">Cabang</label>
-                                <input type="text" class="form-control @error('cabang') is-invalid @enderror" name="cabang"
-                                    value="{{ old('cabang') }}" placeholder="Masukkan Cabang">
-
-                                <!-- error message untuk cabang -->
-                                @error('cabang')
+                                <!-- error message untuk nilai -->
+                                @error('nilai')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
 
-
-
-
-                            <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
-                            <button type="reset" class="btn btn-md btn-warning">RESET</button>
+                            <button type="submit" class="btn btn-md btn-primary">Simpan</button>
+                            <button type="reset" class="btn btn-md btn-warning">Reset</button>
 
                         </form>
                     </div>
@@ -114,5 +81,38 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $(document).ready(function() {
+
+            $("#tags").autocomplete({
+                source: function(request, response) {
+                    // Fetch data
+                    $.ajax({
+                        url: "{{ route('getsiswa') }}",
+                        type: 'post',
+                        dataType: "json",
+                        data: {
+                            _token: CSRF_TOKEN,
+                            search: request.term
+                        },
+                        success: function(data) {
+                            response(data);
+                            console.log(data);
+                        }
+                    });
+                },
+                select: function(event, ui) {
+
+                    $('#tags').val(ui.item.label);
+                    $('#nama').val(ui.item.label);
+                    $('#induk').val(ui.item.id);
+                    $('#semester').val(ui.item.semester);
+                    return false;
+                }
+            });
+        });
+    </script>
 
 @endsection

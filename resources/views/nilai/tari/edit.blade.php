@@ -11,26 +11,11 @@
                             @csrf
                             @method('PUT')
 
-
-                            <div class="form-group">
-                                <label class="font-weight-bold">No Induk</label>
-                                <input type="text" class="form-control @error('no_induk') is-invalid @enderror"
-                                    name="no_induk" value="{{ old('no_induk', $nilai->no_induk) }}"
-                                    placeholder="Masukkan No Induk">
-
-                                <!-- error message untuk no_induk -->
-                                @error('no_induk')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
                             <div class="form-group">
                                 <label class="font-weight-bold">Nama Siswa</label>
                                 <input type="text" class="form-control @error('nama_siswa') is-invalid @enderror"
-                                    name="nama_siswa" value="{{ old('nama_siswa', $nilai->nama_siswa) }}"
-                                    placeholder="Masukkan Nama Siswa">
+                                    name="nama_siswa" value="{{ $nilai->no_induk }} - {{ $siswas->siswa->nama_siswas }}"
+                                    placeholder="Masukkan Nama Siswa" disabled>
 
                                 <!-- error message untuk nama_siswa -->
                                 @error('nama_siswa')
@@ -41,21 +26,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Jenis Tari</label>
+                                <label class="font-weight-bold">Tari</label>
                                 <select name="tari" id="tari" style="width: 100%;"
-                                    class="js-example-basic-single form-control @error('wirama') is-invalid @enderror">
-                                    @foreach ($taris as $item)
-                                        @if (old('tari'))
-                                            
-                                        @endif
-                                    @endforeach
-                                </select>
-                                <input type="text" class="form-control @error('jenis_tari') is-invalid @enderror"
-                                    name="jenis_tari" value="{{ old('jenis_tari', $nilai->jenis_tari) }}"
-                                    placeholder="Masukkan Jenis Tari">
+                                    class="form-control form-control @error('wirama') is-invalid @enderror"></select>
 
-                                <!-- error message untuk jenis_tari -->
-                                @error('jenis_tari')
+                                <!-- error message untuk wirama -->
+                                @error('wirama')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -63,7 +39,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">wirama </label>
+                                <label class="font-weight-bold">Wirama</label>
                                 <input type="text" class="form-control @error('wirama') is-invalid @enderror" name="wirama"
                                     value="{{ old('wirama', $nilai->wirama) }}" placeholder="Masukkan Nilai Wirama">
 
@@ -76,7 +52,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">wiraga</label>
+                                <label class="font-weight-bold">Wiraga</label>
                                 <input type="text" class="form-control @error('wiraga') is-invalid @enderror" name="wiraga"
                                     value="{{ old('wiraga', $nilai->wiraga) }}" placeholder="Masukkan Nilai Wiraga">
 
@@ -89,7 +65,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">wirasa</label>
+                                <label class="font-weight-bold">Wirasa</label>
                                 <input type="text" class="form-control @error('wirasa') is-invalid @enderror" name="wirasa"
                                     value="{{ old('wirasa', $nilai->wirasa) }}" placeholder="Masukkan Nilai Wirasa">
 
@@ -101,9 +77,6 @@
                                 @enderror
                             </div>
 
-
-
-
                             <button type="submit" class="btn btn-md btn-primary">UPDATE</button>
                             {{-- <button type="reset" class="btn btn-md btn-warning">RESET</button> --}}
 
@@ -113,5 +86,39 @@
             </div>
         </div>
     </div>
+
+    <script>
+                $(document).ready(function() {
+            $('#tari').select2({
+                placeholder: 'Tarian',
+                width: 'resolve',
+                theme: 'bootstrap-5',
+                selectionCssClass: 'form-edit',
+                ajax: {
+                    url: "{{ route('browse-tari') }}",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        var query = {
+                            q: params.term,
+                            type: 'query'
+                            //tambahkan parameter lainnya di sini jika ada
+                        }
+                        return query;
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: $.map(data, function(item) {
+                                return {
+                                    text: item.nama + ' - ' + item.daerah,
+                                    id: item.id,
+                                }
+                            })
+                        };
+                    }
+                }
+            });
+        });
+    </script>
 
 @endsection

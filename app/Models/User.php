@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'id_cabang',
+        'singkatan',
         'name',
         'foto',
         'role',
@@ -47,6 +48,6 @@ class User extends Authenticatable
 
     public function siswa()
     {
-        return $this->hasMany(Siswa::class, 'id_cabang');
+        return $this->hasMany(Siswa::class, 'cabang', 'singkatan');
     }
 }

@@ -5,10 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Nilaivokal extends Model
+class Sinopsis extends Model
 {
+    use HasFactory;
+
+    protected $table = 'sinopses';
+
     protected $fillable = [
-        'no_induk','id_juri','lagu','semester','penampilan','teknik'
+        'no_induk','id_juri','semester','nilai'
     ];
 
     public function siswa()

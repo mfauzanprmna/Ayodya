@@ -18,7 +18,7 @@ class CreateSiswasTable extends Migration
             $table->string('nama_siswa');
             $table->string('no_induk')->unique();
             $table->string('foto');
-            $table->string('semester');
+            $table->integer('semester');
             $table->string('tanggal_lahir');
             $table->string('orang_tua');
             $table->string('alamat');

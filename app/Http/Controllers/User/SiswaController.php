@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Imports\SiswaImport;
 use App\Models\Siswa;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
@@ -14,6 +15,8 @@ class SiswaController extends Controller
     public function index()
     {
         $siswas = Siswa::orderby('nama_siswa', 'asc')->paginate(10);
+        // $user = User::all()->where('role', 'cabang')->first();
+        // dd($user->tempat->name);
         return view('user.siswa.index', compact('siswas'));
     }
 

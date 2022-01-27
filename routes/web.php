@@ -6,6 +6,7 @@ use App\Http\Controllers\NilaivokalController;
 use App\Http\Controllers\SertifikatController;
 use App\Http\Controllers\TarianController;
 use App\Http\Controllers\UndianController;
+use App\Http\Controllers\SinopsisController;
 use App\Http\Controllers\User\CabangController;
 use App\Http\Controllers\User\JuriController;
 use App\Http\Controllers\User\SiswaController;
@@ -43,7 +44,7 @@ Route::middleware(['auth:user', 'role:admin'])->group(function () {
     Route::get('/sertifikat', [SertifikatController::class, 'index']);
     Route::post('/sertifikat/getSertifikat', [SertifikatController::class, 'getSertifikat'])->name('sertifikat.getSertifikat');
     Route::get('/sertifikat/{id}', [SertifikatController::class, 'cetak_sertifikat'])->name('sertifikat.print');
-    Route::get('/sertifikat/pdf/{id}', [SertifikatController::class, 'sertipdf'])->name('sertifikat.pdf');
+    Route::get('/nilai/{id}', [SertifikatController::class, 'cetak_nilai'])->name('nilai.print');
     Route::post('file-import', [SiswaController::class, 'fileImport'])->name('file-import');
     Route::post('tari-import', [TarianController::class, 'fileImport'])->name('tari-import');
     Route::get('/browse/tari', [NilaiController::class, 'browse'])->name('browse-tari');

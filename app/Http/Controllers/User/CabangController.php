@@ -27,7 +27,7 @@ class CabangController extends Controller
      */
     public function create()
     {
-        return view('user.juri.create');
+        return view('user.cabang.create');
     }
 
     /**
@@ -49,7 +49,7 @@ class CabangController extends Controller
         };
 
         $cabang = User::create([
-            'id_cabang' => $cabang,
+            'singkatan' => $request->singkatan,
             'name' => $request->name,
             'foto' => 'image/default.png',
             'role' => 'cabang',
@@ -74,7 +74,7 @@ class CabangController extends Controller
      */
     public function show(User $user)
     {
-        //
+        // 
     }
 
     /**

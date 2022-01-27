@@ -10,5 +10,5 @@ class Layout extends Model
     use HasFactory;
     protected $fillable = [
         'background','kelas'
-     ];
+    ];
 }

@@ -18,10 +18,10 @@ class CreateNilaisTable extends Migration
             $table->string('no_induk');
             $table->foreignId('id_juri');
             $table->foreignId('tari_id');
-            $table->string('semester');
-            $table->string('wirama');
-            $table->string('wiraga');
-            $table->string('wirasa');
+            $table->integer('semester');
+            $table->decimal('wirama');
+            $table->decimal('wiraga');
+            $table->decimal('wirasa');
             $table->timestamps();
         });
     }
