@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
         if (Auth::guard('siswa')->attempt(['no_induk' => $request->username, 'password' => $request->password])) {
             return redirect('/dashboard/siswa');
         } elseif (Auth::guard('user')->attempt(['email' => $request->username, 'password' => $request->password])) {
-            return redirect('/dashboard');
+            return redirect('/dashboard/siswa');
         }
 
         return redirect('/login');
