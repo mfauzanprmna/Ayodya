@@ -59,10 +59,9 @@ class SertifikatController extends Controller
       return response()->json($response);
    }
 
-   public function cetak_sertifikat($id)
+   public function cetak_sertifikat($id, $hari)
    {
       $siswas = Siswa::findOrFail($id);
-
       $siswa = Siswa::select('nama_siswa')->get();
 
       $nama = array();
@@ -100,7 +99,18 @@ class SertifikatController extends Controller
       $bulan = $lahir[2];
       $tahun = $lahir[3];
 
-      return view('print.sertifikat', ['siswas' => $siswas, 'tempat' => $tempat, 'tanggal' => $tanggal, 'bulan' => $bulan, 'tahun' => $tahun, 'rombulan' => $rombulan, 'semester' => $tbr, 'ujian' => $ujian]);
+      return view('print.sertifikat', 
+      [
+         'siswas' => $siswas, 
+         'tempat' => $tempat, 
+         'tanggal' => $tanggal, 
+         'bulan' => $bulan, 
+         'tahun' => $tahun, 
+         'rombulan' => $rombulan, 
+         'semester' => $tbr, 
+         'ujian' => $ujian,
+         'hari' => $hari,
+      ]);
    }
 
    public function cetak_nilai($id)

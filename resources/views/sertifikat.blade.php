@@ -59,7 +59,12 @@
                     $('#cabang').html(ui.item.cabang);
                     $('.ujian').html(ui.item.index + 1);
                     $('#foto').attr("src", '{{ asset('/') }}' + ui.item.foto);
-                    $('#printserti').attr("href", '/sertifikat/' + ui.item.id);
+                    $(document).ready(function() {
+                    $('#lenggara').keyup(function() {
+                        var tanggal = $('#lenggara').val();
+                        $('#printserti').attr("href", '/sertifikat/' + ui.item.id + '/' + tanggal);
+                    });
+                    });
                     $('#printnilai').attr("href", '/nilai/' + ui.item.id);
                     return false;
                 }
@@ -79,6 +84,7 @@
         var tr = romawi[tgl];
 
         $('#ini').html(tr);
+        
 
         $(document).ready(function() {
             $('#lenggara').keyup(function() {
@@ -94,6 +100,7 @@
     <style>
         .A3 {
             box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.10);
+            background-color: white;
         }
 
         p.ttd {
@@ -209,9 +216,7 @@
             <div>
                 <a href="" id="printnilai" target="_blank"><button type="submit" class="btn btn-info">Print</button></a>
             </div>
-            <div class="container A3 mt-3" style="background-image: url('Atlantis-Lite/assets/img/LAYOUT SISI BELAKANG SERTIFIKAT-1.png') ; background-size: 100% 530px;
-                            background-repeat: no-repeat;
-                            position: relative;">
+            <div class="container A3 mt-3">
                 <br>
                 <img src="" alt="">
                 <div>
@@ -342,7 +347,10 @@
                             </tr>
                         </div>
                     </center>
-
+                    <div class="text-center" style="">
+                        <img src="{{ asset('Atlantis-Lite/assets/img/LAYOUT SISI BELAKANG SERTIFIKAT-1.png') }}" alt="" width="100%">
+            
+                    </div>
                 </div>
                 <br>
                 <br>
