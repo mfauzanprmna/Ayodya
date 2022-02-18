@@ -61,7 +61,7 @@
                             tari daerah, modelling &
                             vokal di semester terpadu ke - {{ $siswas->semester }} ( <span
                                 id="huruf">{{ $semester }}</span> )
-                            <br>yang diselenggarakan pada tanggal __, __, __, __ Oktober 2020
+                            <br>yang diselenggarakan pada tanggal {{ $hari }}
                             <br>di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depok
                             <br>dan tercatat sebagai siswa Ayodya Pala - {{ $siswas->tempat->name }}
                             <br>dengan nomor induk : {{ $siswas->no_induk }}

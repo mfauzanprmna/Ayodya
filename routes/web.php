@@ -47,7 +47,7 @@ Route::middleware(['auth:user', 'role:admin'])->group(function () {
     });
     Route::get('/sertifikat', [SertifikatController::class, 'index']);
     Route::post('/sertifikat/getSertifikat', [SertifikatController::class, 'getSertifikat'])->name('sertifikat.getSertifikat');
-    Route::get('/sertifikat/{id}', [SertifikatController::class, 'cetak_sertifikat'])->name('sertifikat.print');
+    Route::get('/sertifikat/{id}/{hari}', [SertifikatController::class, 'cetak_sertifikat'])->name('sertifikat.print');
     Route::get('/nilai/{id}', [SertifikatController::class, 'cetak_nilai'])->name('nilai.print');
     Route::post('file-import', [SiswaController::class, 'fileImport'])->name('file-import');
     Route::post('tari-import', [TarianController::class, 'fileImport'])->name('tari-import');
