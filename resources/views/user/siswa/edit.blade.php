@@ -1,10 +1,14 @@
 @extends('template.appadmin')
 @section('main')
-
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">Edit Data Siswa Ayodya</h4>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <form action="{{ route('siswa.update', $siswa->id) }}" method="POST"
                             enctype="multipart/form-data">
@@ -30,9 +34,9 @@
                                 <div class="">
                                     <div class="input-file-image">
                                         <img class="img-upload-preview" width="100" height="100"
-                                            src="{{ asset('/' . $siswa->foto) }}" alt="preview" style="border-radius: 50%">
-                                        <input type="file" class="form-control mt-2"
-                                            name="foto" accept="image/*" required>
+                                            src="{{ asset('/' . $siswa->foto) }}" alt="preview"
+                                            style="border-radius: 50%">
+                                        <input type="file" class="form-control mt-2" name="foto" accept="image/*" required>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +82,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Orang Tua Siswa <span class="required-label">*</span></label>
+                                <label class="font-weight-bold">Orang Tua Siswa <span
+                                        class="required-label">*</span></label>
                                 <input type="text" class="form-control @error('orang_tua') is-invalid @enderror"
                                     name="orang_tua" value="{{ old('orang_tua', $siswa->orang_tua) }}"
                                     placeholder="Masukkan nama orangtua siswa">
@@ -116,7 +121,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="" class="font-weight-bold">Password <span class="required-label">* Kosongkan jika
+                                <label for="" class="font-weight-bold">Password <span class="required-label">* Kosongkan
+                                        jika
                                         tidak ingin mengubah password</span></label>
                                 <input type="password" class="form-control" name="password" placeholder="Password">
                             </div>
@@ -131,5 +137,4 @@
             </div>
         </div>
     </div>
-
 @endsection

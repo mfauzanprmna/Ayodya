@@ -27,12 +27,12 @@ class Siswa extends Model
 
     public function tari()
     {
-        return $this->hasMany(Nilai::class, 'no_induk');
+        return $this->hasMany(Nilai::class, 'no_induk', 'no_induk');
     }
 
     public function vokal()
     {
-        return $this->hasMany(Nilaivokal::class, 'no_induk');
+        return $this->hasMany(Nilaivokal::class, 'no_induk', 'no_induk');
     }
 
     public function sinopsis()

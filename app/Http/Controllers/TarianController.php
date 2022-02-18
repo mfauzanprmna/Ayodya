@@ -16,7 +16,7 @@ class TarianController extends Controller
      */
     public function index()
     {
-        $tarians = Tarian::latest()->paginate(10);
+        $tarians = Tarian::all();
         return view('tarian.index', compact('tarians'));
     }
 
@@ -37,30 +37,26 @@ class TarianController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-        {
-            $this->validate($request, [
-                'nama'     => 'required',
-                'daerah'     => 'required',
-                
-             
-            ]);
-        
-        
-            $tarian = Tarian::create([
-                'nama'     => $request->nama,
-                'daerah'     => $request->daerah,
-                
-              
-            ]);
-        
-            if($tarian){
-                //redirect dengan pesan sukses
-                return redirect()->route('tarian.index')->with(['success' => 'Data Berhasil Disimpan!']);
-            }else{
-                //redirect dengan pesan error
-                return redirect()->route('tarian.index')->with(['error' => 'Data Gagal Disimpan!']);
-            }
+    {
+        $this->validate($request, [
+            'nama'     => 'required',
+            'daerah'     => 'required',
+        ]);
+
+
+        $tarian = Tarian::create([
+            'nama'     => $request->nama,
+            'daerah'     => $request->daerah,
+        ]);
+
+        if ($tarian) {
+            //redirect dengan pesan sukses
+            return redirect()->route('tarian.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('tarian.index')->with(['error' => 'Data Gagal Disimpan!']);
         }
+    }
 
     /**
      * Display the specified resource.
@@ -95,24 +91,18 @@ class TarianController extends Controller
     {
         $this->validate($request, [
             'nama'     => 'required',
-                'daerah'     => 'required',
+            'daerah'     => 'required',
         ]);
-    
-        //get data tarian by ID
-        $tarian = Tarian::findOrFail($tarian->id);
-    
-    
-            $tarian->update([
-                'nama'     => $request->nama,
-                'daerah'     => $request->daerah,
-            ]);
-    
-        
-    
-        if($tarian){
+
+        $edit = $tarian->update([
+            'nama'     => $request->nama,
+            'daerah'     => $request->daerah,
+        ]);
+
+        if ($edit) {
             //redirect dengan pesan sukses
             return redirect()->route('tarian.index')->with(['success' => 'Data Berhasil Diupdate!']);
-        }else{
+        } else {
             //redirect dengan pesan error
             return redirect()->route('tarian.index')->with(['error' => 'Data Gagal Diupdate!']);
         }
@@ -125,23 +115,20 @@ class TarianController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Tarian $tarian)
-    {
-        {
-            $tarian->delete();
-          
-            if($tarian){
-               //redirect dengan pesan sukses
-               return redirect()->route('tarian.index')->with(['success' => 'Data Berhasil Dihapus!']);
-            }else{
-              //redirect dengan pesan error
-              return redirect()->route('tarian.index')->with(['error' => 'Data Gagal Dihapus!']);
+    { 
+            $delete = $tarian->delete();
+            if ($delete) {
+                //redirect dengan pesan sukses
+                return redirect()->route('tarian.index')->with(['success' => 'Data Berhasil Dihapus!']);
+            } else {
+                //redirect dengan pesan error
+                return redirect()->route('tarian.index')->with(['error' => 'Data Gagal Dihapus!']);
             }
     }
-}
-public function fileImport(Request $request)
+
+    public function fileImport(Request $request)
     {
         Excel::import(new TarianImport, $request->file('file')->store('temp'));
         return back();
     }
-    }
-
+}

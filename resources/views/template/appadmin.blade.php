@@ -194,13 +194,13 @@
                         @endif
                         @if (Auth::user()->role == 'admin' || 'juri')
                             <li
-                                class="nav-item {{ request()->is('nilaipilihan') || request()->is('admin/nilai*') || request()->is('admin/nilaivokal*') ? 'active submenu' : '' }}">
+                                class="nav-item {{ request()->is('nilaipilihan') || request()->is('admin/nilai*') || request()->is('admin/vokal*') || request()->is('admin/sinopsis*') ? 'active submenu' : '' }}">
                                 <a data-toggle="collapse" href="#nilai" class="collapsed" aria-expanded="false">
                                     <i class="fas fa-table"></i>
                                     <p>Data Nilai</p>
                                     <span class="caret"></span>
                                 </a>
-                                <div class="collapse {{ request()->is('nilaipilihan') || request()->is('admin/nilai*') || request()->is('admin/nilaivokal*') ? 'show' : '' }}"
+                                <div class="collapse {{ request()->is('nilaipilihan') || request()->is('admin/nilai*') || request()->is('admin/vokal*') || request()->is('admin/sinopsis*') ? 'show' : '' }}"
                                     id="nilai">
                                     <ul class="nav nav-collapse">
                                         <li class="{{ request()->is('admin/nilai*') ? 'active' : '' }}">

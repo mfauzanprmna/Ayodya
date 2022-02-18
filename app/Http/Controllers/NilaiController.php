@@ -20,12 +20,13 @@ class NilaiController extends Controller
     public function index()
     {
         if (Auth::user()->role == 'admin') {
-            $nilais = Nilai::latest()->paginate(10);
+            $juris = User::all()->where('role', 'juri');
+            $nilais = Nilai::all();
         } elseif (Auth::user()->role == 'juri') {
-            $nilais = Nilai::latest()->where('id_juri', Auth::user()->id)->paginate(10);
+            $nilais = Nilai::all()->where('id_juri', Auth::user()->id);
         }
 
-        return view('nilai.tari.index', compact('nilais'));
+        return view('nilai.tari.index', compact('nilais', 'juris'));
     }
 
     /**
@@ -73,12 +74,17 @@ class NilaiController extends Controller
      */
     public function store(Request $request)
     {
+        $juris = User::all()->where('role', 'juri');
         $this->validate($request, [
             'tari' => 'required',
-            'wirama' => 'required',
-            'wiraga' => 'required',
-            'wirasa' => 'required',
         ]);
+        foreach ($juris as $key => $value) {
+            $valudateData = $request->validate([
+                'wirama' . $key  => 'required',
+                'wiraga' . $key => 'required',
+                'wirasa' . $key => 'required',
+            ]);
+        }
 
         if (Auth::user()->role == 'juri') {
             $nilai = Nilai::create([
@@ -91,15 +97,17 @@ class NilaiController extends Controller
                 'wirasa' => $request->wirasa,
             ]);
         } elseif (Auth::user()->role == 'admin') {
-            $nilai = Nilai::create([
-                'no_induk' => $request->induk,
-                'id_juri' => '3',
-                'tari_id' => $request->tari,
-                'semester' => $request->semester,
-                'wirama' => $request->wirama,
-                'wiraga' => $request->wiraga,
-                'wirasa' => $request->wirasa,
-            ]);
+            foreach ($juris as $key => $juri) {
+                $nilai = Nilai::create([
+                    'no_induk' => $request->induk,
+                    'id_juri' => $juri->id,
+                    'tari_id' => $request->tari,
+                    'semester' => $request->semester,
+                    'wirama' => request('wirama' . $key),
+                    'wiraga' => request('wiraga' . $key),
+                    'wirasa' => request('wirasa' . $key),
+                ]);
+            }
         }
 
         if ($nilai) {
@@ -132,7 +140,7 @@ class NilaiController extends Controller
     {
         $juris = User::all()->where('role', 'juri');
 
-        return view('nilai.tari.edit', compact('juris'));
+        return view('nilai.tari.edit', compact('juris', 'nilai'));
     }
 
     /**
@@ -145,18 +153,13 @@ class NilaiController extends Controller
     public function update(Request $request, Nilai $nilai)
     {
         $this->validate($request, [
-            'id_juri' => 'required',
-            'tari_id' => 'required',
             'wirama' => 'required',
             'wiraga' => 'required',
             'wirasa' => 'required',
         ]);
 
-        //get data nilai by ID
-        $nilai = Nilai::findOrFail($nilai->id);
-
         if (Auth::user()->role == 'juri') {
-            $nilai = Nilai::edit([
+            $edit = $nilai->update([
                 'no_induk' => $request->induk,
                 'id_juri' => Auth::guard('user')->user()->id,
                 'tari_id' => $request->tari,
@@ -166,18 +169,18 @@ class NilaiController extends Controller
                 'wirasa' => $request->wirasa,
             ]);
         } elseif (Auth::user()->role == 'admin') {
-            $nilai = Nilai::edit([
-                'no_induk' => $request->induk,
-                'id_juri' => '3',
-                'tari_id' => $request->tari,
-                'semester' => $request->semester,
+            $edit = $nilai->update([
+                // 'no_induk' => $request->induk,
+                // 'id_juri' => '3',
+                // 'tari_id' => $request->tari,
+                // 'semester' => $request->semester,
                 'wirama' => $request->wirama,
                 'wiraga' => $request->wiraga,
                 'wirasa' => $request->wirasa,
             ]);
         }
 
-        if ($nilai) {
+        if ($edit) {
             //redirect dengan pesan sukses
             return redirect()->route('nilai.index')->with(['success' => 'Data Berhasil Diupdate!']);
         } else {
@@ -192,20 +195,16 @@ class NilaiController extends Controller
      * @param  \App\Models\Nilai  $nilai
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Nilai $nilai)
     {
-        {
-            $nilai = Nilai::findOrFail($id);
-            Storage::disk('local')->delete('public/nilais/' . $nilai->image);
-            $nilai->delete();
+        $delete = $nilai->delete();
 
-            if ($nilai) {
-                //redirect dengan pesan sukses
-                return redirect()->route('nilai.index')->with(['success' => 'Data Berhasil Dihapus!']);
-            } else {
-                //redirect dengan pesan error
-                return redirect()->route('nilai.index')->with(['error' => 'Data Gagal Dihapus!']);
-            }
+        if ($delete) {
+            //redirect dengan pesan sukses
+            return redirect()->route('nilai.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('nilai.index')->with(['error' => 'Data Gagal Dihapus!']);
         }
     }
 }

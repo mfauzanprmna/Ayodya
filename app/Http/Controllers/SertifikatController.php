@@ -35,6 +35,10 @@ class SertifikatController extends Controller
          );
       }
 
+      // $siswas = Siswa::where('nama_siswa', 'y')->first();
+
+      
+
       if ($search == '') {
          $employees = Siswa::orderby('nama_siswa', 'asc')->select('no_induk', 'nama_siswa', 'cabang', 'orang_tua', 'tanggal_lahir', 'foto', 'semester')->get();
       } else {
@@ -53,6 +57,8 @@ class SertifikatController extends Controller
             "foto" => $employee->foto,
             "semester" => $employee->semester,
             "index" => array_search([$employee->nama_siswa], $nama),
+            "tari" => $employee->tari,
+            "sinopsis" => $employee->sinopsis,
          );
       }
 
@@ -87,7 +93,7 @@ class SertifikatController extends Controller
       } else if ($semester < 20) {
          $tbr = $ang[$semester - 10] + " belas";
       } else if ($semester < 100) {
-         $tbr = $ang[floor($semester / 10)] + " puluh " + $ang[$semester % 10];
+         $tbr = $ang[$semester / 10] + " puluh " + $ang[$semester % 10];
       }
 
       $romawi = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
@@ -120,27 +126,14 @@ class SertifikatController extends Controller
       $ujian = array_search([$siswas->nama_siswa], $nama);
       
       $semester = $siswas->semester;
-
-      $ang = [
-         '', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan',
-         'sembilan', 'sepuluh', 'sebelas',
-      ];
-      
-      if ($semester < 12) {
-         $tbr = $ang[$semester];
-      } else if ($semester < 20) {
-         $tbr = $ang[$semester - 10] + " belas";
-      } else if ($semester < 100) {
-         $tbr = $ang[floor($semester / 10)] + " puluh " + $ang[$semester % 10];
-      }
       
       $juri = User::all()->where('role', 'juri');
 
       // Nilai Tari
       $tarian1 = Nilai::where('no_induk', $siswas->no_induk)->limit($juri->count() * 2)->first();
       $tarian2 = Nilai::latest()->where('no_induk', $siswas->no_induk)->limit($juri->count() * 2)->first();
-      $tari1 = Nilai::where('tari_id', $tarian1->tari_id)->limit($juri->count() * 2)->get();
-      $tari2 = Nilai::where('tari_id', $tarian2->tari_id)->limit($juri->count() * 2)->get();
+      $tari1 = Nilai::where('no_induk', $siswas->no_induk)->limit($juri->count())->get();
+      $tari2 = Nilai::latest()->where('no_induk', $siswas->no_induk)->limit($juri->count())->get();
 
       // Nilai Wirama
       $wirama1 = array();
@@ -155,7 +148,7 @@ class SertifikatController extends Controller
       $wirama2 = array();
 
       foreach ($tari2 as $key) {
-         $wirama2[] = $key->wiraga;
+         $wirama2[] = $key->wirama;
       }
 
       $hasil2 = round(array_sum($wirama2) / $juri->count(), 2);
@@ -195,10 +188,10 @@ class SertifikatController extends Controller
       $hasil6 = round(array_sum($wirasa2) / $juri->count(), 2);
 
       // Subtotal
-      $sub1 = ($hasil1 + $hasil3 + $hasil5) / 3;
-      $sub2 = ($hasil2 + $hasil4 + $hasil6) / 3;
-      $subtotal1 = round(($hasil1 + $hasil3 + $hasil5) / 3, 2);
-      $subtotal2 = round(($hasil2 + $hasil4 + $hasil6) / 3, 2);
+      $sub1 = ($hasil1 + $hasil3 + $hasil5);
+      $sub2 = ($hasil2 + $hasil4 + $hasil6);
+      $subtotal1 = round(($hasil1 + $hasil3 + $hasil5), 2);
+      $subtotal2 = round(($hasil2 + $hasil4 + $hasil6), 2);
 
       // Total
       $total = round(($sub1 + $sub2) / 2, 2);
@@ -219,7 +212,7 @@ class SertifikatController extends Controller
 
       return view('print.nilai', [
          'siswas' => $siswas, 
-         'semester' => $tbr, 
+         'semester' => $semester, 
          'ujian' => $ujian, 
          'sinopsis' => $hasilsinop,
          'wirama1' => $hasil1,

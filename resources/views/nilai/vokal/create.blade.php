@@ -14,6 +14,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">Tambah Nilai Vokal</h4>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <form action="{{ route('nilai.store') }}" method="POST" enctype="multipart/form-data"
                             style="font-size: 17px">
@@ -59,10 +64,34 @@
                                 @enderror
                             </div>
 
+                            @if (Auth::user()->role == 'admin')
+                                <div class="form-group">
+                                    <label class="font-weight-bold">Juri</label>
+                                    <select name="juri" id="" type="text"
+                                        class="form-control @error('juri') is-invalid @enderror" name="juri"
+                                        value="{{ old('juri') }}" placeholder="Masukkan Juri">
+                                        <option value="">
+                                            <-- Pilih Juri -->
+                                        </option>
+                                        @foreach ($juri as $item)
+                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    <!-- error message untuk juri -->
+                                    @error('juri')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            @endif
+
                             <div class="form-group">
-                                <label class="font-weight-bold">Penampila</label>
-                                <input type="text" class="form-control @error('penampilan') is-invalid @enderror" name="penampilan"
-                                    value="{{ old('penampilan') }}" placeholder="Masukkan Nilai Penampilan">
+                                <label class="font-weight-bold">Penampilan</label>
+                                <input type="text" class="form-control @error('penampilan') is-invalid @enderror"
+                                    name="penampilan" value="{{ old('penampilan') }}"
+                                    placeholder="Masukkan Nilai Penampilan">
 
                                 <!-- error message untuk penampilan -->
                                 @error('penampilan')
@@ -99,7 +128,6 @@
     </div>
 
     <script type="text/javascript">
-
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
         $(document).ready(function() {
 

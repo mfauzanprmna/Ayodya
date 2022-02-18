@@ -43,6 +43,7 @@
                     } else if (semester < 100) {
                         tbr = ang[Math.floor(semester / 10)] + " puluh " + ang[semester % 10];
                     }
+                    console.log(ui.item.tari);
 
                     $('#tags').val(ui.item.label);
                     $('.nama').html(ui.item.label);

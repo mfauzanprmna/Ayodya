@@ -1,12 +1,17 @@
 @extends('template.appadmin')
 @section('main')
-
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">Edit Data Cabang Ayodya</h4>
+                        </div>
+                    </div>
                     <div class="card-body">
-                        <form action="{{ route('cabang.update', $cabang->id) }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('cabang.update', $cabang->id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
@@ -52,5 +57,4 @@
             </div>
         </div>
     </div>
-
 @endsection

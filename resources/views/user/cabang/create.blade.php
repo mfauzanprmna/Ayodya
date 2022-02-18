@@ -1,13 +1,15 @@
 @extends('template.appadmin')
 @section('main')
-
     <div class="container mt-5 mb-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">Tambah Data Cabang Ayodya</h4>
+                        </div>
+                    </div>
                     <div class="card-body">
-                        <h1>Tambah Data Cabang</h1>
-                        <hr>
                         <form action="{{ route('cabang.store') }}" method="POST" enctype="multipart/form-data">
 
                             @csrf
@@ -60,5 +62,4 @@
             </div>
         </div>
     </div>
-
 @endsection

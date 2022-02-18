@@ -11,19 +11,26 @@
     </style>
 
     <div class="container mt-5 mb-5">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card border-0 shadow rounded">
-                    <div class="card-body">
-                        <form action="{{ route('nilai.store') }}" method="POST" enctype="multipart/form-data"
-                            style="font-size: 17px">
+        <a href="/admin/nilai" class="col-12" style="font-size: 17px;"><i class="fas fa-angle-double-left"></i>
+            Kembali</a>
+        <form action="{{ route('nilai.store') }}" method="POST" enctype="multipart/form-data" style="font-size: 17px">
+            @csrf
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card border-0 shadow rounded">
+                        <div class="card-header">
+                            <div class="d-flex align-items-center">
+                                <h4 class="card-title">Tambah Nilai Tari</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {{-- <label class="font-weight-bold"><h2>Tambah Nilai Tari</h2></label> --}}
 
-                            @csrf
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Nama Siswa</label>
                                 <input type="text" class="form-control @error('tags') is-invalid @enderror" name="tags"
-                                    value="{{ old('tags') }}" placeholder="Masukkan" id="tags">
+                                    value="{{ old('tags') }}" placeholder="Masukkan Nama" id="tags">
 
                                 <!-- error message untuk tags -->
                                 @error('tags')
@@ -36,7 +43,7 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">No Induk</label>
                                 <input type="text" class="form-control @error('induk') is-invalid @enderror" name="induk"
-                                    value="{{ old('induk') }}" placeholder="Masukkan" id="induk">
+                                    value="{{ old('induk') }}" placeholder="Masukkan Nomor Induk" id="induk">
 
                                 <!-- error message untuk induk -->
                                 @error('induk')
@@ -49,7 +56,8 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">Semester</label>
                                 <input type="text" class="form-control @error('semester') is-invalid @enderror"
-                                    name="semester" value="{{ old('semester') }}" placeholder="Masukkan" id="semester">
+                                    name="semester" value="{{ old('semester') }}" placeholder="Masukkan Semester"
+                                    id="semester">
 
                                 <!-- error message untuk semester -->
                                 @error('semester')
@@ -71,57 +79,116 @@
                                     </div>
                                 @enderror
                             </div>
+                            @if (Auth::user()->role == 'juri')
+                                <div class="form-group">
+                                    <label class="font-weight-bold">Wirama </label>
+                                    <input type="text" class="form-control @error('wirama') is-invalid @enderror"
+                                        name="wirama" value="{{ old('wirama') }}" placeholder="Masukkan Nilai Wirama">
 
-                            <div class="form-group">
-                                <label class="font-weight-bold">Wirama </label>
-                                <input type="text" class="form-control @error('wirama') is-invalid @enderror" name="wirama"
-                                    value="{{ old('wirama') }}" placeholder="Masukkan Nilai WIrama">
+                                    <!-- error message untuk wirama -->
+                                    @error('wirama')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
 
-                                <!-- error message untuk wirama -->
-                                @error('wirama')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
+                                <div class="form-group">
+                                    <label class="font-weight-bold">Wiraga</label>
+                                    <input type="text" class="form-control @error('wiraga') is-invalid @enderror"
+                                        name="wiraga" value="{{ old('wiraga') }}" placeholder="Masukkan Nilai Wiraga">
 
-                            <div class="form-group">
-                                <label class="font-weight-bold">Wiraga</label>
-                                <input type="text" class="form-control @error('wiraga') is-invalid @enderror" name="wiraga"
-                                    value="{{ old('wiraga') }}" placeholder="Masukkan Nilai Wiraga">
+                                    <!-- error message untuk wiraga -->
+                                    @error('wiraga')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
 
-                                <!-- error message untuk wiraga -->
-                                @error('wiraga')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
+                                <div class="form-group">
+                                    <label class="font-weight-bold">Wirasa</label>
+                                    <input type="text" class="form-control @error('wirasa') is-invalid @enderror"
+                                        name="wirasa" value="{{ old('wirasa') }}" placeholder="Masukkan Nilai Wirasa">
 
-                            <div class="form-group">
-                                <label class="font-weight-bold">Wirasa</label>
-                                <input type="text" class="form-control @error('wirasa') is-invalid @enderror" name="wirasa"
-                                    value="{{ old('wirasa') }}" placeholder="Masukkan Nilai Wirasa">
-
-                                <!-- error message untuk wirasa -->
-                                @error('wirasa')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-
-
-
-                            <button type="submit" class="btn btn-md btn-primary">Simpan</button>
-                            <button type="reset" class="btn btn-md btn-warning">Reset</button>
-
-                        </form>
+                                    <!-- error message untuk wirasa -->
+                                    @error('wirasa')
+                                        <div class="alert alert-danger mt-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <button type="submit" class="btn btn-md btn-primary">Simpan</button>
+                                <button type="reset" class="btn btn-md btn-warning">Reset</button>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+            @if (Auth::user()->role == 'admin')
+                @foreach ($juris as $key => $juri)
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card border-0 shadow rounded">
+                                <div class="card-body">
+                                    <h3>{{ $juri->name }}</h3>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Wirama</label>
+                                        <input type="text"
+                                            class="form-control @error('wirama{{ $key }}') is-invalid @enderror"
+                                            name="wirama{{ $key }}" value="{{ old('wirama' . $key) }}"
+                                            placeholder="Masukkan Nilai Wirama">
+
+                                        <!-- error message untuk wirama -->
+                                        @error('wirama' . $key)
+                                            <div class="alert alert-danger mt-2">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Wiraga</label>
+                                        <input type="text"
+                                            class="form-control @error('wiraga{{ $key }}') is-invalid @enderror"
+                                            name="wiraga{{ $key }}" value="{{ old('wiraga' . $key) }}"
+                                            placeholder="Masukkan Nilai Wiraga">
+
+                                        <!-- error message untuk wiraga -->
+                                        @error('wiraga' . $key)
+                                            <div class="alert alert-danger mt-2">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Wirasa</label>
+                                        <input type="text"
+                                            class="form-control @error('wirasa{{ $key }}') is-invalid @enderror"
+                                            name="wirasa{{ $key }}" value="{{ old('wirasa' . $key) }}"
+                                            placeholder="Masukkan Nilai Wirasa">
+
+                                        <!-- error message untuk wirasa -->
+                                        @error('wirasa' . $key)
+                                            <div class="alert alert-danger mt-2">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    @if ($loop->last)
+                                        <button type="submit" class="btn btn-md btn-primary">Simpan</button>
+                                    <button type="reset" class="btn btn-md btn-warning">Reset</button>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+            @endif
+
+        </form>
     </div>
 
     <script type="text/javascript">

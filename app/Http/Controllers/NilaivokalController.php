@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Nilaivokal;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -15,7 +16,7 @@ class NilaivokalController extends Controller
      */
     public function index()
     {
-        $nilaivokals = Nilaivokal::latest()->paginate(10);
+        $nilaivokals = Nilaivokal::all();
         return view('nilai.vokal.index', compact('nilaivokals'));
     }
 
@@ -26,7 +27,9 @@ class NilaivokalController extends Controller
      */
     public function create()
     {
-        return view('nilai.vokal.create');
+        $juri = User::all()->where('role', 'juri');
+
+        return view('nilai.vokal.create', compact('juri'));
     }
 
     /**
@@ -38,28 +41,23 @@ class NilaivokalController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'no_induk'     => 'required',
-        'nama_siswa'     => 'required',
-            'penampilan'     => 'required',
-            'teknik'     => 'required',
-            
-         
+            'no_induk'    => 'required',
+            'nama_siswa'  => 'required',
+            'penampilan'  => 'required',
+            'teknik'      => 'required',
         ]);
-    
-    
+
         $nilaivokal = Nilaivokal::create([
-            'no_induk'                  => $request->no_induk,
-        'nama_siswa'                => $request->nama_siswa,
-            'penampilan'                => $request->penampilan,
-            'teknik'                => $request->teknik,
-            
-          
+            'no_induk'       => $request->no_induk,
+            'nama_siswa'     => $request->nama_siswa,
+            'penampilan'     => $request->penampilan,
+            'teknik'         => $request->teknik,
         ]);
-    
-        if($nilaivokal){
+
+        if ($nilaivokal) {
             //redirect dengan pesan sukses
             return redirect()->route('vokal.index')->with(['success' => 'Data Berhasil Disimpan!']);
-        }else{
+        } else {
             //redirect dengan pesan error
             return redirect()->route('vokal.index')->with(['error' => 'Data Gagal Disimpan!']);
         }
@@ -86,7 +84,7 @@ class NilaivokalController extends Controller
     {
         return view('nilai.vokal.edit', compact('nilaivokal'));
     }
-    
+
 
     /**
      * Update the specified resource in storage.
@@ -95,32 +93,26 @@ class NilaivokalController extends Controller
      * @param  \App\Models\Nilaivokal  $nilaivokal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Nilaivokal $nilaivokal)
+    public function update(Request $request, Nilaivokal $vokal)
     {
         $this->validate($request, [
             'no_induk'     => 'required',
-        'nama_siswa'     => 'required',
+            'nama_siswa'     => 'required',
             'penampilan'     => 'required',
             'teknik'     => 'required',
         ]);
-    
-        //get data nilaivokal by ID
-        $nilaivokal = Nilaivokal::findOrFail($nilaivokal->id);
-    
-    
-            $nilaivokal->update([
-                'no_induk'                  => $request->no_induk,
-                'nama_siswa'                => $request->nama_siswa,
-                    'penampilan'                => $request->penampilan,
-                    'teknik'                => $request->teknik,
-            ]);
-    
-        
-    
-        if($nilaivokal){
+
+        $edit = $vokal->update([
+            'no_induk'                  => $request->no_induk,
+            'nama_siswa'                => $request->nama_siswa,
+            'penampilan'                => $request->penampilan,
+            'teknik'                => $request->teknik,
+        ]);
+
+        if ($edit) {
             //redirect dengan pesan sukses
             return redirect()->route('vokal.index')->with(['success' => 'Data Berhasil Diupdate!']);
-        }else{
+        } else {
             //redirect dengan pesan error
             return redirect()->route('vokal.index')->with(['error' => 'Data Gagal Diupdate!']);
         }
@@ -132,20 +124,16 @@ class NilaivokalController extends Controller
      * @param  \App\Models\Nilaivokal  $nilaivokal
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Nilaivokal $vokal)
     {
-        {
-            $nilaivokal = Nilaivokal::findOrFail($id);
-            Storage::disk('local')->delete('public/nilaivokals/'.$nilaivokal->image);
-            $nilaivokal->delete();
-          
-            if($nilaivokal){
-               //redirect dengan pesan sukses
-               return redirect()->route('vokal.index')->with(['success' => 'Data Berhasil Dihapus!']);
-            }else{
-              //redirect dengan pesan error
-              return redirect()->route('vokal.index')->with(['error' => 'Data Gagal Dihapus!']);
-            }
+        $delete = $vokal->delete();
+
+        if ($delete) {
+            //redirect dengan pesan sukses
+            return redirect()->route('vokal.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('vokal.index')->with(['error' => 'Data Gagal Dihapus!']);
+        }
     }
-}
 }

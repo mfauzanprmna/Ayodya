@@ -14,7 +14,7 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">Nama Siswa</label>
                                 <input type="text" class="form-control @error('nama_siswa') is-invalid @enderror"
-                                    name="nama_siswa" value="{{ $nilai->no_induk }} - {{ $siswas->siswa->nama_siswas }}"
+                                    name="nama_siswa" value="{{ $nilai->no_induk }} - {{ $nilai->siswa->nama_siswa }}"
                                     placeholder="Masukkan Nama Siswa" disabled>
 
                                 <!-- error message untuk nama_siswa -->

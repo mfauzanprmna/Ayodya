@@ -16,7 +16,7 @@ class CabangController extends Controller
      */
     public function index()
     {
-        $cabang = User::orderby('name', 'asc')->where('role', 'cabang')->paginate(10);
+        $cabang = User::orderby('name', 'asc')->where('role', 'cabang')->get();
         return view('user.cabang.index', compact('cabang'));
     }
 
@@ -95,20 +95,20 @@ class CabangController extends Controller
      * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $cabang)
     {
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',
         ]);
 
-        $user->update([
+        $cabang->update([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password,
         ]);
 
-        if ($user) {
+        if ($cabang) {
             //redirect dengan pesan sukses
             return redirect()->route('cabang.index')->with(['success' => 'Data Berhasil Diupdate!']);
         } else {

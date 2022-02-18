@@ -14,7 +14,7 @@ class SiswaController extends Controller
 {
     public function index()
     {
-        $siswas = Siswa::orderby('nama_siswa', 'asc')->paginate(10);
+        $siswas = Siswa::orderby('nama_siswa', 'asc')->get();
         // $user = User::all()->where('role', 'cabang')->first();
         // dd($user->tempat->name);
         return view('user.siswa.index', compact('siswas'));

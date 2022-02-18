@@ -17,7 +17,7 @@ class JuriController extends Controller
      */
     public function index()
     {
-        $juris = User::orderby('name', 'asc')->where('role', 'juri')->paginate(10);
+        $juris = User::orderby('name', 'asc')->where('role', 'juri')->get();
         return view('user.juri.index', compact('juris'));
     }
 
@@ -90,15 +90,13 @@ class JuriController extends Controller
      * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $juri)
     {
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',
         ]);
 
-        //get data siswa by ID
-        $juris = User::findOrFail($user->id);
         $file = $request->file('foto');
 
         // Mendapatkan Nama File
@@ -117,14 +115,14 @@ class JuriController extends Controller
         $file->move($destinationPath, $nama_file);
         $filenameSimpan = $destinationPath . '/' . $nama_file;
 
-        $juris->update([
+        $edit = $juri->update([
             'name' => $request->name,
             'foto' => $filenameSimpan,
             'email' => $request->email,
             // 'password'          => $request->password,
         ]);
 
-        if ($juris) {
+        if ($edit) {
             //redirect dengan pesan sukses
             return redirect()->route('juri.index')->with(['success' => 'Data Berhasil Diupdate!']);
         } else {

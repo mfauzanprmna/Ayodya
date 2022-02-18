@@ -27,6 +27,10 @@ Route::middleware(['auth:user'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboardtampilan');
     })->name('dashboard');
+    
+Route::get('/', function () {
+    return view('welcome');
+});
 
 });
 
@@ -54,14 +58,11 @@ Route::middleware(['auth:user', 'role:admin'])->group(function () {
 Route::middleware(['auth:user', 'role:juri,admin'])->group(function () {
     Route::resource('admin/nilai', NilaiController::class);
     Route::resource('admin/vokal', NilaivokalController::class);
+    Route::resource('admin/sinopsis', SinopsisController::class);
 });
 
 Route::get('/dashboard/siswa', function () {
     return view('siswadashboard');
-});
-
-Route::get('/', function () {
-    return view('welcome');
 });
 
 Route::get('/nilaipilihan', function () {

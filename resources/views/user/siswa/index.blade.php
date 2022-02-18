@@ -3,6 +3,11 @@
 
     <div class="container-fluid mt-5">
         <div class="card border-0 shadow rounded">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <h4 class="card-title">Data Siswa Ayodya</h4>
+                </div>
+            </div>
             <div class="card-body kekanan">
                 <div class="mb-3 d-flex justify-content-between">
                     <a href="{{ route('siswa.create') }}" class="btn btn-md btn-success">Tambah Siswa</a>
@@ -44,7 +49,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="display table table-striped table-hover">
+                    <table id="multi-filter-select" class="display table table-striped table-hover">
                         <thead style="background: #7a74fc" class="text-white text-center">
                             <tr>
                                 <th scope="col">No</th>
@@ -57,7 +62,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($siswas as $siswa)
+                            @foreach ($siswas as $siswa)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td class="text-center">
@@ -82,16 +87,9 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @empty
-                                <div class="alert alert-danger">
-                                    Data siswa belum Tersedia.
-                                </div>
-                            @endforelse
+                            @endforeach
                         </tbody>
                     </table>
-                </div>
-                <div class="d-flex justify-content-center">
-                    {{ $siswas->links() }}
                 </div>
             </div>
         </div>
