@@ -140,105 +140,180 @@ class SertifikatController extends Controller
       $juri = User::all()->where('role', 'juri');
 
       // Nilai Tari
-      $tarian1 = Nilai::where('no_induk', $siswas->no_induk)->limit($juri->count() * 2)->first();
-      $tarian2 = Nilai::latest()->where('no_induk', $siswas->no_induk)->limit($juri->count() * 2)->first();
-      $tari1 = Nilai::where('no_induk', $siswas->no_induk)->limit($juri->count())->get();
-      $tari2 = Nilai::latest()->where('no_induk', $siswas->no_induk)->limit($juri->count())->get();
+      $tari = Nilai::where('no_induk', $siswas->no_induk)->where('semester', $siswas->semester)->limit($juri->count() * 2);
+      if ($tari->count() / 2 == $juri->count()) {
+         $tarian1 = Nilai::where('no_induk', $siswas->no_induk)->where('semester', $siswas->semester)->limit($juri->count() * 2)->first();
+         $tarian2 = Nilai::latest()->where('no_induk', $siswas->no_induk)->where('semester', $siswas->semester)->limit($juri->count() * 2)->first();
+         $tari1 = Nilai::where('tari_id', $tarian1->tari_id)->where('no_induk', $siswas->no_induk)->limit($juri->count())->get();
+         $tari2 = Nilai::latest()->where('tari_id', $tarian2->tari_id)->where('no_induk', $siswas->no_induk)->limit($juri->count())->get();
 
-      // Nilai Wirama
-      $wirama1 = array();
+         // Nilai Wirama
+         $wirama1 = array();
 
-      foreach ($tari1 as $key) {
-         $wirama1[] = $key->wirama;
+         foreach ($tari1 as $key) {
+            $wirama1[] = $key->wirama;
+         }
+
+         $hasil1 = round(array_sum($wirama1) / $juri->count(), 2);
+
+
+         $wirama2 = array();
+
+         foreach ($tari2 as $key) {
+            $wirama2[] = $key->wirama;
+         }
+
+         $hasil2 = round(array_sum($wirama2) / $juri->count(), 2);
+
+         // Nilai Wiraga
+         $wiraga1 = array();
+
+         foreach ($tari1 as $key) {
+            $wiraga1[] = $key->wiraga;
+         }
+
+         $hasil3 = round(array_sum($wiraga1) / $juri->count(), 2);
+
+         $wiraga2 = array();
+
+         foreach ($tari2 as $key) {
+            $wiraga2[] = $key->wiraga;
+         }
+
+         $hasil4 = round(array_sum($wiraga2) / $juri->count(), 2);
+
+         // Nilai Wirasa
+         $wirasa1 = array();
+
+         foreach ($tari1 as $key) {
+            $wirasa1[] = $key->wirasa;
+         }
+
+         $hasil5 = round(array_sum($wirasa1) / $juri->count(), 2);
+
+         $wirasa2 = array();
+
+         foreach ($tari2 as $key) {
+            $wirasa2[] = $key->wirasa;
+         }
+
+         $hasil6 = round(array_sum($wirasa2) / $juri->count(), 2);
+
+         // Subtotal
+         $sub1 = ($hasil1 + $hasil3 + $hasil5);
+         $sub2 = ($hasil2 + $hasil4 + $hasil6);
+         $subtotal1 = round(($hasil1 + $hasil3 + $hasil5), 2);
+         $subtotal2 = round(($hasil2 + $hasil4 + $hasil6), 2);
+
+         // Total
+         $total = round(($sub1 + $sub2) / 2, 2);
+
+         // Nilai Sinopsis
+         $sinopsis = Sinopsis::latest()->where('no_induk', $siswas->no_induk)->limit($juri->count())->get();
+         $nilai = array();
+
+         foreach ($sinopsis as $key) {
+            $nilai[] = $key->nilai;
+         }
+
+         $hasilsinop = array_sum($nilai) / $juri->count();
+
+         // Daerah
+         $daerah1 = Tarian::where('id', $tarian1->tari_id)->first();
+         $daerah2 = Tarian::where('id', $tarian2->tari_id)->first();
+
+         return view('print.nilai', [
+            'siswas' => $siswas,
+            'semester' => $semester,
+            'ujian' => $ujian,
+            'sinopsis' => $hasilsinop,
+            'wirama1' => $hasil1,
+            'wirama2' => $hasil2,
+            'wiraga1' => $hasil3,
+            'wiraga2' => $hasil4,
+            'wirasa1' => $hasil5,
+            'wirasa2' => $hasil6,
+            'tarian1' => $daerah1->nama,
+            'tarian2' => $daerah2->nama,
+            'daerah1' => $daerah1->daerah,
+            'daerah2' => $daerah2->daerah,
+            'subtotal1' => $subtotal1,
+            'subtotal2' => $subtotal2,
+            'total' => $total
+         ]);
+      } elseif ($tari->count() / 2 == 1) {
+         $tarian1 = Nilai::where('no_induk', $siswas->no_induk)->where('semester', $siswas->semester)->limit($juri->count() * 2)->first();
+         $tari1 = Nilai::where('tari_id', $tarian1->tari_id)->where('no_induk', $siswas->no_induk)->limit($juri->count())->get();
+
+         // Nilai Wirama
+         $wirama1 = array();
+
+         foreach ($tari1 as $key) {
+            $wirama1[] = $key->wirama;
+         }
+
+         $hasil1 = round(array_sum($wirama1) / $juri->count(), 2);
+
+         // Nilai Wiraga
+         $wiraga1 = array();
+
+         foreach ($tari1 as $key) {
+            $wiraga1[] = $key->wiraga;
+         }
+
+         $hasil3 = round(array_sum($wiraga1) / $juri->count(), 2);
+
+         // Nilai Wirasa
+         $wirasa1 = array();
+
+         foreach ($tari1 as $key) {
+            $wirasa1[] = $key->wirasa;
+         }
+
+         $hasil5 = round(array_sum($wirasa1) / $juri->count(), 2);
+
+         // Subtotal
+         $sub1 = ($hasil1 + $hasil3 + $hasil5);
+         $sub2 = 0;
+         $subtotal1 = round(($hasil1 + $hasil3 + $hasil5), 2);
+         $subtotal2 = 0;
+
+         // Total
+         $total = round(($sub1 + $sub2) / 2, 2);
+
+         // Nilai Sinopsis
+         $sinopsis = Sinopsis::latest()->where('no_induk', $siswas->no_induk)->limit($juri->count())->get();
+         $nilai = array();
+
+         foreach ($sinopsis as $key) {
+            $nilai[] = $key->nilai;
+         }
+
+         $hasilsinop = array_sum($nilai) / $juri->count();
+
+         // Daerah
+         $daerah1 = Tarian::where('id', $tarian1->tari_id)->first();
+
+         return view('print.nilai', [
+            'siswas' => $siswas,
+            'semester' => $semester,
+            'ujian' => $ujian,
+            'sinopsis' => $hasilsinop,
+            'wirama1' => $hasil1,
+            'wirama2' => 0,
+            'wiraga1' => $hasil3,
+            'wiraga2' => 0,
+            'wirasa1' => $hasil5,
+            'wirasa2' => 0,
+            'tarian1' => $daerah1->nama,
+            'tarian2' => '-',
+            'daerah1' => $daerah1->daerah,
+            'daerah2' => '-',
+            'subtotal1' => $subtotal1,
+            'subtotal2' => $subtotal2,
+            'total' => $total
+         ]);
       }
-
-      $hasil1 = round(array_sum($wirama1) / $juri->count(), 2);
-
-
-      $wirama2 = array();
-
-      foreach ($tari2 as $key) {
-         $wirama2[] = $key->wirama;
-      }
-
-      $hasil2 = round(array_sum($wirama2) / $juri->count(), 2);
-
-      // Nilai Wiraga
-      $wiraga1= array();
-
-      foreach ($tari1 as $key) {
-         $wiraga1[] = $key->wiraga;
-      }
-
-      $hasil3 = round(array_sum($wiraga1) / $juri->count(), 2);
-
-      $wiraga2 = array();
-
-      foreach ($tari2 as $key) {
-         $wiraga2[] = $key->wiraga;
-      }
-
-      $hasil4 = round(array_sum($wiraga2) / $juri->count(), 2);
-
-      // Nilai Wirasa
-      $wirasa1 = array();
-
-      foreach ($tari1 as $key) {
-         $wirasa1[] = $key->wirasa;
-      }
-
-      $hasil5 = round(array_sum($wirasa1) / $juri->count(), 2);
-
-      $wirasa2 = array();
-
-      foreach ($tari2 as $key) {
-         $wirasa2[] = $key->wirasa;
-      }
-
-      $hasil6 = round(array_sum($wirasa2) / $juri->count(), 2);
-
-      // Subtotal
-      $sub1 = ($hasil1 + $hasil3 + $hasil5);
-      $sub2 = ($hasil2 + $hasil4 + $hasil6);
-      $subtotal1 = round(($hasil1 + $hasil3 + $hasil5), 2);
-      $subtotal2 = round(($hasil2 + $hasil4 + $hasil6), 2);
-
-      // Total
-      $total = round(($sub1 + $sub2) / 2, 2);
-
-      // Nilai Sinopsis
-      $sinopsis = Sinopsis::latest()->where('no_induk', $siswas->no_induk)->limit($juri->count())->get();
-      $nilai = array();
-
-      foreach ($sinopsis as $key) {
-         $nilai[] = $key->nilai;
-      }
-
-      $hasilsinop = array_sum($nilai) / $juri->count();
-
-      // Daerah
-      $daerah1 = Tarian::where('id', $tarian1->tari_id)->first();
-      $daerah2 = Tarian::where('id', $tarian2->tari_id)->first();
-
-      return view('print.nilai', [
-         'siswas' => $siswas, 
-         'semester' => $semester, 
-         'ujian' => $ujian, 
-         'sinopsis' => $hasilsinop,
-         'wirama1' => $hasil1,
-         'wirama2' => $hasil2,
-         'wiraga1' => $hasil3,
-         'wiraga2' => $hasil4,
-         'wirasa1' => $hasil5,
-         'wirasa2' => $hasil6,
-         'tarian1' => $daerah1->nama,
-         'tarian2' => $daerah2->nama,
-         'daerah1' => $daerah1->daerah,
-         'daerah2' => $daerah2->daerah,
-         'subtotal1' => $subtotal1,
-         'subtotal2' => $subtotal2,
-         'total' => $total
-      ]);
    }
 
    public function sertipdf($id)

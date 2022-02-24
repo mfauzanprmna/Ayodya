@@ -43,7 +43,7 @@ class NilaiController extends Controller
 
     public function browse(Request $request)
     {
-        $data = Tarian::whereRaw("(nama LIKE '%" . $request->get('q') . "%' OR daerah LIKE '%" . $request->get('q') . "%')")
+        $data = Tarian::orderby('nama', 'asc')->whereRaw("(nama LIKE '%" . $request->get('q') . "%' OR daerah LIKE '%" . $request->get('q') . "%')")
             ->limit(30)
             ->get();
         return response()->json($data);
