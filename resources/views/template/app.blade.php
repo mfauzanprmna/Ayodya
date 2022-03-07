@@ -15,27 +15,6 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
-    <style>
-        .sidebar.sidebar-style-2 .nav.nav-primary>.nav-item.active>a {
-            background: #1572e8 !important;
-            /* box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, .1), 4px 4px 15px -5px rgba(21, 114, 232, .4) !important; */
-        }
-
-        .sidebar.sidebar-style-2 .nav.nav-purple>.nav-item.active>a .caret,
-        .sidebar.sidebar-style-2 .nav.nav-purple>.nav-item.active>a i,
-        .sidebar.sidebar-style-2 .nav.nav-purple>.nav-item.active>a p,
-        .sidebar.sidebar-style-2 .nav.nav-purple>.nav-item.active>a span {
-            color: #fff !important;
-        }
-
-        @media (max-width: 1300px) {
-            .kekanan {
-                width: 100%;
-                overflow-x: scroll;
-            }
-        }
-
-    </style>
 
     <!-- Fonts and icons -->
     <script src="{{ asset('Atlantis-Lite/assets/js/plugin/webfont/webfont.min.js') }}"></script>
@@ -68,19 +47,19 @@
 </head>
 
 <body>
-   
-        <div class="main-header">
-            <!-- Navbar Header -->
-            <nav class="navbar navbar-header navbar-expand-lg" style="background: #6C63FF">
-               
-                <div class="container-fluid">
-                    <a href="/dashboard" class="logo mt-1">
-                        <img src="{{ asset('Atlantis-Lite/assets/img/Layer1001.svg') }}" alt="navbar brand"
-                            class="navbar-brand " style="height:50px; width:50px ;">
-                        <h1 style="color: white; height:50px;" class="navbar-brand ">Ayodya Pala</h1>
-                
-                    </a>
-                    {{-- <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+
+    <div class="main-header">
+        <!-- Navbar Header -->
+        <nav class="navbar navbar-header navbar-expand-lg" style="background: #6C63FF">
+
+            <div class="container-fluid">
+                <a href="/dashboard" class="logo mt-1">
+                    <img src="{{ asset('Atlantis-Lite/assets/img/Layer1001.svg') }}" alt="navbar brand"
+                        class="navbar-brand " style="height:50px; width:50px ;">
+                    <h1 style="color: white; height:50px;" class="navbar-brand ">Ayodya Pala</h1>
+
+                </a>
+                {{-- <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                         <li class="nav-item dropdown hidden-caret">
                             <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"
                                 aria-expanded="false">
@@ -118,18 +97,27 @@
                             </ul>
                         </li>
                     </ul> --}}
-                    <button class="btn btn-light btn-sm" >logout</button>
-                </div>
-            </nav>
-            <!-- End Navbar -->
-        </div>
-        <br>
-        <br>
-        <div class="main">
-            <div class="content">
-                @yield('main')
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a href="route('logout')"
+                        onclick="event.preventDefault();this.closest('form').submit();">
+                        <button class="btn btn-light btn-sm">
+                            <i class="fas fa-sign-out-alt me-2"></i>
+                            Logout
+                        </button>
+                    </a>
+                </form>
             </div>
+        </nav>
+        <!-- End Navbar -->
+    </div>
+    <br>
+    <br>
+    <div class="main">
+        <div class="content">
+            @yield('main')
         </div>
+    </div>
     <!--   Core JS Files   -->
     {{-- <script src="{{ asset('Atlantis-Lite/assets/js/core/jquery.3.2.1.min.js')}}"></script> --}}
     <script src="{{ asset('Atlantis-Lite/assets/js/core/popper.min.js') }}"></script>

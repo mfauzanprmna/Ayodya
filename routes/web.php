@@ -11,6 +11,7 @@ use App\Http\Controllers\User\CabangController;
 use App\Http\Controllers\User\JuriController;
 use App\Http\Controllers\User\SiswaController;
 use Illuminate\Support\Facades\Route;
+use Carbon\Carbon;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,8 +62,23 @@ Route::middleware(['auth:user', 'role:juri,admin'])->group(function () {
     Route::resource('admin/sinopsis', SinopsisController::class);
 });
 
-Route::get('/dashboard/siswa', function () {
-    return view('siswadashboard');
+Route::middleware(['auth:siswa'])->group(function () {
+    Route::get('/dashboard/siswa', function () {
+        $time = date('H');
+        $timezone = date("e");
+
+        if ($time < "12") {
+            $greetings = "Selamat Pagi";
+        } elseif ($time >= "12" && $time < "15") {
+            $greetings = "Selamat Siang";
+        } elseif ($time >= "15" && $time < "18") {
+            $greetings = "Selamat Sore";
+        } elseif ($time >= "18") {
+            $greetings = "Selamat Malam";
+        }
+        
+        return view('siswadashboard', compact('greetings'));
+    });
 });
 
 Route::get('/nilaipilihan', function () {

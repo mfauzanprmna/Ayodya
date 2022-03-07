@@ -273,13 +273,7 @@ class SertifikatController extends Controller
          $hasil5 = round(array_sum($wirasa1) / $juri->count(), 2);
 
          // Subtotal
-         $sub1 = ($hasil1 + $hasil3 + $hasil5);
-         $sub2 = 0;
          $subtotal1 = round(($hasil1 + $hasil3 + $hasil5), 2);
-         $subtotal2 = 0;
-
-         // Total
-         $total = round(($sub1 + $sub2) / 2, 2);
 
          // Nilai Sinopsis
          $sinopsis = Sinopsis::latest()->where('no_induk', $siswas->no_induk)->limit($juri->count())->get();
@@ -310,8 +304,8 @@ class SertifikatController extends Controller
             'daerah1' => $daerah1->daerah,
             'daerah2' => '-',
             'subtotal1' => $subtotal1,
-            'subtotal2' => $subtotal2,
-            'total' => $total
+            'subtotal2' => 0,
+            'total' => $subtotal1
          ]);
       }
    }

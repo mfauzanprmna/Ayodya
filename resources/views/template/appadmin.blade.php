@@ -203,19 +203,19 @@
                                 <div class="collapse {{ request()->is('nilaipilihan') || request()->is('admin/nilai*') || request()->is('admin/vokal*') || request()->is('admin/sinopsis*') ? 'show' : '' }}"
                                     id="nilai">
                                     <ul class="nav nav-collapse">
-                                        <li class="{{ request()->is('admin/nilai*') ? 'active' : '' }}">
+                                        <li class="nav-item {{ request()->is('admin/nilai*') ? 'active' : '' }}">
                                             <a href="/admin/nilai">
                                                 <span class="sub-item">Nilai
                                                     Tari</span>
                                             </a>
                                         </li>
-                                        <li class="{{ request()->is('admin/vokal*') ? 'active' : '' }}">
+                                        <li class="nav-item {{ request()->is('admin/vokal*') ? 'active' : '' }}">
                                             <a href="/admin/vokal">
                                                 <span class="sub-item">Nilai
                                                     Vokal</span>
                                             </a>
                                         </li>
-                                        <li class="{{ request()->is('admin/sinopsis*') ? 'active' : '' }}">
+                                        <li class="nav-item {{ request()->is('admin/sinopsis*') ? 'active' : '' }}">
                                             <a href="/admin/sinopsis">
                                                 <span class="sub-item">Nilai
                                                     Sinopsis</span>
