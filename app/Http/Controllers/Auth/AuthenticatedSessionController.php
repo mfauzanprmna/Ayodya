@@ -28,13 +28,18 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
         if (Auth::guard('siswa')->attempt(['no_induk' => $request->username, 'password' => $request->password])) {
             return redirect('/dashboard/siswa');
         } elseif (Auth::guard('user')->attempt(['email' => $request->username, 'password' => $request->password])) {
             return redirect('/dashboard');
         }
 
-        return redirect('/login');
+        return back()->with('loginError', 'Username/Password Salah');
         
     }
 
