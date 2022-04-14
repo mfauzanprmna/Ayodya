@@ -43,6 +43,7 @@ Route::middleware(['auth:user', 'role:admin'])->group(function () {
     Route::resource('admin/absen', AbsenController::class);
     Route::resource('admin/tarian', TarianController::class);
     Route::resource('admin/layout', LayoutController::class);
+    Route::post('admin/layout', [LayoutController::class, 'serti'])->name('layout.serti');
     Route::get('/nilaipilihan', function () {
         return view('nilaipilihan');
     });
@@ -54,6 +55,7 @@ Route::middleware(['auth:user', 'role:admin'])->group(function () {
     Route::post('tari-import', [TarianController::class, 'fileImport'])->name('tari-import');
     Route::get('/browse/tari', [NilaiController::class, 'browse'])->name('browse-tari');
     Route::post('/getsiswa', [NilaiController::class, 'getSiswa'])->name('getsiswa');
+    Route::get('nilai_export', [NilaiController::class, 'export'])->name('nilai_export'); 
 });
 
 Route::middleware(['auth:user', 'role:juri,admin'])->group(function () {

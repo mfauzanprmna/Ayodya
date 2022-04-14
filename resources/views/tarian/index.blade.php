@@ -9,7 +9,7 @@
             </div>
             <div class="card-body kekanan">
                 <div class="mb-3 d-flex justify-content-between">
-                    <a href="{{ route('tarian.create') }}" class="btn btn-md btn-success">Tambah Siswa</a>
+                    <a href="{{ route('tarian.create') }}" class="btn btn-md btn-success">Tambah Tari</a>
                     <div>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Export Excel

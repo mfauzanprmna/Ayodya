@@ -5,12 +5,14 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card border-0 shadow rounded">
+                    <div class="card-header">
+                        <div class="d-flex align-items-center">
+                            <h4 class="card-title">Tambah Data Background</h4>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <form action="{{ route('layout.store') }}" method="POST" enctype="multipart/form-data">
-
                             @csrf
-
-
 
                             <div class="form-group">
                                 <label class="">Upload Image <span class="required-label">*</span></label>
@@ -27,9 +29,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">kelas</label>
-                                <input type="text" class="form-control @error('kelas') is-invalid @enderror" name="kelas"
-                                    value="{{ old('kelas') }}" placeholder="Masukkan Judul no induk">
+                                <label class="font-weight-bold">Kelas</label>
+                                <select name="kelas" id="" class="form-control form-control @error('kelas') is-invalid @enderror">
+                                    <option value="tari">Tari</option>
+                                    <option value="vocal">Vocal</option>
+                                </select>
 
                                 <!-- error message untuk kelas -->
                                 @error('kelas')
@@ -39,12 +43,10 @@
                                 @enderror
                             </div>
 
-
-
-
-
-                            <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
-                            <button type="reset" class="btn btn-md btn-warning">RESET</button>
+                            <button type="submit" class="btn btn-md btn-primary">Simpan</button>
+                            <a href="{{ route('layout.index') }}">
+                                <button type="reset" class="btn btn-md btn-warning">Kembali</button>
+                            </a>
 
                         </form>
                     </div>

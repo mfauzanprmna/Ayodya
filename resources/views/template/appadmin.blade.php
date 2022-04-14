@@ -248,7 +248,7 @@
                             <li class="nav-item {{ request()->is('admin/layout') ? 'active' : '' }}">
                                 <a href="/admin/layout">
                                     <i class="fas fa-image"></i>
-                                    <p>background</p>
+                                    <p>Layout</p>
                                 </a>
                             </li>
                         @endif

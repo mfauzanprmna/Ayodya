@@ -10,8 +10,6 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <h1>Tambah Data Siswa</h1>
-                        <hr>
                         <form action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data">
 
                             @csrf

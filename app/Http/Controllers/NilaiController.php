@@ -6,9 +6,11 @@ use App\Models\Nilai;
 use App\Models\Siswa;
 use App\Models\Tarian;
 use App\Models\User;
+use App\Exports\NilaiExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class NilaiController extends Controller
 {
@@ -206,5 +208,10 @@ class NilaiController extends Controller
             //redirect dengan pesan error
             return redirect()->route('nilai.index')->with(['error' => 'Data Gagal Dihapus!']);
         }
+    }
+
+    function export()
+    {
+        return Excel::download(new NilaiExport(), 'nilai_tari.xlsx');
     }
 }

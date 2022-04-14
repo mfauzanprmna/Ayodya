@@ -65,7 +65,7 @@
             width: 0%;
             height: 2px;
             background: #6C63FF;
-            transition: .5s;
+            transition: .14s;
         }
 
         .text-box input:focus ~ label,
@@ -111,9 +111,8 @@
                     {{-- <img src="https://thumbs.dreamstime.com/b/lake-matheson-south-island-new-zealand-mirror-80239509.jpg"
                         alt="Login image" class="w-100 h-100 min-vh-100" style="object-fit: cover;" id="banner-tb"> --}}
                     {{-- <img src="{{ asset('img/bg-tb1.jpg') }}" alt="Login image" class="w-100 vh-100 d-none"
-                        style="object-fit: cover; object-position: left;" id="banner-tb1"> --}}
-                       
-                        <img src="{{ asset('Atlantis-Lite/assets/img/MASTER landscape.jpg') }}" alt="Login image" class="w-100 h-100 min-vh-100" style="object-fit: cover;" id="banner-tb">>
+                        style="object-fit: cover; object-position: left;" id="banner-tb1"> --}}                       
+                    <img src="{{ asset('Atlantis-Lite/assets/img/MASTER landscape.jpg') }}" alt="Login image" class="w-100 h-100 min-vh-100" style="object-fit: cover;" id="banner-tb">>
                 </div>
                 <div class="halaman col-sm-5" style="background-color: #fafafa;">
                     <div class="login d-flex h-custom-2 px-5">

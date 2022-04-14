@@ -18,7 +18,17 @@
                         </li>
                     @endforeach
                 </ul>
-                <a href="{{ route('sinopsis.create') }}" class="btn btn-md btn-success mb-3">Tambah Nilai Sinopsis</a>
+                <div class="mb-3 d-flex justify-content-between">
+                    <a href="{{ route('sinopsis.create') }}" class="btn btn-md btn-success">Tambah Nilai Sinopsis</a>
+                    <div>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Export Excel
+                        </button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Import Excel
+                        </button>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table id="multi-filter-select" class="display table table-striped table-hover">
                         <thead style="background: #7a74fc" class="text-white text-center">
