@@ -18,8 +18,8 @@
                                 <label class="">Upload Image <span class="required-label">*</span></label>
                                 <div class="">
                                     <div class="input-file input-file-image">
-                                        <img class="img-upload-preview" width="150" height="100"
-                                            src="http://placehold.it/150x100" alt="preview">
+                                        <img class="img-upload-preview" width="140" height="100"
+                                            src="http://placehold.it/140x100" alt="preview">
                                         <input type="file" class="form-control form-control-file" id="uploadImg"
                                             name="background" accept="image/*" required>
                                         <label for="uploadImg" class="btn btn-primary btn-round btn-lg"><i
@@ -30,10 +30,8 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Kelas</label>
-                                <select name="kelas" id="" class="form-control form-control @error('kelas') is-invalid @enderror">
-                                    <option value="tari">Tari</option>
-                                    <option value="vocal">Vocal</option>
-                                </select>
+                                <input type="text" class="form-control @error('kelas') is-invalid @enderror"
+                                    name="kelas" value="{{ old('kelas') }}" placeholder="Masukkan Kelas">
 
                                 <!-- error message untuk kelas -->
                                 @error('kelas')

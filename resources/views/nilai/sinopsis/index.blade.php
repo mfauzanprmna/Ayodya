@@ -8,20 +8,20 @@
                 </div>
             </div>
             <div class="card-body kekanan">
-                <ul class="nav nav-pills nav-secondary nav-pills-no-bd d-flex justify-content-center align-items-center mb-3"
-                    id="pills-tab-without-border" role="tablist">
-                    @foreach ($juris as $juri)
-                        <li class="nav-item">
-                            <a class="nav-link active" id="{{ $juri->id }}" data-toggle="pill"
-                                href="#{{ $juri->id }}" role="tab" aria-controls="pills-home-nobd"
-                                aria-selected="true">{{ $juri->name }}</a>
-                        </li>
-                    @endforeach
-                </ul>
                 <div class="mb-3 d-flex justify-content-between">
                     <a href="{{ route('sinopsis.create') }}" class="btn btn-md btn-success">Tambah Nilai Sinopsis</a>
                     <div>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <ul class="nav nav-pills nav-secondary nav-pills-no-bd d-flex justify-content-center align-items-center mb-3"
+                                id="pills-tab-without-border" role="tablist">
+                                @foreach ($juris as $juri)
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="{{ $juri->id }}" data-toggle="pill"
+                                            href="#{{ $juri->id }}" role="tab" aria-controls="pills-home-nobd"
+                                            aria-selected="true">{{ $juri->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
                             Export Excel
                         </button>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">

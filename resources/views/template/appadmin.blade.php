@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title> Ayodya Pala Dashboard Admin</title>
+    <title>@yield('title') | Ayodya Pala</title>
     <meta content='width=device-width, initial-scale=1.0' name='viewport' />
     <link rel="icon" href="{{ asset('Atlantis-Lite/assets/img/Layer1001.svg') }}" type="image/x-icon" />
 
@@ -58,6 +58,7 @@
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('Atlantis-Lite/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('Atlantis-Lite/assets/css/atlantis.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -150,7 +151,7 @@
                 <div class="sidebar-content">
                     <ul class="nav nav-primary">
                         <li
-                            class="nav-item {{ request()->is('dashboard') || request()->is('dashboard/siswa*') ? 'active' : '' }}">
+                            class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
                             <a href="/dashboard">
                                 <i class="fas fa-home"></i>
                                 <p>Dashboard</p>
@@ -162,6 +163,36 @@
                             </span>
                             <h4 class="text-section">Components</h4>
                         </li>
+                        @if (Auth::user()->role == 'Cabang')
+                            <li
+                                class="nav-item {{ request()->is('admin/siswa*') || request()->is('admin/juri*') || request()->is('admin/cabang*') ? 'active submenu' : '' }}">
+                                <a data-toggle="collapse" href="#admin" class="collapsed" aria-expanded="false">
+                                    <i class="fas fa-user"></i>
+                                    <p>Data Siswa</p>
+                                    <span class="caret"></span>
+                                </a>
+                                <div class="collapse {{ request()->is('admin/siswa*') || request()->is('admin/juri*') || request()->is('admin/cabang*') ? 'show' : '' }}"
+                                    id="admin">
+                                    <ul class="nav nav-collapse">
+                                        <li class="nav-item {{ request()->is('admin/siswa*') ? 'active' : '' }}">
+                                            <a href="/admin/siswa">
+                                                <span class="sub-item">Data Siswa</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item {{ request()->is('admin/juri*') ? 'active' : '' }}">
+                                            <a href="/admin/juri">
+                                                <span class="sub-item">Data Juri</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item {{ request()->is('admin/cabang*') ? 'active' : '' }}">
+                                            <a href="/admin/cabang">
+                                                <span class="sub-item">Data Cabang</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        @endif
                         @if (Auth::user()->role == 'admin')
                             <li
                                 class="nav-item {{ request()->is('admin/siswa*') || request()->is('admin/juri*') || request()->is('admin/cabang*') ? 'active submenu' : '' }}">
@@ -194,13 +225,13 @@
                         @endif
                         @if (Auth::user()->role == 'admin' || 'juri')
                             <li
-                                class="nav-item {{ request()->is('nilaipilihan') || request()->is('admin/nilai*') || request()->is('admin/vokal*') || request()->is('admin/sinopsis*') ? 'active submenu' : '' }}">
+                                class="nav-item {{ request()->is('admin/nilai*') || request()->is('admin/vokal*') || request()->is('admin/sinopsis*') ? 'active submenu' : '' }}">
                                 <a data-toggle="collapse" href="#nilai" class="collapsed" aria-expanded="false">
                                     <i class="fas fa-table"></i>
                                     <p>Data Nilai</p>
                                     <span class="caret"></span>
                                 </a>
-                                <div class="collapse {{ request()->is('nilaipilihan') || request()->is('admin/nilai*') || request()->is('admin/vokal*') || request()->is('admin/sinopsis*') ? 'show' : '' }}"
+                                <div class="collapse {{ request()->is('admin/nilai*') || request()->is('admin/vokal*') || request()->is('admin/sinopsis*') ? 'show' : '' }}"
                                     id="nilai">
                                     <ul class="nav nav-collapse">
                                         <li class="nav-item {{ request()->is('admin/nilai*') ? 'active' : '' }}">
@@ -245,7 +276,7 @@
                                     <p>Tarian</p>
                                 </a>
                             </li>
-                            <li class="nav-item {{ request()->is('admin/layout') ? 'active' : '' }}">
+                            <li class="nav-item {{ request()->is('admin/layout*') ? 'active' : '' }}">
                                 <a href="/admin/layout">
                                     <i class="fas fa-image"></i>
                                     <p>Layout</p>

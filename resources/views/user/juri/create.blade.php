@@ -1,4 +1,5 @@
 @extends('template.appadmin')
+@section('title', 'Create Juri')
 @section('main')
     <div class="container mt-5 mb-5">
         <div class="row">

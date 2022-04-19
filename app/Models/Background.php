@@ -11,4 +11,9 @@ class Background extends Model
     protected $fillable = [
         'image', 'kelas'
     ];
+
+    public function siswa()
+    {
+        return $this->hasMany(Siswa::class, 'kelas', 'id');
+    }
 }

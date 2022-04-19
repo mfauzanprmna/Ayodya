@@ -1,4 +1,5 @@
 @extends('template.appadmin')
+@section('title', 'Table Cabang')
 @section('main')
     <div class="container-fluid mt-5">
         <div class="card border-0 shadow rounded">

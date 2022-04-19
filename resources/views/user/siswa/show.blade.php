@@ -1,4 +1,5 @@
 @extends('template.appadmin')
+@section('title', 'Show' . $siswa->nama_siswa)
 @section('main')
 
 <div class="panel-header " style="background-image: linear-gradient(#7a74fc, #6C63FF);">

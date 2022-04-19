@@ -15,6 +15,7 @@ class Siswa extends Authenticatable
     
     protected $fillable = [
         'foto',
+        'kelas',
         'no_induk',
         'nama_siswa',
         'semester',
@@ -43,5 +44,10 @@ class Siswa extends Authenticatable
     public function tempat()
     {
         return $this->belongsTo(User::class, 'cabang', 'singkatan');
+    }
+
+    public function kelass()
+    {
+        return $this->belongsTo(Background::class, 'kelas', 'id');
     }
 }

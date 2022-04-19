@@ -26,8 +26,9 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
                             </div>
                             <form action="{{ route('tari-import') }}" method="POST" enctype="multipart/form-data">
                                 <div class="modal-body">

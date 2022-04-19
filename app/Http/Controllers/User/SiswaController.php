@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Imports\SiswaImport;
+use App\Models\Background;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,9 +16,12 @@ class SiswaController extends Controller
     public function index()
     {
         $siswas = Siswa::orderby('nama_siswa', 'asc')->get();
+        $kelas = Background::all();
+        // dd($siswa);
+        // dd($kelas);
         // $user = User::all()->where('role', 'cabang')->first();
         // dd($user->tempat->name);
-        return view('user.siswa.index', compact('siswas'));
+        return view('user.siswa.index', compact('siswas', 'kelas'));
     }
 
     /**
@@ -27,7 +31,9 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('user.siswa.create');
+        $kelas = Background::all();
+        $cabang = User::all()->where('role', 'cabang');
+        return view('user.siswa.create', compact('kelas', 'cabang'));
     }
 
     /**
@@ -41,10 +47,10 @@ class SiswaController extends Controller
         $this->validate($request, [
             'no_induk' => 'required',
             'nama_siswa' => 'required',
-            'tempat' => 'required',
             'tanggal_lahir' => 'required',
             'orang_tua' => 'required',
             'alamat' => 'required',
+            'cabang' => 'required',
             'cabang' => 'required',
         ]);
 
@@ -57,6 +63,7 @@ class SiswaController extends Controller
             'orang_tua' => $request->orang_tua,
             'alamat' => $request->alamat,
             'cabang' => $request->cabang,
+            'kelas' => $request->kelas,
             'password' => Hash::make('password'),
         ]);
 
@@ -77,7 +84,9 @@ class SiswaController extends Controller
      */
     public function edit(Siswa $siswa)
     {
-        return view('user.siswa.edit', compact('siswa'));
+        $kelas = Background::all();
+        $cabang = User::all()->where('role', 'cabang');
+        return view('user.siswa.edit', compact('siswa', 'kelas', 'cabang'));
     }
 
     public function show(Siswa $siswa)
@@ -101,20 +110,23 @@ class SiswaController extends Controller
             'orang_tua' => 'required',
             'alamat' => 'required',
             'cabang' => 'required',
+            'kelas' => 'required',
         ]);
 
-        $file = $request->file('foto');
+        if ($request->foto != '') {
+            $file = $request->file('foto');
 
-// Mendapatkan Nama File
-        $extension = $file->getClientOriginalExtension();
-        $name = $request->nama_siswa;
-        $nama = explode(" ", $name);
-        $nama_file = join("-", $nama) . "." . $extension;
+            // Mendapatkan Nama File
+            $extension = $file->getClientOriginalExtension();
+            $name = $request->nama_siswa;
+            $nama = explode(" ", $name);
+            $nama_file = join("-", $nama) . "." . $extension;
 
-// Proses Upload File
-        $destinationPath = 'image/siswa';
-        $file->move($destinationPath, $nama_file);
-        $filenameSimpan = $destinationPath . '/' . $nama_file;
+            // Proses Upload File
+            $destinationPath = 'image/siswa';
+            $file->move($destinationPath, $nama_file);
+            $filenameSimpan = $destinationPath . '/' . $nama_file;
+        }
 
         if ($request->foto == '' && $request->password == '') {
             $siswa->update([
@@ -124,6 +136,7 @@ class SiswaController extends Controller
                 'orang_tua' => $request->orang_tua,
                 'alamat' => $request->alamat,
                 'cabang' => $request->cabang,
+                'kelas' => $request->kelas,
             ]);
         } elseif ($request->foto == '') {
             $siswa->update([
@@ -133,6 +146,7 @@ class SiswaController extends Controller
                 'orang_tua' => $request->orang_tua,
                 'alamat' => $request->alamat,
                 'cabang' => $request->cabang,
+                'kelas' => $request->kelas,
                 'password' => Hash::make($request->password),
             ]);
         } elseif ($request->password == '') {
@@ -144,6 +158,7 @@ class SiswaController extends Controller
                 'orang_tua' => $request->orang_tua,
                 'alamat' => $request->alamat,
                 'cabang' => $request->cabang,
+                'kelas' => $request->kelas,
             ]);
         } else {
             $siswa->update([
@@ -154,6 +169,7 @@ class SiswaController extends Controller
                 'orang_tua' => $request->orang_tua,
                 'alamat' => $request->alamat,
                 'cabang' => $request->cabang,
+                'kelas' => $request->kelas,
                 'password' => Hash::make($request->password),
             ]);
         }

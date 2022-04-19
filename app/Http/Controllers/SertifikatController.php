@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Layout;
 use App\Models\Nilai;
 use App\Models\Sinopsis;
 use App\Models\Siswa;
@@ -15,7 +16,8 @@ class SertifikatController extends Controller
    public function index()
    {
       $siswas = Siswa::orderby('nama_siswa', 'asc')->get();
-      return view('sertifikat', compact('siswas'));
+      $layout = Layout::all()->first();
+      return view('sertifikat', compact('siswas', 'layout'));
    }
 
    /*
@@ -40,17 +42,18 @@ class SertifikatController extends Controller
       
 
       if ($search == '') {
-         $employees = Siswa::orderby('nama_siswa', 'asc')->select('no_induk', 'nama_siswa', 'cabang', 'orang_tua', 'tanggal_lahir', 'foto', 'semester')->get();
+         $employees = Siswa::orderby('nama_siswa', 'asc')->select('*')->get();
       } else {
-         $employees = Siswa::orderby('nama_siswa', 'asc')->select('id', 'no_induk', 'nama_siswa', 'cabang', 'orang_tua', 'tanggal_lahir', 'foto', 'semester')->where('nama_siswa', 'like', '%' . $search . '%')->get();
+         $employees = Siswa::orderby('nama_siswa', 'asc')->select('*')->where('nama_siswa', 'like', '%' . $search . '%')->get();
       }
-
+      // dd($employees);
       $response = array();
       foreach ($employees as $employee) {
          $response[] = array(
             "id" => $employee->id,
             "no_induk" => $employee->no_induk,
-            "label" => $employee->nama_siswa,
+            "label" => $employee->nama_siswa . ' | ' . $employee->no_induk,
+            "nama" => $employee->nama_siswa,
             "cabang" => $employee->tempat->name,
             "ortu" => $employee->orang_tua,
             "ttl" => $employee->tanggal_lahir,
@@ -59,6 +62,7 @@ class SertifikatController extends Controller
             "index" => array_search([$employee->nama_siswa], $nama),
             "tari" => $employee->tari,
             "sinopsis" => $employee->sinopsis,
+            "kelas" => $employee->kelass,
          );
       }
 

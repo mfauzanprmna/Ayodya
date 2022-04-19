@@ -21,6 +21,7 @@
                     });
                 },
                 select: function(event, ui) {
+                    // console.log(ui.item.data);
                     var tempat = ui.item.ttl;
                     var convert = tempat.split(",");
 
@@ -43,10 +44,10 @@
                     } else if (semester < 100) {
                         tbr = ang[Math.floor(semester / 10)] + " puluh " + ang[semester % 10];
                     }
-                    console.log(ui.item.tari);
+                    // console.log(ui.item.tari);
 
                     $('#tags').val(ui.item.label);
-                    $('.nama').html(ui.item.label);
+                    $('.nama').html(ui.item.nama);
                     $('#induk').html(ui.item.no_induk);
                     $('#tempat').html(convert[0]);
                     $('#cabang').html(ui.item.cabang);
@@ -60,6 +61,8 @@
                     $('#cabang').html(ui.item.cabang);
                     $('.ujian').html(ui.item.index + 1);
                     $('#foto').attr("src", '{{ asset('/') }}' + ui.item.foto);
+                    $('#background').attr("src", '{{ asset('/') }}' + ui.item.kelas.image);
+                    $('#kelas').html(ui.item.kelas.kelas);
                     $(document).ready(function() {
                     $('#lenggara').keyup(function() {
                         var tanggal = $('#lenggara').val();
@@ -85,14 +88,7 @@
         var tr = romawi[tgl];
 
         $('#ini').html(tr);
-        
 
-        $(document).ready(function() {
-            $('#lenggara').keyup(function() {
-                var tanggal = $('#lenggara').val();
-                $('#pengambilan').html(tanggal);
-            });
-        });
     </script>
 @endsection
 @section('main')
@@ -130,10 +126,6 @@
                     <label for="tags">Siswa</label>
                     <input id="tags" class="form-control" name="tags">
                 </div>
-                <div class="col">
-                    <label for="lenggara">Tanggal Penyelenggara</label>
-                    <input id="lenggara" class="form-control" name="lenggara">
-                </div>
             </div>
 
         </div>
@@ -161,7 +153,7 @@
 
                     <div class="col-md-4" style="float: left; width:800px">
                         <div class="fotobaground">
-                            <img src="{{ asset('image/layout1.png') }}" alt="" style=" width: 500px ;  
+                            <img id="background" src="" alt="" style=" width: 500px ;  
                                             position: absolute; top: 30%">
                         </div>
                     </div>
@@ -184,23 +176,22 @@
                             <h1 style="font-family: Pristina; font-size: 50px; margin: -10px 0">Lulus</h1>
 
                             <p style="font-family: 'eras-demi-itc-bold', sans-serif" class="desc">Pada ujian
-                                tari daerah, modelling &
-                                vokal di semester terpadu ke - <span class="semester">__</span> ( <span
+                                <span id="kelas">__</span> di semester terpadu ke - <span class="semester">__</span> ( <span
                                     id="huruf">___</span> )
-                                <br>yang diselenggarakan pada tanggal <span id="pengambilan">__</span>
-                                <br>di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depok
+                                <br>yang diselenggarakan pada tanggal {{ $layout->tanggal }}
+                                <br>di {{ $layout->tempat }}
                                 <br>dan tercatat sebagai siswa Ayodya Pala - <span id="cabang"></span>
                                 <br>dengan nomor induk : <span id="induk">__</span>
                             </p>
 
 
                         </center>
-                        <div class="container d-flex justify-content-between">
+                        <div class="container d-flex justify-content-between mb-3">
                             <div class="foto">
                                 <img src="{{ asset('/image/default.png') }}" alt="" id="foto" width="110px" height="150px"
                                     style="border-radius: 100%">
                             </div>
-                            <div style="margin-left: 0; text-align: center;">
+                            <div style="margin-left: 0; text-align: center;" class="mt-2">
                                 <p class="ttd">Depok, {{ Carbon\Carbon::now()->isoFormat('D MMMM YYYY') }}
                                     <br>Pimpinan
                                 </p>

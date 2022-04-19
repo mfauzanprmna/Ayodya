@@ -33,9 +33,8 @@
                                         @foreach ($layouts as $layout)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>
-                                                    <img src="{{ asset('/') . $layout->background }}" alt=""
-                                                        width="150px">
+                                                <td style="width: 50%">
+                                                    <img src="{{ asset('/') . $layout->image }}" alt="" width="50%">
                                                 </td>
                                                 <td>{{ $layout->kelas }}</td>
                                                 <td class="text-center">

@@ -1,4 +1,5 @@
 @extends('template.appadmin')
+@section('title', 'Edit' . $cabang->name)
 @section('main')
     <div class="container mt-5 mb-5">
         <div class="row">
