@@ -13,8 +13,6 @@
         .A3 {
             height: 895px;
             width: 1000px;
-
-
         }
 
         @page {
@@ -33,7 +31,7 @@
         position: relative;"></div> --}}
         <div class="row">
             <div class="col-sm-4" style="float: left">
-                <img src="{{ asset('image/layout1.png') }}" alt="" style=" width: 600px ;  
+                <img src="{{ asset('/' . $siswas->kelass->image) }}" alt="" style=" width: 600px ;  
                 position: absolute; top: 300px">
             </div>
             <div class="col-sm-8" style="">
@@ -45,7 +43,7 @@
                             {{ Carbon\Carbon::now()->isoFormat('YYYY') }} </h3>
                         <p style="font-family: 'eras-demi-itc-bold', sans-serif ; font-size: 20px">Diberikan Kepada:</p>
                         <h1 style="font-family: Edwardian Script ITC; font-size: 80px; " class="nama">
-                            {{ $siswas->nama_siswa }}
+                            {{ $siswas->nama_siswas }}
                         </h1>
 
                         <p style="font-family: 'eras-demi-itc-bold', sans-serif ; font-size: 20px"> Dilahirkan di
@@ -57,19 +55,14 @@
                         <h1 style="font-family: Pristina; font-size: 80px;  ">Lulus</h1>
 
                         <p style="font-family: 'eras-demi-itc-bold', sans-serif ; font-size: 20px"
-                            class="desc">Pada ujian
-                            tari daerah, modelling &
-                            vokal di semester terpadu ke - {{ $siswas->semester }} ( <span
+                            class="desc">Pada ujian {{ $siswas->kelass->kelas }} di semester terpadu ke - {{ $siswas->semester }} ( <span
                                 id="huruf">{{ $semester }}</span> )
-                            <br>yang diselenggarakan pada tanggal {{ $hari }}
-                            <br>di Gedung IX Fakultas Ilmu Pengetahuan Budaya Universitas Indonesia - Depok
+                            <br>yang diselenggarakan pada tanggal {{ $layout->tanggal }}
+                            <br>di {{ $layout->tempat }}
                             <br>dan tercatat sebagai siswa Ayodya Pala - {{ $siswas->tempat->name }}
                             <br>dengan nomor induk : {{ $siswas->no_induk }}
                         </p>
                     </div>
-
-
-
                 </center>
                 <div class="container d-flex justify-content-between">
                     <div class="foto">
@@ -83,7 +76,7 @@
                         </p>
                         <br>
                         <br>
-                        <p tyle="font-size: 20px;">Dra. Budi Agustinah</p>
+                        <p style="font-size: 20px;">Dra. Budi Agustinah</p>
                     </div>
                 </div>
             </div>

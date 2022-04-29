@@ -39,8 +39,6 @@ class SertifikatController extends Controller
 
       // $siswas = Siswa::where('nama_siswa', 'y')->first();
 
-      
-
       if ($search == '') {
          $employees = Siswa::orderby('nama_siswa', 'asc')->select('*')->get();
       } else {
@@ -69,10 +67,11 @@ class SertifikatController extends Controller
       return response()->json($response);
    }
 
-   public function cetak_sertifikat($id, $hari)
+   public function cetak_sertifikat($id)
    {
       $siswas = Siswa::findOrFail($id);
       $siswa = Siswa::select('nama_siswa')->get();
+      $layout = Layout::all()->first();
 
       $nama = array();
 
@@ -119,7 +118,7 @@ class SertifikatController extends Controller
          'rombulan' => $rombulan, 
          'semester' => $tbr, 
          'ujian' => $ujian,
-         'hari' => $hari,
+         'layout' => $layout,
       ]);
    }
 

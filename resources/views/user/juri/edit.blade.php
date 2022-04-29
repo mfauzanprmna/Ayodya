@@ -1,5 +1,5 @@
 @extends('template.appadmin')
-@section('title', 'Edit' . $juri->name)
+@section('title', 'Edit Juri')
 @section('main')
     <div class="container mt-5 mb-5">
         <div class="row">
@@ -17,8 +17,14 @@
 
                             <div class="form-group">
                                 <label for="" class="font-wight-bold">Foto</label>
-                                <img src="{{ asset('/' . $juri->foto) }}" alt="">
-                                <input type="file" class="form-control @error('foto') is-invalid @enderror" name="foto">
+                                <div class="">
+                                    <div class="input-file-image">
+                                        <img class="img-upload-preview" width="100" height="100"
+                                            src="{{ asset('/' . $juri->foto) }}" alt="preview"
+                                            style="border-radius: 50%">
+                                        <input type="file" class="form-control mt-2" name="foto">
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group">

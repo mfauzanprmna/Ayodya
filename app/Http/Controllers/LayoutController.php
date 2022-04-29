@@ -16,9 +16,9 @@ class LayoutController extends Controller
      */
     public function index()
     {
-        $layout = Layout::all()->first();
+        $text = Layout::all()->first();
         $layouts = Background::latest()->paginate(10);
-        return view('layout.index', compact('layouts', 'layout'));
+        return view('layout.index', compact('layouts', 'text'));
     }
 
     /**
@@ -111,7 +111,7 @@ class LayoutController extends Controller
      */
     public function edit(Layout $layout)
     {
-        return view('nilai.edit', compact('nilai'));
+        return view('layout.edit', compact('layout'));
     }
 
     /**
@@ -151,17 +151,17 @@ class LayoutController extends Controller
      * @param  \App\Models\Layout  $layout
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Layout $layout)
-    { {
-            $layout->delete();
+    public function destroy(Background $layout)
+    { 
+        $layout->siswa->delete();
+        $layout->delete();
 
-            if ($layout) {
-                //redirect dengan pesan sukses
-                return redirect()->route('layout.index')->with(['success' => 'Data Berhasil Dihapus!']);
-            } else {
-                //redirect dengan pesan error
-                return redirect()->route('layout.index')->with(['error' => 'Data Gagal Dihapus!']);
-            }
+        if ($layout) {
+            //redirect dengan pesan sukses
+            return redirect()->route('layout.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('layout.index')->with(['error' => 'Data Gagal Dihapus!']);
         }
     }
 }

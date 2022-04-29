@@ -1,5 +1,15 @@
 @extends('template.appadmin')
+@section('title', 'Edit Nilai')
 @section('main')
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
+    <style>
+        .form-edit {
+            font-size: 14px;
+            border-color: #ebedf2 !important;
+        }
+
+    </style>
 
     <div class="container mt-5 mb-5">
         <div class="row">
@@ -31,7 +41,7 @@
                                     class="form-control form-control @error('wirama') is-invalid @enderror"></select>
 
                                 <!-- error message untuk wirama -->
-                                @error('wirama')
+                                @error('tari')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
@@ -88,9 +98,9 @@
     </div>
 
     <script>
-                $(document).ready(function() {
+        $(document).ready(function() {
             $('#tari').select2({
-                placeholder: 'Tarian',
+                placeholder: '{{ $nilai->tari->nama }}',
                 width: 'resolve',
                 theme: 'bootstrap-5',
                 selectionCssClass: 'form-edit',

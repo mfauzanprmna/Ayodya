@@ -1,4 +1,5 @@
 @extends('template.appadmin')
+@section('title', 'Edit Tari')
 @section('main')
     <div class="container mt-5 mb-5">
         <div class="row">
@@ -14,8 +15,6 @@
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-
-
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Nama</label>

@@ -1,4 +1,5 @@
 @extends('template.appadmin')
+@section('title', 'Create Nilai')
 @section('main')
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />

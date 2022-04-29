@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Imports\SiswaImport;
 use App\Models\Background;
+use App\Models\Nilai;
+use App\Models\Nilaivokal;
 use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -58,7 +60,7 @@ class SiswaController extends Controller
             'foto' => 'image/default.png',
             'no_induk' => $request->no_induk,
             'nama_siswa' => $request->nama_siswa,
-            'semester' => 'SMT 1',
+            'semester' => 1,
             'tanggal_lahir' => $request->tanggal_lahir,
             'orang_tua' => $request->orang_tua,
             'alamat' => $request->alamat,
@@ -199,6 +201,10 @@ class SiswaController extends Controller
                 @unlink($file);
             }
         }
+
+        $siswa->nilai->delet();
+        $siswa->vokal->delete();
+        $siswa->sinopsis->delete();
         $siswa->delete();
 
         if ($siswa) {

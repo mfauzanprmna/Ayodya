@@ -50,4 +50,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Siswa::class, 'cabang', 'singkatan');
     }
+
+    public function nilai()
+    {
+        return $this->hasMany(Nilai::class, 'id_juri', 'id');
+    }
+
+    public function vokal()
+    {
+        return $this->hasMany(Nilaivokal::class, 'id_juri', 'id');
+    }
+
+    public function sinopsis()
+    {
+        return $this->hasMany(Sinopsis::class, 'id_juri', 'id');
+    }
 }

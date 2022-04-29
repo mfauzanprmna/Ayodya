@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SinopsisExport;
 use App\Models\Sinopsis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Siswa;
 use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SinopsisController extends Controller
 {
@@ -18,9 +20,9 @@ class SinopsisController extends Controller
     public function index()
     {
         if (Auth::user()->role == 'admin') {
-            $juris = User::all()->where('role', 'juri');
+            $juri = User::all()->where('role', 'juri');
             $sinopsis = Sinopsis::all();
-            return view('nilai.sinopsis.index', compact('sinopsis', 'juris'));
+            return view('nilai.sinopsis.index', compact('sinopsis', 'juri'));
         } elseif (Auth::user()->role == 'juri') {
             $sinopsis = Sinopsis::all()->where('id_juri', Auth::user()->id);
             return view('nilai.sinopsis.index', compact('sinopsis'));
@@ -34,9 +36,9 @@ class SinopsisController extends Controller
      */
     public function create()
     {
-        $juri = User::all()->where('role', 'juri');
+        $juris = User::all()->where('role', 'juri');
 
-        return view('nilai.sinopsis.create', compact('juri'));
+        return view('nilai.sinopsis.create', compact('juris'));
     }
 
     /**
@@ -47,30 +49,35 @@ class SinopsisController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'tari' => 'required',
-            'nilai' => 'required',
+        $juris = User::all()->where('role', 'juri');
+        $data = $request->validate([
+            'no_induk' => 'required',
+            'semester' => 'required',
         ]);
 
-        if (Auth::user()->role == 'juri') {
-            $sinopsis = Sinopsis::create([
-                'no_induk' => $request->induk,
-                'id_juri' => Auth::guard('user')->user()->id,
-                'tari_id' => $request->tari,
-                'semester' => $request->semester,
-                'nilai' => $request->nilai,
-            ]);
-        } elseif (Auth::user()->role == 'admin') {
-            $sinopsis = Sinopsis::create([
-                'no_induk' => $request->induk,
-                'id_juri' => $request->juri,
-                'tari_id' => $request->tari,
-                'semester' => $request->semester,
-                'nilai' => $request->nilai,
+        foreach ($juris as $key => $value) {
+            $valudateData = $request->validate([
+                'nilai' . $key => 'required',
             ]);
         }
+        if (Auth::user()->role == 'juri') {
+            $data = $request->validate([
+                'nilai' => 'required',
+            ]);
+            $data['id_juri'] = Auth::user()->id;
+            $nilai = Sinopsis::create($data);
+        } elseif (Auth::user()->role == 'admin') {
+            foreach ($juris as $key => $juri) {
+                $nilai = Sinopsis::create([
+                    'no_induk' => $request->no_induk,
+                    'id_juri' => $juri->id,
+                    'semester' => $request->semester,
+                    'nilai' => request('nilai' . $key),
+                ]);
+            }
+        }
 
-        if ($sinopsis) {
+        if ($nilai) {
             //redirect dengan pesan sukses
             return redirect()->route('sinopsis.index')->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
@@ -96,11 +103,11 @@ class SinopsisController extends Controller
      * @param  \App\Models\Sinopsis  $sinopsis
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sinopsis $sinopsis)
+    public function edit(Sinopsis $sinopsi)
     {
         $juris = User::all()->where('role', 'juri');
 
-        return view('nilai.sinopsis.edit', compact('juris'));
+        return view('nilai.sinopsis.edit', compact('juris', 'sinopsi'));
     }
 
     /**
@@ -110,39 +117,29 @@ class SinopsisController extends Controller
      * @param  \App\Models\Sinopsis  $sinopsis
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sinopsis $sinopsis)
+    public function update(Request $request, Sinopsis $sinopsi)
     {
         $this->validate($request, [
-            'id_juri' => 'required',
-            'tari_id' => 'required',
             'nilai' => 'required',
         ]);
 
         //get data nilai by ID
         if (Auth::user()->role == 'juri') {
-            $sinopsis = Sinopsis::edit([
-                'no_induk' => $request->induk,
-                'id_juri' => Auth::guard('user')->user()->id,
-                'tari_id' => $request->tari,
-                'semester' => $request->semester,
+            $sinopsi->update([
                 'nilai' => $request->nilai,
             ]);
         } elseif (Auth::user()->role == 'admin') {
-            $sinopsis = Sinopsis::edit([
-                'no_induk' => $request->induk,
-                'id_juri' => '3',
-                'tari_id' => $request->tari,
-                'semester' => $request->semester,
+            $sinopsi->update([
                 'nilai' => $request->nilai,
             ]);
         }
 
-        if ($sinopsis) {
+        if ($sinopsi) {
             //redirect dengan pesan sukses
-            return redirect()->route('nilai.index')->with(['success' => 'Data Berhasil Diupdate!']);
+            return redirect()->route('sinopsis.index')->with(['success' => 'Data Berhasil Diupdate!']);
         } else {
             //redirect dengan pesan error
-            return redirect()->route('nilai.index')->with(['error' => 'Data Gagal Diupdate!']);
+            return redirect()->route('sinopsis.index')->with(['error' => 'Data Gagal Diupdate!']);
         }
     }
 
@@ -164,5 +161,10 @@ class SinopsisController extends Controller
             //redirect dengan pesan error
             return redirect()->route('sinopsis.index')->with(['error' => 'Data Gagal Dihapus!']);
         }
+    }
+
+    function export()
+    {
+        return Excel::download(new SinopsisExport(), 'nilai_sinopsis.xlsx');
     }
 }

@@ -1,4 +1,5 @@
 @extends('template.appadmin')
+@section('title', 'Sertifikat')
 @section('jquery')
     <script type="text/javascript">
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
@@ -63,12 +64,7 @@
                     $('#foto').attr("src", '{{ asset('/') }}' + ui.item.foto);
                     $('#background').attr("src", '{{ asset('/') }}' + ui.item.kelas.image);
                     $('#kelas').html(ui.item.kelas.kelas);
-                    $(document).ready(function() {
-                    $('#lenggara').keyup(function() {
-                        var tanggal = $('#lenggara').val();
-                        $('#printserti').attr("href", '/sertifikat/' + ui.item.id + '/' + tanggal);
-                    });
-                    });
+                    $('#printserti').attr("href", '/sertifikat/' + ui.item.id );
                     $('#printnilai').attr("href", '/nilai/' + ui.item.id);
                     return false;
                 }

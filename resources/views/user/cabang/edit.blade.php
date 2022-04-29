@@ -1,5 +1,5 @@
 @extends('template.appadmin')
-@section('title', 'Edit' . $cabang->name)
+@section('title', 'Edit Cabang')
 @section('main')
     <div class="container mt-5 mb-5">
         <div class="row">
@@ -23,6 +23,19 @@
 
                                 <!-- error message untuk nama cabang -->
                                 @error('name')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Singkatan</label>
+                                <input type="text" class="form-control @error('singakatan') is-invalid @enderror"
+                                    name="singkatan" value="{{ old('singkatan', $cabang->singkatan) }}" placeholder="Masukkan Singkatan">
+
+                                <!-- error message untuk singkatan -->
+                                @error('singkatan')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>

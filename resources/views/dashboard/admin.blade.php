@@ -1,4 +1,5 @@
 @extends('template.appadmin')
+@section('title', 'Dashboard')
 @section('main')
 <style>
     .row input[type="checkbox"]{

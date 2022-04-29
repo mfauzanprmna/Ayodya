@@ -115,15 +115,15 @@ class TarianController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Tarian $tarian)
-    { 
-            $delete = $tarian->delete();
-            if ($delete) {
-                //redirect dengan pesan sukses
-                return redirect()->route('tarian.index')->with(['success' => 'Data Berhasil Dihapus!']);
-            } else {
-                //redirect dengan pesan error
-                return redirect()->route('tarian.index')->with(['error' => 'Data Gagal Dihapus!']);
-            }
+    {
+        $delete = $tarian->delete();
+        if ($delete) {
+            //redirect dengan pesan sukses
+            return redirect()->route('tarian.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('tarian.index')->with(['error' => 'Data Gagal Dihapus!']);
+        }
     }
 
     public function fileImport(Request $request)

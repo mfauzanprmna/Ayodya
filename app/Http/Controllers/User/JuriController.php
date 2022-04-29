@@ -78,9 +78,9 @@ class JuriController extends Controller
      * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $juri)
     {
-        return view('user.juri.edit', compact('user'));
+        return view('user.juri.edit', compact('juri'));
     }
 
     /**
@@ -97,30 +97,46 @@ class JuriController extends Controller
             'email' => 'required|email',
         ]);
 
-        $file = $request->file('foto');
+        if ($request->foto != '') {
+            $file = $request->file('foto');
 
-        // Mendapatkan Nama File
-        $extension = $file->getClientOriginalExtension();
-        $name = $request->name;
-        $nama = explode(" ", $name);
-        $nama_file = join("-", $nama) . "." . $extension;
+            // Mendapatkan Nama File
+            $extension = $file->getClientOriginalExtension();
+            $name = $request->name;
+            $nama = explode(" ", $name);
+            $nama_file = join("-", $nama) . "." . $extension;
 
-        // Mendapatkan Extension File
+            // Proses Upload File
+            $destinationPath = 'image/juri';
+            $file->move($destinationPath, $nama_file);
+            $filenameSimpan = $destinationPath . '/' . $nama_file;
+        }
 
-        // Mendapatkan Ukuran File
-        $ukuran_file = $file->getSize();
-
-        // Proses Upload File
-        $destinationPath = 'image/juri';
-        $file->move($destinationPath, $nama_file);
-        $filenameSimpan = $destinationPath . '/' . $nama_file;
-
-        $edit = $juri->update([
-            'name' => $request->name,
-            'foto' => $filenameSimpan,
-            'email' => $request->email,
-            // 'password'          => $request->password,
-        ]);
+        if ($request->foto == '' && $request->password == '') {
+            $edit = $juri->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+        } elseif ($request->foto == '') {
+            $edit = $juri->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+        } elseif ($request->password == '') {
+            $edit = $juri->update([
+                'name' => $request->name,
+                'foto' => $filenameSimpan,
+                'email' => $request->email,
+            ]);
+        } else {
+            $edit = $juri->update([
+                'name' => $request->name,
+                'foto' => $filenameSimpan,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+        }
 
         if ($edit) {
             //redirect dengan pesan sukses
@@ -137,17 +153,27 @@ class JuriController extends Controller
      * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $juri)
     {
-        Storage::disk('local')->delete('public/juris/' . $user->image);
-        $juri = $user->delete();
+        $file = public_path('/') . $juri->foto;
+        $default = public_path('/image/default.png');
+
+        if (file_exists($file)) {
+            if ($file != $default) {
+                @unlink($file);
+            }
+        }
+        $juri->nilai->delete();
+        $juri->vokal->delete();
+        $juri->sinopsis->delete();
+        $juri->delete();
 
         if ($juri) {
             //redirect dengan pesan sukses
-            return redirect()->route('user.juri.index')->with(['success' => 'Data Berhasil Dihapus!']);
+            return redirect()->route('juri.index')->with(['success' => 'Data Berhasil Dihapus!']);
         } else {
             //redirect dengan pesan error
-            return redirect()->route('user.juri.index')->with(['error' => 'Data Gagal Dihapus!']);
+            return redirect()->route('juri.index')->with(['error' => 'Data Gagal Dihapus!']);
         }
     }
 }

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\VokalExport;
 use App\Models\Nilaivokal;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
 
 class NilaivokalController extends Controller
 {
@@ -17,6 +20,7 @@ class NilaivokalController extends Controller
     public function index()
     {
         $nilaivokals = Nilaivokal::all();
+
         return view('nilai.vokal.index', compact('nilaivokals'));
     }
 
@@ -27,9 +31,9 @@ class NilaivokalController extends Controller
      */
     public function create()
     {
-        $juri = User::all()->where('role', 'juri');
+        $juris = User::all()->where('role', 'juri');
 
-        return view('nilai.vokal.create', compact('juri'));
+        return view('nilai.vokal.create', compact('juris'));
     }
 
     /**
@@ -40,21 +44,40 @@ class NilaivokalController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'no_induk'    => 'required',
-            'nama_siswa'  => 'required',
-            'penampilan'  => 'required',
-            'teknik'      => 'required',
+        $juris = User::all()->where('role', 'juri');
+        $data = $request->validate([
+            'no_induk' => 'required',
+            'semester' => 'required',
+            // 'lagu' => 'required',
         ]);
+        foreach ($juris as $key => $value) {
+            $valudateData = $request->validate([
+                'penampilan' . $key  => 'required',
+                'teknik' . $key => 'required',
+            ]);
+        }
 
-        $nilaivokal = Nilaivokal::create([
-            'no_induk'       => $request->no_induk,
-            'nama_siswa'     => $request->nama_siswa,
-            'penampilan'     => $request->penampilan,
-            'teknik'         => $request->teknik,
-        ]);
+        if (Auth::user()->role == 'juri') {
+            $data = $request->validate([
+                'penampilan' => 'required',
+                'teknik' => 'required',
+            ]);
+            $data['id_juri'] = Auth::user()->id;
+            $nilai = Nilaivokal::create($data);
+        } elseif (Auth::user()->role == 'admin') {
+            foreach ($juris as $key => $juri) {
+                $nilai = Nilaivokal::create([
+                    'no_induk' => $request->no_induk,
+                    'id_juri' => $juri->id,
+                    'semester' => $request->semester,
+                    'lagu' => 'Tes',
+                    'penampilan' => request('penampilan' . $key),
+                    'teknik' => request('teknik' . $key),
+                ]);
+            }
+        }
 
-        if ($nilaivokal) {
+        if ($nilai) {
             //redirect dengan pesan sukses
             return redirect()->route('vokal.index')->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
@@ -69,9 +92,9 @@ class NilaivokalController extends Controller
      * @param  \App\Models\Nilaivokal  $nilaivokal
      * @return \Illuminate\Http\Response
      */
-    public function show(Nilaivokal $nilaivokal)
+    public function show(Nilaivokal $nilai)
     {
-        return view('nilai.vokal.edit', compact('nilaivokal'));
+        return view('nilai.vokal.edit', compact('nilai'));
     }
 
     /**
@@ -80,9 +103,9 @@ class NilaivokalController extends Controller
      * @param  \App\Models\Nilaivokal  $nilaivokal
      * @return \Illuminate\Http\Response
      */
-    public function edit(Nilaivokal $nilaivokal)
+    public function edit(Nilaivokal $vokal)
     {
-        return view('nilai.vokal.edit', compact('nilaivokal'));
+        return view('nilai.vokal.edit', compact('vokal'));
     }
 
 
@@ -96,17 +119,17 @@ class NilaivokalController extends Controller
     public function update(Request $request, Nilaivokal $vokal)
     {
         $this->validate($request, [
-            'no_induk'     => 'required',
-            'nama_siswa'     => 'required',
+            // 'no_induk'     => 'required',
+            // 'nama_siswa'     => 'required',
             'penampilan'     => 'required',
             'teknik'     => 'required',
         ]);
 
         $edit = $vokal->update([
-            'no_induk'                  => $request->no_induk,
-            'nama_siswa'                => $request->nama_siswa,
-            'penampilan'                => $request->penampilan,
-            'teknik'                => $request->teknik,
+            // 'no_induk'          => $request->no_induk,
+            // 'nama_siswa'        => $request->nama_siswa,
+            'penampilan'        => $request->penampilan,
+            'teknik'            => $request->teknik,
         ]);
 
         if ($edit) {
@@ -135,5 +158,10 @@ class NilaivokalController extends Controller
             //redirect dengan pesan error
             return redirect()->route('vokal.index')->with(['error' => 'Data Gagal Dihapus!']);
         }
+    }
+
+    function export()
+    {
+        return Excel::download(new VokalExport(), 'nilai_vokal.xlsx');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Siswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -83,9 +84,9 @@ class CabangController extends Controller
      * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(User $cabang)
     {
-        return view('user.cabang.edit', compact('user'));
+        return view('user.cabang.edit', compact('cabang'));
     }
 
     /**
@@ -99,16 +100,26 @@ class CabangController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'singkatan' => 'required',
             'email' => 'required|email',
         ]);
 
-        $cabang->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-        ]);
+        if ($request->password == '') {
+            $edit = $cabang->update([
+                'name' => $request->name,
+                'singkatan' => $request->singkatan,
+                'email' => $request->email,
+            ]);
+        } else {
+            $edit = $cabang->update([
+                'name' => $request->name,
+                'singkatan' => $request->singkatan,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+        }
 
-        if ($cabang) {
+        if ($edit) {
             //redirect dengan pesan sukses
             return redirect()->route('cabang.index')->with(['success' => 'Data Berhasil Diupdate!']);
         } else {
@@ -123,16 +134,21 @@ class CabangController extends Controller
      * @param  \App\Models\User\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(User $cabang)
     {
-        $cabang = $user->delete();
+        $siswa = Siswa::where('cabang', $cabang->singkatan);
+        $siswa->delete();
+        $siswa->nilai->delete();
+        $siswa->vokal->delete();
+        $siswa->sinopsis->delete();
+        $cabang->delete();
 
         if ($cabang) {
             //redirect dengan pesan sukses
-            return redirect()->route('user.cabang.index')->with(['success' => 'Data Berhasil Dihapus!']);
+            return redirect()->route('cabang.index')->with(['success' => 'Data Berhasil Dihapus!']);
         } else {
             //redirect dengan pesan error
-            return redirect()->route('user.cabang.index')->with(['error' => 'Data Gagal Dihapus!']);
+            return redirect()->route('cabang.index')->with(['error' => 'Data Gagal Dihapus!']);
         }
     }
 }

@@ -1,10 +1,6 @@
 @extends('template.appadmin')
 @section('title', 'Table Siswa')
 @section('main')
-    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.css"/>
- 
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.5/datatables.min.js"></script> --}}
-
 
     <div class="container-fluid mt-5">
         <ul class="nav nav-pills nav-secondary nav-pills-no-bd d-flex justify-content-center align-items-center mb-3"

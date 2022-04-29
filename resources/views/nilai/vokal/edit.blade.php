@@ -1,4 +1,5 @@
 @extends('template.appadmin')
+@section('title', 'Edit Nilai')
 @section('main')
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.2.0/dist/select2-bootstrap-5-theme.min.css" />
@@ -20,15 +21,16 @@
                 </div>
             </div>
                     <div class="card-body">
-                        <form action="{{ route('nilai.store') }}" method="POST" enctype="multipart/form-data"
+                        <form action="{{ route('vokal.update', $vokal->id) }}" method="POST" enctype="multipart/form-data"
                             style="font-size: 17px">
 
                             @csrf
+                            @method('put')
 
                             <div class="form-group">
                                 <label class="font-weight-bold">Nama Siswa</label>
                                 <input type="text" class="form-control @error('siswa') is-invalid @enderror" name="siswa"
-                                    value="{{ $nilai->no_induk }} - {{ $nilai->siswa->nama_siswa }}" placeholder="Masukkan" id="siswa">
+                                    value="{{ $vokal->no_induk }} - {{ $vokal->siswa->nama_siswa }}" placeholder="Masukkan" id="siswa" disabled="disabled">
 
                                 <!-- error message untuk siswa -->
                                 @error('siswa')
@@ -39,22 +41,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">Semester</label>
-                                <input type="text" class="form-control @error('semester') is-invalid @enderror"
-                                    name="semester" value="{{ old('semester', $nilai->semester) }}" placeholder="Masukkan" id="semester">
-
-                                <!-- error message untuk semester -->
-                                @error('semester')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label class="font-weight-bold">Penampila</label>
+                                <label class="font-weight-bold">Penampilan</label>
                                 <input type="text" class="form-control @error('penampilan') is-invalid @enderror" name="penampilan"
-                                    value="{{ old('penampilan', $nilai->penampilan) }}" placeholder="Masukkan Nilai Penampilan">
+                                    value="{{ old('penampilan', $vokal->penampilan) }}" placeholder="Masukkan vokal Penampilan">
 
                                 <!-- error message untuk penampilan -->
                                 @error('penampilan')
@@ -67,7 +56,7 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">Teknik</label>
                                 <input type="text" class="form-control @error('teknik') is-invalid @enderror" name="teknik"
-                                    value="{{ old('teknik', $nilai->teknik) }}" placeholder="Masukkan Nilai Teknik">
+                                    value="{{ old('teknik', $vokal->teknik) }}" placeholder="Masukkan Nilai Teknik">
 
                                 <!-- error message untuk teknik -->
                                 @error('teknik')
@@ -76,10 +65,6 @@
                                     </div>
                                 @enderror
                             </div>
-
-
-
-
                             <button type="submit" class="btn btn-md btn-primary">Simpan</button>
                             <button type="reset" class="btn btn-md btn-warning">Reset</button>
 

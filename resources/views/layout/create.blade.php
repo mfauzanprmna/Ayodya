@@ -1,4 +1,5 @@
 @extends('template.appadmin')
+@section('title', 'Create Background')
 @section('main')
 
     <div class="container mt-5 mb-5">

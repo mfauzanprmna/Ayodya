@@ -1,4 +1,5 @@
 @extends('template.appadmin')
+@section('title', 'Edit Nilai')
 @section('main')
     <div class="container mt-5 mb-5">
         <div class="row">
@@ -10,7 +11,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('sinopsis.update', $nilai->id) }}" method="POST"
+                        <form action="{{ route('sinopsis.update', $sinopsi->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
@@ -18,8 +19,8 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">Nama Siswa</label>
                                 <input type="text" class="form-control @error('nama_siswa') is-invalid @enderror"
-                                    name="nama_siswa" value="{{ $nilai->no_induk }} - {{ $siswas->siswa->nama_siswa }}"
-                                    placeholder="Masukkan Nama Siswa">
+                                    name="nama_siswa" value="{{ $sinopsi->no_induk }} - {{ $sinopsi->siswa->nama_siswa }}"
+                                    placeholder="Masukkan Nama Siswa" disabled="disabled">
 
                                 <!-- error message untuk nama_siswa -->
                                 @error('nama_siswa')
@@ -32,7 +33,7 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">Nilai</label>
                                 <input type="text" class="form-control @error('nilai') is-invalid @enderror" name="nilai"
-                                    value="{{ old('nilai', $nilai->nilai) }}" placeholder="Masukkan Nilai">
+                                    value="{{ old('nilai', $sinopsi->nilai) }}" placeholder="Masukkan Nilai">
 
                                 <!-- error message untuk nilai -->
                                 @error('nilai')

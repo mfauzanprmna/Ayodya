@@ -35,31 +35,17 @@ use Illuminate\Support\Facades\Auth;
 //     })->name('dashboard');
 // });
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth:user', 'role:admin']], function () {
-    Route::resource('/juri', JuriController::class);
-    Route::resource('/cabang', CabangController::class);
-    Route::resource('/absen', AbsenController::class);
-    Route::resource('/tarian', TarianController::class);
-    Route::resource('/layout', LayoutController::class);
-    Route::post('/serti', [LayoutController::class, 'serti'])->name('layout.serti');
-    Route::get('/nilaipilihan', function () {
-        return view('nilaipilihan');
-    });
-    Route::get('/sertifikat', [SertifikatController::class, 'index']);
-    Route::post('/sertifikat/getSertifikat', [SertifikatController::class, 'getSertifikat'])->name('sertifikat.getSertifikat');
-    Route::get('/nilai/{id}', [SertifikatController::class, 'cetak_nilai'])->name('nilai.print');
-    Route::post('/file-import', [SiswaController::class, 'fileImport'])->name('file-import');
-    Route::post('/tari-import', [TarianController::class, 'fileImport'])->name('tari-import');
-    Route::get('/browse/tari', [NilaiController::class, 'browse'])->name('browse-tari');
-    Route::post('/getsiswa', [NilaiController::class, 'getSiswa'])->name('getsiswa');
-    Route::get('/nilai_export', [NilaiController::class, 'export'])->name('nilai_export');
-});
-
 Route::middleware(['auth:user', 'role:juri,admin,cabang'])->group(function () {
-    Route::resource('/nilai', NilaiController::class);
-    Route::resource('/vokal', NilaivokalController::class);
-    Route::resource('/sinopsis', SinopsisController::class);
-    Route::resource('/undian', UndianController::class);
+    // CRUD Nilai
+    Route::resource('admin/nilai', NilaiController::class);
+    Route::resource('admin/vokal', NilaivokalController::class);
+    Route::resource('admin/sinopsis', SinopsisController::class);
+    Route::resource('admin/undian', UndianController::class);
+    Route::post('/getsiswa', [NilaiController::class, 'getSiswa'])->name('getsiswa');
+    Route::get('/browse/tari', [NilaiController::class, 'browse'])->name('browse-tari');
+    Route::get('/nilai_export', [NilaiController::class, 'export'])->name('nilai_export');
+
+    // Dashboard
     Route::get('/dashboard', function () {
         $cabangs = User::all()->where('role', 'cabang');
         $siswa = Siswa::all();
@@ -69,9 +55,27 @@ Route::middleware(['auth:user', 'role:juri,admin,cabang'])->group(function () {
 });
 
 Route::middleware(['auth:user', 'role:cabang,admin'])->group(function () {
+    // CRUD Siswa
     Route::resource('admin/siswa', SiswaController::class);
+    Route::post('/file-import', [SiswaController::class, 'fileImport'])->name('file-import');
+
+    // Sertifikat
+    Route::get('/nilai/{id}', [SertifikatController::class, 'cetak_nilai'])->name('nilai.print');
     Route::get('/sertifikat', [SertifikatController::class, 'index']);
+    Route::get('/sertifikat/{id}', [SertifikatController::class, 'cetak_sertifikat']);
     Route::post('/sertifikat/getSertifikat', [SertifikatController::class, 'getSertifikat'])->name('sertifikat.getSertifikat');
+});
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:user', 'role:admin']], function () {
+    // CRUD Data User
+    Route::resource('/juri', JuriController::class);
+    Route::resource('/cabang', CabangController::class);
+
+    Route::resource('/absen', AbsenController::class);
+    Route::resource('/tarian', TarianController::class);
+    Route::resource('/layout', LayoutController::class);
+    Route::post('/layout/serti', [LayoutController::class, 'serti'])->name('layout.serti');
+    Route::post('/tari-import', [TarianController::class, 'fileImport'])->name('tari-import');
 });
 
 Route::middleware(['auth:siswa'])->group(function () {

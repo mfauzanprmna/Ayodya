@@ -161,25 +161,38 @@ class NilaiController extends Controller
         ]);
 
         if (Auth::user()->role == 'juri') {
-            $edit = $nilai->update([
-                'no_induk' => $request->induk,
-                'id_juri' => Auth::guard('user')->user()->id,
-                'tari_id' => $request->tari,
-                'semester' => $request->semester,
-                'wirama' => $request->wirama,
-                'wiraga' => $request->wiraga,
-                'wirasa' => $request->wirasa,
-            ]);
+            if ($request->tari == '') {
+                $edit = $nilai->update([
+                    'id_juri' => Auth::guard('user')->user()->id,
+                    'wirama' => $request->wirama,
+                    'wiraga' => $request->wiraga,
+                    'wirasa' => $request->wirasa,
+                ]);
+            } else {
+                $edit = $nilai->update([
+                    'id_juri' => Auth::guard('user')->user()->id,
+                    'tari_id' => $request->tari,
+                    'wirama' => $request->wirama,
+                    'wiraga' => $request->wiraga,
+                    'wirasa' => $request->wirasa,
+                ]);
+            }
+            
         } elseif (Auth::user()->role == 'admin') {
-            $edit = $nilai->update([
-                // 'no_induk' => $request->induk,
-                // 'id_juri' => '3',
-                // 'tari_id' => $request->tari,
-                // 'semester' => $request->semester,
-                'wirama' => $request->wirama,
-                'wiraga' => $request->wiraga,
-                'wirasa' => $request->wirasa,
-            ]);
+            if ($request->tari == '') {
+                $edit = $nilai->update([
+                    'wirama' => $request->wirama,
+                    'wiraga' => $request->wiraga,
+                    'wirasa' => $request->wirasa,
+                ]);
+            } else {
+                $edit = $nilai->update([
+                    'tari_id' => $request->tari,
+                    'wirama' => $request->wirama,
+                    'wiraga' => $request->wiraga,
+                    'wirasa' => $request->wirasa,
+                ]);
+            }
         }
 
         if ($edit) {

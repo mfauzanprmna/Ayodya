@@ -1,4 +1,5 @@
 @extends('template.appadmin')
+@section('title', 'Layout')
 @section('main')
     <div class="card-body">
         <ul class="nav nav-pills nav-secondary nav-pills-no-bd d-flex justify-content-center align-items-center"
@@ -72,7 +73,7 @@
                                 <div class="form-group">
                                     <label class="font-weight-bold">Tanggal Pengambilan Nilai</label>
                                     <input type="text" class="form-control @error('tanggal') is-invalid @enderror"
-                                        name="tanggal" id="" value="{{ old('tempat', $layout->tanggal) }}">
+                                        name="tanggal" id="" value="{{ old('tanggal', $text->tanggal) }}">
 
                                     <!-- error message untuk kelas -->
                                     @error('tanggal')
@@ -85,7 +86,7 @@
                                 <div class="form-group">
                                     <label class="font-weight-bold">Tempat Pengambilan Nilai</label>
                                     <input type="text" class="form-control @error('tempat') is-invalid @enderror"
-                                        name="tanggal" id="" value="{{ old('tempat', $layout->tempat) }}">
+                                        name="tanggal" id="" value="{{ $text->tempat }}">
 
                                     <!-- error message untuk kelas -->
                                     @error('tempat')

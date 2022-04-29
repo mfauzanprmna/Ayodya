@@ -1,4 +1,5 @@
 @extends('template.appadmin')
+@section('title', 'Tabel Niali Vokal')
 @section('main')
     <div class="container-fluid mt-5">
         <div class="card border-0 shadow rounded">
@@ -25,15 +26,15 @@
                         <tbody>
                             @foreach ($nilaivokals as $nilaivokal)
                                 <tr>
-                                    <td>{{ $loop->itertion }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $nilaivokal->siswa->nama_siswa }}</td>
                                     <td>{{ $nilaivokal->semester }}</td>
                                     <td>{{ $nilaivokal->penampilan }}</td>
                                     <td>{{ $nilaivokal->teknik }}</td>
                                     <td class="text-center">
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                            action="{{ route('nilaivokal.destroy', $nilaivokal->id) }}" method="POST">
-                                            <a href="{{ route('nilaivokal.edit', $nilaivokal->id) }}"
+                                            action="{{ route('vokal.destroy', $nilaivokal->id) }}" method="POST">
+                                            <a href="{{ route('vokal.edit', $nilaivokal->id) }}"
                                                 class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                             @csrf
                                             @method('DELETE')
