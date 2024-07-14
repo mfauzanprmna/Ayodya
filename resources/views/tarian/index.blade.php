@@ -13,9 +13,6 @@
                     <a href="{{ route('tarian.create') }}" class="btn btn-md btn-success">Tambah Tari</a>
                     <div>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Export Excel
-                        </button>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Import Excel
                         </button>
                     </div>

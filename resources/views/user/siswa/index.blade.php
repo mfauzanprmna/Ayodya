@@ -30,9 +30,6 @@
                         <div class="mb-3 d-flex justify-content-between">
                             <a href="{{ route('siswa.create') }}" class="btn btn-md btn-success">Tambah Siswa</a>
                             <div>
-                                <button type="button" class="btn btn-primary">
-                                    Export Excel
-                                </button>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
                                     Import Excel
@@ -53,6 +50,10 @@
                                     <form action="{{ route('file-import') }}" method="POST" enctype="multipart/form-data">
                                         <div class="modal-body">
                                             @csrf
+                                            <div class="form-group" style="max-width: 500px; margin: 0 auto;">
+                                                <label for="">Donwload Template</label>
+                                                <a href="{{ route('download.templates') }}" target="_blank"><button type="button" class="btn btn-info">Download</button></a>
+                                            </div>
                                             <div class="form-group" style="max-width: 500px; margin: 0 auto;">
                                                 <label for="">Kelas</label>
                                                 <select class="form-control @error('kelas') is-invalid @enderror"

@@ -45,7 +45,7 @@
                     } else if (semester < 100) {
                         tbr = ang[Math.floor(semester / 10)] + " puluh " + ang[semester % 10];
                     }
-                    // console.log(ui.item.tari);
+                    console.log(ui.item.tari);
 
                     $('#tags').val(ui.item.label);
                     $('.nama').html(ui.item.nama);
@@ -65,6 +65,7 @@
                     $('#background').attr("src", '{{ asset('/') }}' + ui.item.kelas.image);
                     $('#kelas').html(ui.item.kelas.kelas);
                     $('#printserti').attr("href", '/sertifikat/' + ui.item.id );
+                    $('#pdfserti').attr("href", '/sertifikat/pdf/' + ui.item.id );
                     $('#printnilai').attr("href", '/nilai/' + ui.item.id);
                     return false;
                 }
@@ -136,6 +137,7 @@
         <div class="mt-4">
             <div>
                 <a href="" id="printserti" target="_blank"><button type="submit" class="btn btn-info">Print</button></a>
+                <a href="" id="pdfserti" target="_blank"><button type="submit" class="btn btn-info">PDF</button></a>
             </div>
 
 
@@ -198,150 +200,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="mt-5">
-            <div>
-                <a href="" id="printnilai" target="_blank"><button type="submit" class="btn btn-info">Print</button></a>
-            </div>
-            <div class="container A3 mt-3">
-                <br>
-                <img src="" alt="">
-                <div>
-                    <h2 class="text-center ">DAFTAR NILAI UJIAN</h2>
-                </div>
-                <table style="margin-left: 100px">
-                    <tr>
-                        <th>Nama</th>
-                        <td>:</td>
-                        <td class="nama">__</td>
-                    </tr>
-                    <tr>
-                        <th>No.Ujian</th>
-                        <td>:</td>
-                        <td class="ujian">__</td>
-                    </tr>
-                    <tr>
-                        <th>Semester</th>
-                        <td>:</td>
-                        <td class="semester">__</td>
-                    </tr>
-                </table>
-                <br>
-                <center>
-                    <table border='1' style="text-align: center; width: 100%; height:150px" class="mt-3 mb-3">
-                        <tr>
-                            <th colspan="2">MATERI UJIAN</th>
-                            <th colspan="5">NILAI</th>
-                        </tr>
-
-                        <tr>
-                            <th>DARI DAERAH</th>
-                            <th>NAMA TARIAN </th>
-                            <th>Wirawa</th>
-                            <th>Wiraga</th>
-                            <th>Wirasa</th>
-                            <th>Subtotal</th>
-                            <th>TOTAL</th>
-                        </tr>
-                        <tr>
-                            <td id="daerah"></td>
-                            <td id="tari"></td>
-                            <td id="wirawa">0</td>
-                            <td id="wiraga">0</td>
-                            <td id="wirasa">0</td>
-                            <td id="subtotal">0</td>
-                            <th id="total" rowspan="2">0</th>
-                        </tr>
-                        <tr>
-                            <td id="daerah1"></td>
-                            <td id="tari1"></td>
-                            <td id="wirawa1">0</td>
-                            <td id="wiraga1">0</td>
-                            <td id="wirasa1">0</td>
-                            <td id="subtotal1">0</td>
-                        </tr>
-                        {{-- <tr>
-                            <th colspan="2">Undian</th>
-                            <td>233</td>
-                            <td>23</td>
-                            <td>232</td>
-                            <th colspan="2">232</th>
-                        </tr> --}}
-                        <tr>
-                            <th colspan="2">Sinopsis</th>
-                            <th colspan="5">00</th>
-                        </tr>
-                    </table>
-                </center>
-                <br>
-                <div class="row">
-                    <div class="col">
-                        <h5 class="fw-bold">KETERANGAN</h5>
-                        <tr>
-                            <td>A</td>
-                            <td>(Amanat Baik)</td>
-                            <td>=</td>
-                            <td>80</td>
-                            <td>-</td>
-                            <td>90</td>
-                        </tr>
-                        <br>
-                        <tr>
-                            <td>B</td>
-                            <td>(Baik)</td>
-                            <td>=</td>
-                            <td>80</td>
-                            <td>-</td>
-                            <td>90</td>
-                        </tr>
-                        <br>
-                        <tr>
-                            <td>C</td>
-                            <td>(Cukup)</td>
-                            <td>=</td>
-                            <td>80</td>
-                            <td>-</td>
-                            <td>90</td>
-                        </tr>
-                        <br>
-                        <tr>
-                            <td>D</td>
-                            <td>(Kurang)</td>
-                            <td>=</td>
-                            <td>80</td>
-                            <td>-</td>
-                            <td>90</td>
-                        </tr>
-
-                    </div>
-                    <center>
-                        <div class="col">
-                            <tr>
-                                <td>Depok, {{ Carbon\Carbon::now()->isoFormat('D MMMM YYYY') }}</td>
-                            </tr>
-                            <br>
-                            <tr>
-                                <td>Ketua Litbang</td>
-                            </tr>
-                            <br>
-                            <br>
-                            <tr>
-                                <td></td>
-                            </tr>
-                            <br>
-                            <tr>
-                                <td>Wulandari S. Sn.</td>
-                            </tr>
-                        </div>
-                    </center>
-                    <div class="text-center" style="">
-                        <img src="{{ asset('Atlantis-Lite/assets/img/LAYOUT SISI BELAKANG SERTIFIKAT-1.png') }}" alt="" width="100%">
-            
-                    </div>
-                </div>
-                <br>
-                <br>
             </div>
         </div>
     </div>

@@ -57,12 +57,14 @@ Route::middleware(['auth:user', 'role:juri,admin,cabang'])->group(function () {
 Route::middleware(['auth:user', 'role:cabang,admin'])->group(function () {
     // CRUD Siswa
     Route::resource('admin/siswa', SiswaController::class);
+    Route::get('/download-template', [SiswaController::class, 'template'])->name('download.templates');
     Route::post('/file-import', [SiswaController::class, 'fileImport'])->name('file-import');
 
     // Sertifikat
     Route::get('/nilai/{id}', [SertifikatController::class, 'cetak_nilai'])->name('nilai.print');
     Route::get('/sertifikat', [SertifikatController::class, 'index']);
     Route::get('/sertifikat/{id}', [SertifikatController::class, 'cetak_sertifikat']);
+    Route::get('/sertifikat/pdf/{id}', [SertifikatController::class, 'sertipdf'])->name('sertifikat.pdf');
     Route::post('/sertifikat/getSertifikat', [SertifikatController::class, 'getSertifikat'])->name('sertifikat.getSertifikat');
 });
 

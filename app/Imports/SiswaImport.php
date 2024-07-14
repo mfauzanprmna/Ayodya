@@ -5,8 +5,10 @@ use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Facades\Log;
 
-class SiswaImport implements ToModel
+class SiswaImport implements ToModel, WithHeadingRow
 {
     /**
      * @param array $row
@@ -15,15 +17,17 @@ class SiswaImport implements ToModel
      */
     public function model(array $row)
     {
+        Log::info('Row data: ', $row);
+
         return new Siswa([
-            'no_induk' => $row[2],
-            'nama_siswa' => $row[1],
+            'no_induk' => $row['no_induk'],
+            'nama_siswa' => $row['nama_siswa'],
             'kelas' => request('kelas'),
-            'semester' => $row[3],
-            'tanggal_lahir' => $row[4],
-            'orang_tua' => $row[5],
+            'semester' => $row['semester'],
+            'tanggal_lahir' => $row['tempat_lahir'] . ", " . $row['tanggal_lahir'],
+            'orang_tua' => $row['orang_tua'],
             'alamat' => 'depok',
-            'cabang' => $row[9],
+            'cabang' => $row['cabang'],
             'password' => Hash::make('password'),
             'foto' => 'image/default.png',
         ]);

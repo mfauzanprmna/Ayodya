@@ -9,7 +9,7 @@ use App\Models\Siswa;
 use App\Models\User;
 use App\Models\Tarian;
 use Illuminate\Http\Request;
-use PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class SertifikatController extends Controller
 {
@@ -315,10 +315,15 @@ class SertifikatController extends Controller
 
    public function sertipdf($id)
    {
-      $siswas = Siswa::findOrFail($id);
+      set_time_limit(300);
+      
+      $siswa = new Siswa();
+      $details = $siswa->sertifikat($id);
 
-      $pdf = PDF::loadview('pdf.sertifikat', ['siswas' => $siswas]);
+      $pdf = PDF::loadview('print.sertifikat', $details);
 
+      $pdf->setPaper('A3', 'landscape');
+      
       return $pdf->stream();
    }
 }

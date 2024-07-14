@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Response;
 
 class SiswaController extends Controller
 {
@@ -215,9 +216,18 @@ class SiswaController extends Controller
             return redirect()->route('siswa.index')->with(['error' => 'Data Gagal Dihapus!']);
         }
     }
+
     public function fileImport(Request $request)
     {
-        Excel::import(new SiswaImport, $request->file('file')->store('temp'));
+        Excel::import(new SiswaImport, $request->file('file'));
         return back();
+    }
+
+    public function template()
+    {
+        $path = public_path('template/template.xlsx');
+        $fileName = 'template.xlsx';
+
+        return Response::download($path, $fileName, ['Content-Type: xlsx']);
     }
 }

@@ -25,9 +25,6 @@
                                 Export Excel
                             </button>
                         </a>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Import Excel
-                        </button>
                     </div>
                 </div>
                 <div class="table-responsive">
