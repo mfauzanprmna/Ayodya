@@ -2,6 +2,10 @@
     "version": 2,
     "framework": null,
     "functions": {
+        "config": {
+            "buildCommand": "yum install -y openssl-libs"
+        },
+
         "api/index.php": {
             "runtime": "vercel-php@0.6.0"
         }
