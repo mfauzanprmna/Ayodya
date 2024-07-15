@@ -12,7 +12,6 @@
             "dest": "/api/index/php"
         }
     ],
-    "buildCommand": "yum install -y openssl-libs"
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "true",
