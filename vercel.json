@@ -1,5 +1,14 @@
 {
     "version": 2,
+    "builds": [
+        {
+            "src": "api/index.php",
+            "use": "@vercel/php",
+            "config": {
+                "buildCommand": "yum install -y openssl-libs"
+            }
+        }
+    ],
     "framework": null,
     "functions": {
         "api/index.php": {
@@ -10,15 +19,6 @@
         {
             "src": "/(.*)",
             "dest": "/api/index/php"
-        }
-    ],
-    "builds": [
-        {
-            "src": "api/index.php",
-            "use": "@vercel/php",
-            "config": {
-                "buildCommand": "yum install -y openssl-libs"
-            }
         }
     ],
     "env": {
